@@ -1,0 +1,31 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Update cache
+    apt: update_cache=yes
+    become: yes
+  - name: Install packages
+    apt: name={{item}}
+    with_items:
+      - postgresql
+      - python-psycopg2
+    become: yes
+
+- hosts: all
+  sudo: yes
+  sudo_user: postgres
+  gather_facts: no
+  vars:
+    dbname: addressbook
+    dbuser: addressbook
+    dbpassword: passwd
+  tasks:
+  - name: Create database
+    postgresql_db: name={{dbname}}
+    become: yes
+  - name: Ensure user has access to database
+    postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+  - name: Ensure user does not have unnecessary privilege
+    postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  - name: Init database
+    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
