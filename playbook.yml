@@ -9,6 +9,9 @@
     with_items:
       - postgresql
       - python-psycopg2
+      - default-jre
+      - default-jdk
+      - maven
     become: yes
 
 - hosts: all
@@ -29,3 +32,80 @@
     postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
   - name: Init database
     shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
+
+- hosts: all
+  tasks:
+  - name: Add Wildfly user
+    user: name=wildfly
+    become: yes
+  - name: Download Wildfly
+    get_url: url=http://download.jboss.org/wildfly/8.2.0.Final/wildfly-8.2.0.Final.tar.gz dest=/opt/wildfly-8.2.0.Final.tar.gz
+    become: yes
+  - name: Extract Wildfly archive
+    unarchive: src=/opt/wildfly-8.2.0.Final.tar.gz dest=/opt owner=wildfly
+    become: yes
+  - name: Create /opt/wildfly symlink
+    file: src=/opt/wildfly-8.2.0.Final dest=/opt/wildfly owner=wildfly
+     state=link
+    become: yes
+  - name: Configure Wildfly
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# JBOSS_HOME'
+      insertafter='^JBOSS_HOME'
+      line='JBOSS_HOME="/opt/wildfly"'
+    become: yes
+  - name: Configure Wildfly
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# JBOSS_USER'
+      insertafter='^JBOSS_USER'
+      line='JBOSS_USER=wildfly'
+    become: yes
+  - name: Configure Wildfly (1 / 5)
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# JBOSS_MODE'
+      insertafter='^JBOSS_MODE'
+      line='JBOSS_MODE=standalone'
+    become: yes
+  - name: Configure Wildfly (2 / 5)
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# JBOSS_CONFIG'
+      insertafter='^JBOSS_CONFIG'
+      line='JBOSS_CONFIG=standalone-full.xml'
+    become: yes
+  - name: Configure Wildfly (3 / 5)
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# STARTUP_WAIT'
+      insertafter='^STARTUP_WAIT'
+      line='STARTUP_WAIT=120'
+    become: yes
+  - name: Configure Wildfly (4 / 5)
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# SHUTDOWN_WAIT'
+      insertafter='^SHUTDOWN_WAIT'
+      line='SHUTDOWN_WAIT=120'
+    become: yes
+  - name: Configure Wildfly (5 / 5)
+    lineinfile: 
+      dest=/opt/wildfly/bin/init.d/wildfly.conf
+      regexp='^# JBOSS_CONSOLE_LOG'
+      insertafter='^JBOSS_CONSOLE_LOG'
+      line='JBOSS_CONSOLE_LOG="/var/log/wildfly/console.log"'
+    become: yes
+  - name: Create /etc/default/wildfly symlink
+    file: src=/opt/wildfly/bin/init.d/wildfly.conf dest=/etc/default/wildfly  owner=wildfly state=link
+    become: yes
+  - name: Create /etc/init.d/wildfly symlink
+    file: src=/opt/wildfly/bin/init.d/wildfly-init-debian.sh dest=/etc/init.d/wildfly owner=wildfly state=link
+    become: yes
+  - name: Replace all 127.0.0.1 to 0.0.0.0
+    replace: dest=/opt/wildfly/standalone/configuration/standalone-full.xml regexp='127\.0\.0\.1' replace='0.0.0.0' backup=yes
+    become: yes
+  - name: Start Wildfly service
+    service: name=wildfly state=started
+    become: yes
