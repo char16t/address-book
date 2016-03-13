@@ -32,6 +32,9 @@
     postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
   - name: Init database
     shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
+  - name: Start Postgresql on boot
+    shell: "update-rc.d postgresql defaults"
+    become: yes
 
 - hosts: all
   tasks:
@@ -110,5 +113,5 @@
     service: name=wildfly state=restarted
     become: yes  
   - name: Start Wildfly on boot
-    shell: "sudo update-rc.d wildfly defaults"
+    shell: "update-rc.d wildfly defaults"
     become: yes
