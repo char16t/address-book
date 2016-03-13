@@ -42,7 +42,7 @@
     get_url: url=http://download.jboss.org/wildfly/8.2.0.Final/wildfly-8.2.0.Final.tar.gz dest=/opt/wildfly-8.2.0.Final.tar.gz
     become: yes
   - name: Extract Wildfly archive
-    unarchive: src=/opt/wildfly-8.2.0.Final.tar.gz dest=/opt owner=wildfly
+    unarchive: src=/opt/wildfly-8.2.0.Final.tar.gz dest=/opt owner=wildfly copy=no
     become: yes
   - name: Create /opt/wildfly symlink
     file: src=/opt/wildfly-8.2.0.Final dest=/opt/wildfly owner=wildfly
@@ -106,6 +106,9 @@
   - name: Replace all 127.0.0.1 to 0.0.0.0
     replace: dest=/opt/wildfly/standalone/configuration/standalone-full.xml regexp='127\.0\.0\.1' replace='0.0.0.0' backup=yes
     become: yes
-  - name: Start Wildfly service
-    service: name=wildfly state=started
+  - name: Restart Wildfly service
+    service: name=wildfly state=restarted
+    become: yes  
+  - name: Start Wildfly on boot
+    shell: "sudo update-rc.d wildfly defaults"
     become: yes
