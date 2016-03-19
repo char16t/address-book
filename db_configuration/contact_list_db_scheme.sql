@@ -1,6 +1,17 @@
 USE addressbook ;
 
 -- -----------------------------------------------------
+-- Table `addressbook`.`test`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS test ;
+
+CREATE TABLE IF NOT EXISTS test (
+  id INT NOT NULL,
+  description VARCHAR(1024) NULL,
+  PRIMARY KEY (id))
+;
+
+-- -----------------------------------------------------
 -- Table `addressbook`.`person`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS person ;
