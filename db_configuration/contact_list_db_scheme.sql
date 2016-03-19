@@ -1,5 +1,3 @@
-USE addressbook ;
-
 -- -----------------------------------------------------
 -- Table `addressbook`.`person`
 -- -----------------------------------------------------
@@ -61,7 +59,7 @@ CREATE TABLE IF NOT EXISTS field_type (
   id INT NOT NULL,
   type_name VARCHAR(45) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT type_name_UNIQUE UNIQUE  (type_name ASC))
+  CONSTRAINT type_name_UNIQUE UNIQUE  (type_name))
 ;
 
 
@@ -79,7 +77,7 @@ CREATE TABLE IF NOT EXISTS attribute_type (
   hidden SMALLINT NOT NULL DEFAULT 0,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id),
-  CONSTRAINT type_UNIQUE UNIQUE  (name ASC)
+  CONSTRAINT type_UNIQUE UNIQUE  (name)
  ,
   CONSTRAINT FK_Attribute_type_field_type_id
     FOREIGN KEY (field_type_id)
@@ -88,7 +86,7 @@ CREATE TABLE IF NOT EXISTS attribute_type (
     ON UPDATE NO ACTION)
 ;
 
-CREATE INDEX FK_Attribute_type_field_type_id_idx ON attribute_type (field_type_id ASC);
+CREATE INDEX FK_Attribute_type_field_type_id_idx ON attribute_type (field_type_id);
 
 
 -- -----------------------------------------------------
@@ -101,7 +99,7 @@ CREATE TABLE IF NOT EXISTS attribute_group (
   name VARCHAR(45) NOT NULL,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id),
-  CONSTRAINT name_UNIQUE UNIQUE  (name ASC))
+  CONSTRAINT name_UNIQUE UNIQUE  (name))
 ;
 
 
