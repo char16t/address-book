@@ -10,9 +10,7 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Random;
 
@@ -29,26 +27,46 @@ public class AddressBookRestTestService {
     @Path("/simple")
     @Produces(MediaType.APPLICATION_JSON)
     public TestSimple testSimple() {
-
         Random r = new Random();
         return new TestSimple(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt());
     }
 
     @GET
     @NoCache
-    @Path("/postgresql")
+    @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public TestRest testPostgresql() throws TestDisabledException {
-
-        Random r = new Random();
+    public TestRest testPostgresqlGet() throws TestDisabledException {
         Test model = testService.get();
-        if (model == null)
-            model = testService.insert("Description:" + r.nextInt(10000));
-        model = testService.update(model, "Description:" + r.nextInt(10000));
+        return convertToRest(model);
+    }
+
+    // Здесь потребуется прислать JSON
+    @POST
+    @NoCache
+    @Path("/insert")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public TestRest testPostgresqlInsert(TestRest rest) throws TestDisabledException {
+        Test model = testService.insert(rest.getDescription());
+        return convertToRest(model);
+    }
+
+    // Можно использовать переменные из пути:
+    @PUT
+    @NoCache
+    @Path("/insert/{description}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public TestRest testPostgresqlInsert(@PathParam("description") String description) throws TestDisabledException {
+        Test model = testService.insert(description);
         return convertToRest(model);
     }
 
     private TestRest convertToRest(Test model) {
-        return new TestRest(model.getId(), model.getDescription());
+        if (model != null) {
+            return new TestRest(model.getId(), model.getDescription());
+        }
+        else {
+            return null;
+        }
     }
 }
