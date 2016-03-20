@@ -16,6 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <deltaspike.version>1.5.1</deltaspike.version>
     </properties>
 
     <dependencies>
@@ -55,10 +56,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Accessing database -->
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-data-module-api</artifactId>
-            <version>1.5.3</version>
+            <version>${deltaspike.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>
