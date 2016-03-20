@@ -115,7 +115,6 @@
   - name: Copy Wildfly config (1 / 2)
     copy: src=/vagrant/wildfly_standalone_configuration/ dest=/opt/wildfly/standalone/configuration/ owner=wildfly group=wildfly directory_mode=yes
     become: yes
-    become: yes
   - name: Copy Wildfly config (2 / 2)
     copy: src=/vagrant/wildfly_postgresql/ dest=/opt/wildfly/modules/org/postgresql/main/ owner=wildfly group=wildfly directory_mode=yes
     become: yes
