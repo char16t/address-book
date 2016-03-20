@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webContextRoot>/vcpe</webContextRoot>
+        <webContextRoot>addressbook</webContextRoot>
     </properties>
 
     <dependencies>

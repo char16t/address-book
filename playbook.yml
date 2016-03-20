@@ -109,9 +109,26 @@
   - name: Replace all 127.0.0.1 to 0.0.0.0
     replace: dest=/opt/wildfly/standalone/configuration/standalone-full.xml regexp='127\.0\.0\.1' replace='0.0.0.0' backup=yes
     become: yes
+  - name: Start Wildfly on boot
+    shell: "update-rc.d wildfly defaults"
+    become: yes
+  - name: Copy Wildfly config (1 / 2)
+    copy: src=/vagrant/wildfly_standalone_configuration/ dest=/opt/wildfly/standalone/configuration/ owner=wildfly group=wildfly directory_mode=yes
+    become: yes
+    become: yes
+  - name: Copy Wildfly config (2 / 2)
+    copy: src=/vagrant/wildfly_postgresql/ dest=/opt/wildfly/modules/org/postgresql/main/ owner=wildfly group=wildfly directory_mode=yes
+    become: yes
   - name: Restart Wildfly service
     service: name=wildfly state=restarted
     become: yes  
-  - name: Start Wildfly on boot
-    shell: "update-rc.d wildfly defaults"
+
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Package application
+    shell: cd /vagrant/address-book && mvn package
+    become: yes
+  - name: Deploy application
+    shell: sudo /opt/wildfly/bin/jboss-cli.sh --connect --command="deploy --force /vagrant/address-book/ear/target/addressbook-ear-1.0.ear"
     become: yes
