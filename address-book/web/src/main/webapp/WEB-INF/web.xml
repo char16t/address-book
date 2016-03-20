@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
+    <display-name>addressbook</display-name>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error/400.html</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error/403.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>406</error-code>
+        <location>/error/500.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500.html</location>
+    </error-page>
+    <error-page>
+        <error-code>502</error-code>
+        <location>/error/502.html</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/error/503.html</location>
+    </error-page>
+    <error-page>
+        <error-code>504</error-code>
+        <location>/error/504.html</location>
+    </error-page>
+</web-app>
