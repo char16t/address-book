@@ -126,13 +126,3 @@
   - name: Restart Wildfly service
     service: name=wildfly state=restarted
     become: yes  
-
-- hosts: all
-  gather_facts: no
-  tasks:
-  - name: Package application
-    shell: cd /vagrant/address-book && mvn package
-    become: yes
-  - name: Deploy application
-    shell: sudo /opt/wildfly/bin/jboss-cli.sh --connect --command="deploy --force /vagrant/address-book/ear/target/addressbook-ear-1.0.ear"
-    become: yes
