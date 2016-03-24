@@ -23,5 +23,6 @@ public class ApplicationErrorCodes {
 	public static final String TEST_ERROR = "990";
 	public static final String ACCESS_FORBIDDEN = "991";
 	public static final String IO_ERROR = "992";
+	public static final String USER_ROLE_NOT_FOUND = "993";
 	public static final String RUNTIME_EXCEPTION = "999";
 }
