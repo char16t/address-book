@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS public.tag ;
 CREATE TABLE IF NOT EXISTS public.tag (
   id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
-  description VARCHAR(45) NULL,
+  description VARCHAR(1024) NULL,
   PRIMARY KEY (id))
 ;
 
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS public.attribute (
   name VARCHAR(45) NOT NULL,
   type_id INT NOT NULL,
   group_id INT NOT NULL,
-  description VARCHAR(45) NULL,
+  description VARCHAR(1024) NULL,
   PRIMARY KEY (id)
  ,
   CONSTRAINT FK_attribute_type_id
