@@ -1,13 +1,13 @@
 package com.vmanenkov.addressbook.rest.services.account;
 
-import com.vmanenkov.addressbook.model.user.Account;
-import com.vmanenkov.addressbook.model.user.Role;
-import com.vmanenkov.addressbook.rest.model.user.RoleRest;
-import com.vmanenkov.addressbook.rest.model.user.AccountRest;
+import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.addressbook.rest.model.account.RoleRest;
+import com.vmanenkov.addressbook.rest.model.account.AccountRest;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
-import com.vmanenkov.services.user.AccountService;
-import com.vmanenkov.services.user.RoleService;
+import com.vmanenkov.services.account.AccountService;
+import com.vmanenkov.services.account.RoleService;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;

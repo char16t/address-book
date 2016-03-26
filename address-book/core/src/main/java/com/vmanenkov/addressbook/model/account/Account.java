@@ -1,21 +1,29 @@
-package com.vmanenkov.addressbook.rest.model.user;
+package com.vmanenkov.addressbook.model.account;
 
+import javax.persistence.*;
 import java.util.Set;
 
-public class AccountRest {
+@Entity
+@Table(name = "account")
+public class Account {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
-    private Set<RoleRest> roles;
 
-    public AccountRest() {
-    }
+    @ManyToMany
+    @JoinTable(name = "account_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
-    public AccountRest(Long id, String email, String password, Set<RoleRest> roles) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+    public Account() {
     }
 
     public Long getId() {
@@ -42,11 +50,11 @@ public class AccountRest {
         this.password = password;
     }
 
-    public Set<RoleRest> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleRest> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
