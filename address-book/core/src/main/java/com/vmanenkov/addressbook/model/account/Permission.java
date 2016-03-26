@@ -1,7 +1,6 @@
-package com.vmanenkov.addressbook.model.user;
+package com.vmanenkov.addressbook.model.account;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

@@ -1,6 +1,6 @@
 package com.vmanenkov.services.user;
 
-import com.vmanenkov.addressbook.model.user.Role;
+import com.vmanenkov.addressbook.model.account.Role;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
 
 import javax.ejb.Local;

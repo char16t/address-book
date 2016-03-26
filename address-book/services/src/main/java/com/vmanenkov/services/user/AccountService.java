@@ -1,7 +1,7 @@
 package com.vmanenkov.services.user;
 
-import com.vmanenkov.addressbook.model.user.Account;
-import com.vmanenkov.addressbook.model.user.Role;
+import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.account.Role;
 
 import javax.ejb.Local;
 import java.util.Set;

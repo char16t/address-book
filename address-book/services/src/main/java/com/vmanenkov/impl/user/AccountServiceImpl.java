@@ -1,8 +1,8 @@
 package com.vmanenkov.impl.user;
 
-import com.vmanenkov.addressbook.data.user.AccountRepository;
-import com.vmanenkov.addressbook.model.user.Account;
-import com.vmanenkov.addressbook.model.user.Role;
+import com.vmanenkov.addressbook.data.account.AccountRepository;
+import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.account.Role;
 import com.vmanenkov.services.user.AccountService;
 
 import javax.ejb.Stateless;
