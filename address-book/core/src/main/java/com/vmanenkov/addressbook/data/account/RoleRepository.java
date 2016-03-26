@@ -1,6 +1,6 @@
 package com.vmanenkov.addressbook.data.account;
 
-import com.vmanenkov.addressbook.model.user.Role;
+import com.vmanenkov.addressbook.model.account.Role;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;
 
