@@ -1,4 +1,4 @@
-package com.vmanenkov.addressbook.data.user;
+package com.vmanenkov.addressbook.data.account;
 
 
 import com.vmanenkov.addressbook.model.user.Account;
