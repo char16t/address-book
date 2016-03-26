@@ -6,5 +6,5 @@ import org.apache.deltaspike.data.api.Repository;
 
 @Repository
 public interface RoleRepository extends EntityRepository<Role, Long> {
-    Role getByName(String name);
+    Role findByName(String name);
 }
