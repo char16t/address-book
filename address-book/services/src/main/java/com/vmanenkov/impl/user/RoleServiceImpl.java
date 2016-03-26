@@ -1,6 +1,6 @@
 package com.vmanenkov.impl.user;
 
-import com.vmanenkov.addressbook.data.user.RoleRepository;
+import com.vmanenkov.addressbook.data.account.RoleRepository;
 import com.vmanenkov.addressbook.model.user.Role;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
 import com.vmanenkov.services.user.RoleService;
