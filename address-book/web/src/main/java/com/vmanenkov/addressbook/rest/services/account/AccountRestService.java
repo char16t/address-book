@@ -12,15 +12,12 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.HashSet;
 import java.util.Set;
 
-@Path("/users")
+@Path("/accounts")
 @RequestScoped
 @Profiled
 public class AccountRestService {
@@ -32,9 +29,9 @@ public class AccountRestService {
 
     @GET
     @NoCache
-    @Path("/getAllByRole/{role}")
+    @Path("/getAllByRole/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<AccountRest> getAllByRole(@PathParam("role") String role) throws UserRoleNotFoundException {
+    public Set<AccountRest> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
         Role roleObject = roleService.getByName(role);
         return convertUsersToRests(accountService.getAccountsByRole(roleObject));
     }
