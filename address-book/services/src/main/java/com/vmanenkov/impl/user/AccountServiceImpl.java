@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.Set;
 
 @Stateless
@@ -19,6 +20,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<Account> getAccountsByRole(Role role) {
-        return accountRepository.findAccountsByRole(role);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        return accountRepository.findAccountsByRole(roles);
     }
 }

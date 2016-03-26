@@ -14,7 +14,7 @@ import java.util.Set;
 public interface AccountRepository extends EntityRepository<Account, Long> {
     Account findOptionalById(Long id);
 
-    @Query(value = "select u from User as u where u.role=role", singleResult = SingleResultType.ANY)
-    Set<Account> findAccountsByRole(Role role);
+    @Query(value = "select a from Account as a where a.roles in ?1", singleResult = SingleResultType.ANY)
+    Set<Account> findAccountsByRole(Set<Role> roles);
 
 }

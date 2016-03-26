@@ -2,9 +2,12 @@ package com.vmanenkov.addressbook.data.user;
 
 import com.vmanenkov.addressbook.model.user.Role;
 import org.apache.deltaspike.data.api.EntityRepository;
+import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
+import org.apache.deltaspike.data.api.SingleResultType;
 
 @Repository
 public interface RoleRepository extends EntityRepository<Role, Long> {
-    Role getByName(String name);
+    @Query(singleResult = SingleResultType.ANY)
+    Role findByName(String name);
 }
