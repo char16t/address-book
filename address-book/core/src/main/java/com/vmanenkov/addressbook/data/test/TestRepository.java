@@ -1,4 +1,4 @@
-package com.vmanenkov.addressbook.data;
+package com.vmanenkov.addressbook.data.test;
 
 import com.vmanenkov.addressbook.model.test.Test;
 import org.apache.deltaspike.data.api.EntityRepository;

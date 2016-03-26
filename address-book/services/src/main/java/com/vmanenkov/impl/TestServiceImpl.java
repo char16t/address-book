@@ -1,6 +1,6 @@
 package com.vmanenkov.impl;
 
-import com.vmanenkov.addressbook.data.TestRepository;
+import com.vmanenkov.addressbook.data.test.TestRepository;
 import com.vmanenkov.addressbook.model.test.Test;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.services.exceptions.TestDisabledException;

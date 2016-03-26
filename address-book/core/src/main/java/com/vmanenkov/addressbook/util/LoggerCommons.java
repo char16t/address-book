@@ -46,8 +46,9 @@ public class LoggerCommons implements Serializable {
 
         if (logger.isLoggable(Level.FINEST)) {
             logger.log(Level.SEVERE, e.getMessage(), e);
-        } else {
-            logger.log(Level.SEVERE, "{0}:{1}", new Object[] { e.getClass().getName(), e.getMessage() });
+        }
+        else {
+            logger.log(Level.SEVERE, "{0}:{1}", new Object[]{e.getClass().getName(), e.getMessage()});
         }
 
     }
@@ -56,7 +57,8 @@ public class LoggerCommons implements Serializable {
 
         if (logger.isLoggable(Level.FINEST)) {
             logger.log(Level.SEVERE, MessageFormat.format(messageFormat, object), e);
-        } else {
+        }
+        else {
             logger.log(Level.SEVERE, messageFormat, object);
         }
     }

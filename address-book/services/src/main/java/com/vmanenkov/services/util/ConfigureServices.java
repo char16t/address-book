@@ -16,16 +16,20 @@ public class ConfigureServices {
     @Profiled
     public ServicesConf produceConfigurationServices(InjectionPoint injectionPoint) {
         Properties prop = new Properties();
-        try {
-            InputStream tmp = ConfigureServices.class.getClassLoader().getResourceAsStream(SERVICES_PROP_FILE);
-            prop.load(tmp);
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO: not found .properties file
+//        try {
+//            InputStream tmp = ConfigureServices.class.getClassLoader().getResourceAsStream(SERVICES_PROP_FILE);
+//            prop.load(tmp);
+//
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        boolean testEnabled = "true".equals(prop.getProperty("test.enabled"));
 
-        boolean testEnabled = "true".equals(prop.getProperty("test.enabled"));
+        boolean testEnabled = true;
 
         ServicesConf conf = new ServicesConf(testEnabled);
         return conf;
