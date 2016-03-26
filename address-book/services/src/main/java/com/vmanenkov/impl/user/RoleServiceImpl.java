@@ -1,7 +1,7 @@
 package com.vmanenkov.impl.user;
 
-import com.vmanenkov.addressbook.data.account.RoleRepository;
-import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.addressbook.data.user.RoleRepository;
+import com.vmanenkov.addressbook.model.user.Role;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
 import com.vmanenkov.services.user.RoleService;
 
@@ -18,7 +18,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role getByName(String name) throws UserRoleNotFoundException {
-        Role role = roleRepository.findByName(name);
+        Role role = roleRepository.getByName(name);
         if(role == null) {
             throw new UserRoleNotFoundException();
         }

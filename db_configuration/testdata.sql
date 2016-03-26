@@ -1,14 +1,12 @@
 -- -----------------------------------------------------
 -- Test data for account
 -- -----------------------------------------------------
-INSERT INTO public.account (id, email, password) VALUES (1, 'test@test.com', 'passwd');
+-- TODO
 
 -- -----------------------------------------------------
 -- Test data for role
 -- -----------------------------------------------------
-INSERT INTO public.role (id, name) VALUES (1, 'Administrator');
-INSERT INTO public.role (id, name) VALUES (2, 'Operator');
-INSERT INTO public.role (id, name) VALUES (3, 'User');
+-- TODO
 
 -- -----------------------------------------------------
 -- Test data for permission

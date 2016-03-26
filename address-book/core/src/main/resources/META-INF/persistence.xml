@@ -5,9 +5,9 @@
     <persistence-unit name="addressbook" transaction-type="JTA">
         <jta-data-source>java:/address-list-ds</jta-data-source>
         <class>com.vmanenkov.addressbook.model.test.Test</class>
-        <class>com.vmanenkov.addressbook.model.account.Account</class>
-        <class>com.vmanenkov.addressbook.model.account.Permission</class>
-        <class>com.vmanenkov.addressbook.model.account.Role</class>
+        <class>com.vmanenkov.addressbook.model.user.Account</class>
+        <class>com.vmanenkov.addressbook.model.user.Permission</class>
+        <class>com.vmanenkov.addressbook.model.user.Role</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

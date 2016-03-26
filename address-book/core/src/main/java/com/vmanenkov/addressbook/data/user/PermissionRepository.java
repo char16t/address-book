@@ -1,6 +1,6 @@
-package com.vmanenkov.addressbook.data.account;
+package com.vmanenkov.addressbook.data.user;
 
-import com.vmanenkov.addressbook.model.account.Permission;
+import com.vmanenkov.addressbook.model.user.Permission;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;
 

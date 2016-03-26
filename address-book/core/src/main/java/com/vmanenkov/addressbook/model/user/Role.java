@@ -1,4 +1,4 @@
-package com.vmanenkov.addressbook.model.account;
+package com.vmanenkov.addressbook.model.user;
 
 import javax.persistence.*;
 import java.util.Set;

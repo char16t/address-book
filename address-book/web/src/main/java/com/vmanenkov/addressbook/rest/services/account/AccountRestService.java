@@ -1,7 +1,7 @@
 package com.vmanenkov.addressbook.rest.services.account;
 
-import com.vmanenkov.addressbook.model.account.Account;
-import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.addressbook.model.user.Account;
+import com.vmanenkov.addressbook.model.user.Role;
 import com.vmanenkov.addressbook.rest.model.user.RoleRest;
 import com.vmanenkov.addressbook.rest.model.user.AccountRest;
 import com.vmanenkov.profile.Profiled;
