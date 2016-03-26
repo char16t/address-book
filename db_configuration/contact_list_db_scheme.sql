@@ -336,6 +336,12 @@ CREATE INDEX fk_person_has_user_user1_idx ON public.person_account (user_id);
 CREATE INDEX fk_person_has_user_person1_idx ON public.person_account (person_id);
 
 
-/* SET SQL_MODE=@OLD_SQL_MODE; */
-/* SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS; */
-/* SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS; */
+-- DROP SEQUENCE hibernate_sequence;
+CREATE SEQUENCE hibernate_sequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE hibernate_sequence
+  OWNER TO postgres;
