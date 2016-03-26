@@ -12,7 +12,7 @@ public class Permission {
     @Column(name="id")
     private Long id;
 
-    @Column(name="id")
+    @Column(name="name")
     private String name;
 
     @ManyToMany
