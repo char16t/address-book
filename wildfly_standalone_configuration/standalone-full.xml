@@ -142,7 +142,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:2.0">
             <datasources>
                 <datasource jta="true" jndi-name="java:/address-list-ds" pool-name="address-list-ds" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/addressbook</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5433/addressbook</connection-url>
                     <driver-class>org.postgresql.Driver</driver-class>
                     <driver>postgresql</driver>
                     <security>
