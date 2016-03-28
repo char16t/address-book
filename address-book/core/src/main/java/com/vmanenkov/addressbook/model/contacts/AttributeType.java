@@ -12,14 +12,15 @@ public class AttributeType {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "field_type_id")
-    private Long fieldTypeId;
-
     @Column(name = "name")
     private String name;
 
     @OneToMany
     private Set<Attribute> attributes;
+
+    @ManyToOne
+    @JoinColumn(name="field_type_id")
+    private FieldType fieldType;
 
     public AttributeType() {
     }
@@ -30,14 +31,6 @@ public class AttributeType {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getFieldTypeId() {
-        return fieldTypeId;
-    }
-
-    public void setFieldTypeId(Long fieldTypeId) {
-        this.fieldTypeId = fieldTypeId;
     }
 
     public String getName() {
@@ -54,5 +47,13 @@ public class AttributeType {
 
     public void setAttributes(Set<Attribute> attributes) {
         this.attributes = attributes;
+    }
+
+    public FieldType getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(FieldType fieldType) {
+        this.fieldType = fieldType;
     }
 }

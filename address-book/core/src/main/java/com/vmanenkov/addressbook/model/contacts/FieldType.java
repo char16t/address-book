@@ -1,10 +1,9 @@
 package com.vmanenkov.addressbook.model.contacts;
 
 import javax.persistence.*;
+import java.util.Set;
 
-// TODO: Setters and getters
-// TODO: Default constructor
-// TODO: relations
+// TODO: test OneToMany relations
 @Entity
 @Table(name = "field_type")
 public class FieldType {
@@ -15,4 +14,34 @@ public class FieldType {
 
     @Column(name = "type_name")
     private String typeName;
+
+    @OneToMany
+    private Set<AttributeType> attributeTypes;
+
+    public FieldType() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Set<AttributeType> getAttributeTypes() {
+        return attributeTypes;
+    }
+
+    public void setAttributeTypes(Set<AttributeType> attributeTypes) {
+        this.attributeTypes = attributeTypes;
+    }
 }
