@@ -7,7 +7,7 @@ import javax.persistence.*;
 // TODO: Many to many relations
 @Entity
 @Table(name = "person")
-public class Contact {
+public class Person {
     @Id
     @GeneratedValue
     @Column(name = "id")
