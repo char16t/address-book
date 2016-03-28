@@ -1,5 +1,7 @@
 package com.vmanenkov.addressbook.model.account;
 
+import com.vmanenkov.addressbook.model.contacts.Person;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,6 +24,12 @@ public class Account {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
+
+    @ManyToMany
+    @JoinTable(name = "person_account",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "person_id")})
+    private Set<Person> persons;
 
     public Account() {
     }
@@ -56,5 +64,13 @@ public class Account {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
     }
 }

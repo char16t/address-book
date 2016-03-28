@@ -1,10 +1,8 @@
 package com.vmanenkov.addressbook.model.contacts;
 
 import javax.persistence.*;
+import java.util.Set;
 
-// TODO: Setters and getters
-// TODO: Default constructor
-// TODO: Many to many relations
 @Entity
 @Table(name = "tag")
 public class Tag {
@@ -18,4 +16,46 @@ public class Tag {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany
+    @JoinTable(name = "person_tag",
+            joinColumns = {@JoinColumn(name = "tag_id")},
+            inverseJoinColumns = {@JoinColumn(name = "person_id")})
+    private Set<Person> persons;
+
+    public Tag() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
+    }
 }
+
