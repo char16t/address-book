@@ -10,6 +10,9 @@ INSERT INTO public.role (id, name) VALUES (1, 'Administrator');
 INSERT INTO public.role (id, name) VALUES (2, 'Operator');
 INSERT INTO public.role (id, name) VALUES (3, 'User');
 
+INSERT INTO account_role VALUES (1, 1);
+INSERT INTO account_role VALUES (1, 3);
+
 -- -----------------------------------------------------
 -- Test data for permission
 -- -----------------------------------------------------
