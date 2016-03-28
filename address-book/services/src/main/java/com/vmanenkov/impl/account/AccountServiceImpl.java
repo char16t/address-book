@@ -20,8 +20,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<Account> getAccountsByRole(Role role) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-        return accountRepository.findAccountsByRole(roles);
+        return new HashSet<>(accountRepository.findAccountsByRole(role.getName()));
     }
 }
