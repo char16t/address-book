@@ -18,7 +18,7 @@ public class AttributeGroup {
     @Column(name = "description")
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "attributeGroup")
     private Set<Attribute> attributes;
 
     public AttributeGroup() {

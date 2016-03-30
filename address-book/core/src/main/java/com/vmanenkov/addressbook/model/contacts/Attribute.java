@@ -18,7 +18,7 @@ public class Attribute {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name="group_id")
     private AttributeGroup attributeGroup;
 
