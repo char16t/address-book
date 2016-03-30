@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS public.person (
   PRIMARY KEY (id))
 ;
 
-
 -- -----------------------------------------------------
 -- Table `public`.`tag`
 -- -----------------------------------------------------
@@ -178,10 +177,16 @@ DROP TABLE IF EXISTS public.note ;
 
 CREATE TABLE IF NOT EXISTS public.note (
   id INT NOT NULL,
+  person_id INT NOT NULL,
   date DATE NOT NULL,
   value VARCHAR(1024) NULL,
-  PRIMARY KEY (id))
-;
+  PRIMARY KEY (id),
+  CONSTRAINT FK_note_person_id
+    FOREIGN KEY (person_id)
+    REFERENCES public.person (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
 
 
 -- -----------------------------------------------------
