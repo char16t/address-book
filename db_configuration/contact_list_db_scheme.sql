@@ -188,32 +188,6 @@ CREATE TABLE IF NOT EXISTS public.note (
     ON UPDATE NO ACTION
 );
 
-
--- -----------------------------------------------------
--- Table `public`.`person_note`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS public.person_note ;
-
-CREATE TABLE IF NOT EXISTS public.person_note (
-  person_id INT NOT NULL,
-  note_id INT NOT NULL
- ,
-  CONSTRAINT FK_person_note_person_id
-    FOREIGN KEY (person_id)
-    REFERENCES public.person (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT FK_person_note_note_id
-    FOREIGN KEY (note_id)
-    REFERENCES public.note (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-
-CREATE INDEX FK_person_note_person_id_idx ON public.person_note (person_id);
-CREATE INDEX FK_person_note_note_id_idx ON public.person_note (note_id);
-
-
 -- -----------------------------------------------------
 -- Table `public`.`test`
 -- -----------------------------------------------------
