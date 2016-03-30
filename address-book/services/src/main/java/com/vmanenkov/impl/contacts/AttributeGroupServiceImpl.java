@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import java.util.Collection;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -61,4 +62,8 @@ public class AttributeGroupServiceImpl implements AttributeGroupService {
         attributeGroupRepository.remove(attributeGroup);
     }
 
+    @Override
+    public Collection<AttributeGroup> getAll() {
+        return attributeGroupRepository.findAll();
+    }
 }

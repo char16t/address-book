@@ -12,6 +12,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/attribute_groups")
 @RequestScoped
@@ -29,7 +31,7 @@ public class AttributeGroupRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeGroupRest createAttributeGroup(AttributeGroupRest rest)
             throws AttributeGroupNotValidException {
-        return convert(attributeGroupService.create(rest.getName(), rest.getDescription()));
+        return convertToRest(attributeGroupService.create(rest.getName(), rest.getDescription()));
     }
 
     @GET
@@ -38,7 +40,15 @@ public class AttributeGroupRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public AttributeGroupRest readAttributeGroup(@PathParam("id") Long id)
             throws AttributeGroupNotFoundException {
-        return convert(attributeGroupService.get(id));
+        return convertToRest(attributeGroupService.get(id));
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AttributeGroupRest> getAllAttributeGroup() {
+        return convertToRests(attributeGroupService.getAll());
     }
 
     @PUT
@@ -48,7 +58,7 @@ public class AttributeGroupRestService {
     public AttributeGroupRest updateAttributeGroup(@PathParam("id") Long id,
                                                    AttributeGroupRest rest)
             throws AttributeGroupNotFoundException, AttributeGroupNotValidException {
-        return convert(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
+        return convertToRest(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
     }
 
     @DELETE
@@ -59,9 +69,17 @@ public class AttributeGroupRestService {
         attributeGroupService.delete(id);
     }
 
-    private AttributeGroupRest convert(AttributeGroup attributeGroup) {
+    private AttributeGroupRest convertToRest(AttributeGroup attributeGroup) {
         return new AttributeGroupRest(attributeGroup.getId(),
                                       attributeGroup.getName(),
                                       attributeGroup.getDescription());
+    }
+
+    private Collection<AttributeGroupRest> convertToRests(Collection<AttributeGroup> models) {
+        Collection<AttributeGroupRest> rests = new HashSet<>(models.size());
+        for (AttributeGroup model : models) {
+            rests.add(convertToRest(model));
+        }
+        return rests;
     }
 }
