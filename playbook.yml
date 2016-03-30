@@ -142,3 +142,5 @@
   - name: Restart Wildfly service
     service: name=wildfly state=restarted
     become: yes  
+  - name: Build and deploy webapp
+    shell: sh /vagrant/deploy.sh
