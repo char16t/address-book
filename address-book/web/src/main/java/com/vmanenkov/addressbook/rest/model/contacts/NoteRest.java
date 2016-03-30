@@ -7,7 +7,7 @@ public class NoteRest {
     private Long id;
     private Date date;
     private String value;
-    private Set<PersonRest> persons;
+    private Long person_id;
 
     public NoteRest() {
     }
@@ -36,11 +36,11 @@ public class NoteRest {
         this.value = value;
     }
 
-    public Set<PersonRest> getPersons() {
-        return persons;
+    public Long getPerson_id() {
+        return person_id;
     }
 
-    public void setPersons(Set<PersonRest> persons) {
-        this.persons = persons;
+    public void setPerson_id(Long person_id) {
+        this.person_id = person_id;
     }
 }

@@ -22,10 +22,7 @@ public class Person {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "person_note",
-            joinColumns = {@JoinColumn(name = "person_id")},
-            inverseJoinColumns = {@JoinColumn(name = "note_id")})
+    @OneToMany
     private Set<Note> notes;
 
     @ManyToMany

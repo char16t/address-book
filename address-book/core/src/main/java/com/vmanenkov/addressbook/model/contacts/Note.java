@@ -18,11 +18,9 @@ public class Note {
     @Column(name = "value")
     private String value;
 
-    @ManyToMany
-    @JoinTable(name = "person_note",
-            joinColumns = {@JoinColumn(name = "note_id")},
-            inverseJoinColumns = {@JoinColumn(name = "person_id")})
-    private Set<Person> persons;
+    @ManyToOne
+    @JoinColumn(name="person_id")
+    private Person person;
 
     public Note() {
     }
@@ -51,11 +49,11 @@ public class Note {
         this.value = value;
     }
 
-    public Set<Person> getPersons() {
-        return persons;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersons(Set<Person> persons) {
-        this.persons = persons;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
