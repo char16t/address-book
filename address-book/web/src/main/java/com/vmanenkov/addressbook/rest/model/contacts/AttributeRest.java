@@ -1,11 +1,14 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
+import com.vmanenkov.addressbook.model.contacts.AttributeValue;
+
 public class AttributeRest {
     private Long id;
     private String name;
     private String description;
     private AttributeGroupRest attributeGroup;
     private AttributeTypeRest attributeType;
+    private AttributeValue attributeValue;
 
     public AttributeRest() {
     }
@@ -48,5 +51,13 @@ public class AttributeRest {
 
     public void setAttributeType(AttributeTypeRest attributeType) {
         this.attributeType = attributeType;
+    }
+
+    public AttributeValue getAttributeValue() {
+        return attributeValue;
+    }
+
+    public void setAttributeValue(AttributeValue attributeValue) {
+        this.attributeValue = attributeValue;
     }
 }
