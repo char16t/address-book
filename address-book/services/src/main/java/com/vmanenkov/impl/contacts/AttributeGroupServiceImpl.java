@@ -31,7 +31,7 @@ public class AttributeGroupServiceImpl implements AttributeGroupService {
 
     @Override
     public AttributeGroup get(Long id) throws AttributeGroupNotFoundException {
-        AttributeGroup attributeGroup = attributeGroupRepository.findBy(id);
+        AttributeGroup attributeGroup = attributeGroupRepository.findOptionalById(id);
         if (attributeGroup == null) {
             throw new AttributeGroupNotFoundException();
         }
