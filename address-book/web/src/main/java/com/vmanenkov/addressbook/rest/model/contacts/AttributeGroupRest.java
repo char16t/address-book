@@ -1,13 +1,17 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
-import java.util.Set;
-
 public class AttributeGroupRest {
     private Long id;
     private String name;
     private String description;
 
     public AttributeGroupRest() {
+    }
+
+    public AttributeGroupRest(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
     public Long getId() {

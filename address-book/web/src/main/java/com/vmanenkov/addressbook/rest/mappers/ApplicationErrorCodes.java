@@ -20,7 +20,13 @@ public class ApplicationErrorCodes {
     public static final String EMAIL_NOT_FOUND = "013";
     public static final String ACCOUNT_NOT_FOUND = "014";
 
+
     public static final String USER_ROLE_NOT_FOUND = "100";
+
+
+    public static final String ATTRIBUTE_GROUP_NOT_FOUND = "200";
+    public static final String ATTRIBUTE_GROUP_NAME_IS_EMPTY = "201";
+
 
     public static final String TEST_ERROR = "990";
     public static final String ACCESS_FORBIDDEN = "991";
