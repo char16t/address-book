@@ -1,9 +1,12 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.profile.Profiled;
+import com.vmanenkov.services.contacts.AttributeService;
+import com.vmanenkov.services.exceptions.AttributeNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -11,6 +14,10 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 @Profiled
 public class AttributeRestService {
+
+    @Inject
+    private AttributeService attributeService;
+
     @POST
     @NoCache
     @Path("/")
@@ -39,7 +46,7 @@ public class AttributeRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteAttribute(@PathParam("id") Long id) {
-
+    public void deleteAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
+        attributeService.delete(id);
     }
 }
