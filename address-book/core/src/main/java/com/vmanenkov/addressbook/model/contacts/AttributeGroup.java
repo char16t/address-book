@@ -3,7 +3,6 @@ package com.vmanenkov.addressbook.model.contacts;
 import javax.persistence.*;
 import java.util.Set;
 
-// TODO: Test OneToMany relation
 @Entity
 @Table(name = "attribute_group")
 public class AttributeGroup {

@@ -3,7 +3,6 @@ package com.vmanenkov.addressbook.model.contacts;
 import javax.persistence.*;
 import java.util.Set;
 
-// TODO: Test ManyToOne relation
 @Entity
 @Table(name = "attribute")
 public class Attribute {
