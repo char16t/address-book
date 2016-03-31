@@ -46,6 +46,16 @@ public class Person {
     public Person() {
     }
 
+    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes, Set<Account> accounts) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.notes = notes;
+        this.tags = tags;
+        this.attributes = attributes;
+        this.accounts = accounts;
+    }
+
     public Long getId() {
         return id;
     }

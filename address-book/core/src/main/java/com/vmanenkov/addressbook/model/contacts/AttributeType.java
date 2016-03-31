@@ -25,6 +25,12 @@ public class AttributeType {
     public AttributeType() {
     }
 
+    public AttributeType(String name, Set<Attribute> attributes, FieldType fieldType) {
+        this.name = name;
+        this.attributes = attributes;
+        this.fieldType = fieldType;
+    }
+
     public Long getId() {
         return id;
     }

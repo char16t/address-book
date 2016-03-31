@@ -24,6 +24,12 @@ public class Note {
     public Note() {
     }
 
+    public Note(Date date, String value, Person person) {
+        this.date = date;
+        this.value = value;
+        this.person = person;
+    }
+
     public Long getId() {
         return id;
     }

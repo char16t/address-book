@@ -19,6 +19,11 @@ public class AttributeValue {
     public AttributeValue() {
     }
 
+    public AttributeValue(String textValue, byte[] blobValue) {
+        this.textValue = textValue;
+        this.blobValue = blobValue;
+    }
+
     public Long getId() {
         return id;
     }
