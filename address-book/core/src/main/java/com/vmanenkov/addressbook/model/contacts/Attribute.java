@@ -34,6 +34,13 @@ public class Attribute {
     public Attribute() {
     }
 
+    public Attribute(String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) {
+        this.name = name;
+        this.description = description;
+        this.attributeGroup = attributeGroup;
+        this.attributeType = attributeType;
+    }
+
     public Long getId() {
         return id;
     }
