@@ -28,6 +28,13 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_GROUP_NAME_IS_EMPTY = "201";
 
 
+    public static final String NOTE_DATE_IS_NOT_VALID = "210";
+    public static final String NOTE_VALUE_IS_EMPTY = "211";
+
+
+    public static final String PERSON_NAME_IS_NOT_VALID = "220";
+
+
     public static final String TEST_ERROR = "990";
     public static final String ACCESS_FORBIDDEN = "991";
     public static final String IO_ERROR = "992";
