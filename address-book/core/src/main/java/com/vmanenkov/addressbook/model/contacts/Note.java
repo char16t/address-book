@@ -2,7 +2,6 @@ package com.vmanenkov.addressbook.model.contacts;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "note")

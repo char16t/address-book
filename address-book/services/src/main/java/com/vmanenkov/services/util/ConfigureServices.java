@@ -4,8 +4,6 @@ import com.vmanenkov.profile.Profiled;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigureServices {

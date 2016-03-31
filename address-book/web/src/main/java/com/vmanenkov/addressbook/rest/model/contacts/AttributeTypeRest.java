@@ -1,7 +1,5 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
-import java.util.Set;
-
 public class AttributeTypeRest {
     private Long id;
     private String name;

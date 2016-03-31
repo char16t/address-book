@@ -1,7 +1,6 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
 import java.util.Date;
-import java.util.Set;
 
 public class NoteRest {
     private Long id;
