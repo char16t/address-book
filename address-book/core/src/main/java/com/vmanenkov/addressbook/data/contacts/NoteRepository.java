@@ -6,5 +6,5 @@ import org.apache.deltaspike.data.api.Repository;
 
 @Repository
 public interface NoteRepository extends EntityRepository<Note, Long> {
-
+    Note findOptionalById(Long id);
 }
