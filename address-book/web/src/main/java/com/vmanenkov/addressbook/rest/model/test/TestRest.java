@@ -1,4 +1,4 @@
-package com.vmanenkov.addressbook.rest.model;
+package com.vmanenkov.addressbook.rest.model.test;
 
 public class TestRest {
     private Integer id;

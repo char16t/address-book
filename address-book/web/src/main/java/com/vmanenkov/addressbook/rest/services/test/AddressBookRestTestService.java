@@ -1,8 +1,8 @@
 package com.vmanenkov.addressbook.rest.services.test;
 
 import com.vmanenkov.addressbook.model.test.Test;
-import com.vmanenkov.addressbook.rest.model.TestRest;
-import com.vmanenkov.addressbook.rest.model.TestSimple;
+import com.vmanenkov.addressbook.rest.model.test.TestRest;
+import com.vmanenkov.addressbook.rest.model.test.TestSimple;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.exceptions.TestDisabledException;
 import com.vmanenkov.services.test.TestService;
