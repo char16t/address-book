@@ -12,11 +12,11 @@ import java.util.Set;
 
 @Local
 public interface AttributeTypeService {
-    AttributeType create(String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotValidException;
+    AttributeType create(String name, FieldType fieldType) throws AttributeTypeNotValidException;
 
     AttributeType get(Long id) throws AttributeTypeNotFoundException;
 
-    AttributeType update(Long id, String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException;
+    AttributeType update(Long id, String name, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException;
 
     void delete(Long id) throws AttributeTypeNotFoundException;
 

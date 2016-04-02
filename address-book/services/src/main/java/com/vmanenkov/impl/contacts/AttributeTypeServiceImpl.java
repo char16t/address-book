@@ -10,6 +10,7 @@ import com.vmanenkov.services.exceptions.AttributeNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeNotValidException;
 import com.vmanenkov.services.exceptions.AttributeTypeNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeTypeNotValidException;
+import com.vmanenkov.services.exceptions.errortypes.AttributeTypeErrorType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -26,10 +27,14 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
     @Inject
     private AttributeTypeRepository attributeTypeRepository;
 
-    // TODO: Fill AttributeTypeServiceImpl::create
     @Override
-    public AttributeType create(String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotValidException {
-        return null;
+    public AttributeType create(String name, FieldType fieldType) throws AttributeTypeNotValidException {
+        if (name == null || "".equals(name)) {
+            throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_NAME_IS_EMPTY);
+        }
+
+        AttributeType attributeType = new AttributeType(name, fieldType);
+        return attributeTypeRepository.save(attributeType);
     }
 
     // TODO: Fill AttributeTypeServiceImpl::get
@@ -40,7 +45,7 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
 
     // TODO: Fill AttributeTypeServiceImpl::update
     @Override
-    public AttributeType update(Long id, String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException {
+    public AttributeType update(Long id, String name, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException {
         return null;
     }
 

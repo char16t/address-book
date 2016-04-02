@@ -25,6 +25,11 @@ public class AttributeType {
     public AttributeType() {
     }
 
+    public AttributeType(String name, FieldType fieldType) {
+        this.name = name;
+        this.fieldType = fieldType;
+    }
+
     public AttributeType(String name, Set<Attribute> attributes, FieldType fieldType) {
         this.name = name;
         this.attributes = attributes;
