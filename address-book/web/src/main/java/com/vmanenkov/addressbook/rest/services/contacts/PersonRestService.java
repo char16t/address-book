@@ -1,9 +1,12 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.profile.Profiled;
+import com.vmanenkov.services.contacts.PersonService;
+import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -11,6 +14,10 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 @Profiled
 public class PersonRestService {
+
+    @Inject
+    private PersonService personService;
+
     @POST
     @NoCache
     @Path("/")
@@ -39,7 +46,7 @@ public class PersonRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deletePerson(@PathParam("id") Long id) {
-
+    public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
+        personService.delete(id);
     }
 }

@@ -1,9 +1,12 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.profile.Profiled;
+import com.vmanenkov.services.contacts.NoteService;
+import com.vmanenkov.services.exceptions.NoteNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -11,6 +14,10 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 @Profiled
 public class NoteRestService {
+
+    @Inject
+    private NoteService noteService;
+
     @POST
     @NoCache
     @Path("/")
@@ -39,7 +46,7 @@ public class NoteRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteNote(@PathParam("id") Long id) {
-
+    public void deleteNote(@PathParam("id") Long id) throws NoteNotFoundException {
+        noteService.delete(id);
     }
 }
