@@ -41,6 +41,7 @@ public class ApplicationErrorCodes {
 
     public static final String NOTE_DATE_IS_NOT_VALID = "210";
     public static final String NOTE_VALUE_IS_EMPTY = "211";
+    public static final String NOTE_NOT_FOUND = "212";
 
     public static final String TAG_NOT_FOUND = "221";
     public static final String TAG_NAME_IS_EMPTY = "222";
