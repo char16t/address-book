@@ -8,7 +8,9 @@ import com.vmanenkov.services.exceptions.errortypes.FieldTypeErrorType;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
+@Provider
 public class FieldTypeNotValidMapper implements ExceptionMapper<FieldTypeNotValidException> {
 
     @Inject
