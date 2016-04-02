@@ -40,10 +40,16 @@ public class TagServiceImpl implements TagService {
         return tagRepository.save(tag);
     }
 
-    // TODO: Fill TagServiceImpl::update
     @Override
     public Tag update(Long id, String name, String description) throws TagNotFoundException, TagNotValidException {
-        return null;
+        Tag tag = get(id);
+        if (name != null && !("".equals(name))) {
+            throw new TagNotValidException(TagErrorType.TAG_NAME_IS_EMPTY);
+        }
+        tag.setName(name);
+        tag.setDescription(description);
+
+        return tagRepository.save(tag);
     }
 
     @Override
