@@ -41,10 +41,13 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
         return attributeTypeRepository.save(attributeType);
     }
 
-    // TODO: Fill AttributeTypeServiceImpl::get
     @Override
     public AttributeType get(Long id) throws AttributeTypeNotFoundException {
-        return null;
+        AttributeType attributeType = attributeTypeRepository.findOptionalById(id);
+        if (attributeType == null) {
+            throw new AttributeTypeNotFoundException();
+        }
+        return attributeType;
     }
 
     // TODO: Fill AttributeTypeServiceImpl::update
