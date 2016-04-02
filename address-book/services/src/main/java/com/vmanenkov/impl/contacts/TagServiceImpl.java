@@ -5,6 +5,7 @@ import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
 import com.vmanenkov.services.exceptions.TagNotValidException;
+import com.vmanenkov.services.exceptions.errortypes.TagErrorType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -19,10 +20,14 @@ public class TagServiceImpl implements TagService {
     @Inject
     private TagRepository tagRepository;
 
-    // TODO: Fill TagServiceImpl::create
     @Override
     public Tag create(String name, String description) throws TagNotValidException {
-        return null;
+        if (name == null || "".equals(name)) {
+            throw new TagNotValidException(TagErrorType.TAG_NAME_IS_EMPTY);
+        }
+
+        Tag tag = new Tag(name, description);
+        return tagRepository.save(tag);
     }
 
     // TODO: Fill TagServiceImpl::get
