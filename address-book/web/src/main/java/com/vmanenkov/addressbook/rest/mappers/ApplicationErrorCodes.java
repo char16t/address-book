@@ -27,6 +27,7 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_GROUP_NOT_FOUND = "200";
     public static final String ATTRIBUTE_GROUP_NAME_IS_EMPTY = "201";
 
+    public static final String ATTRIBUTE_NOT_FOUND = "202";
 
     public static final String NOTE_DATE_IS_NOT_VALID = "210";
     public static final String NOTE_VALUE_IS_EMPTY = "211";
