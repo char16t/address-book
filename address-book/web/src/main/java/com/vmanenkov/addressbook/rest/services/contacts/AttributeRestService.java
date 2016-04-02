@@ -1,5 +1,7 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
+import com.vmanenkov.addressbook.model.contacts.Attribute;
+import com.vmanenkov.addressbook.rest.model.contacts.AttributeRest;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeService;
 import com.vmanenkov.services.exceptions.AttributeNotFoundException;
@@ -9,6 +11,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/attributes")
 @RequestScoped
