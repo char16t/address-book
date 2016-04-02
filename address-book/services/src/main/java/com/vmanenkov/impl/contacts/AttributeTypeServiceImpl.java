@@ -50,10 +50,18 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
         return attributeType;
     }
 
-    // TODO: Fill AttributeTypeServiceImpl::update
     @Override
     public AttributeType update(Long id, String name, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException {
-        return null;
+        AttributeType attributeType = get(id);
+
+        if (name != null) {
+            attributeType.setName(name);
+        }
+
+        if (fieldType != null) {
+            attributeType.setFieldType(fieldType);
+        }
+        return attributeTypeRepository.save(attributeType);
     }
 
     @Override
