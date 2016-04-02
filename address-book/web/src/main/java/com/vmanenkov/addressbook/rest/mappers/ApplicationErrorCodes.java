@@ -32,6 +32,7 @@ public class ApplicationErrorCodes {
 
     public static final String ATTRIBUTE_TYPE_NOT_FOUND = "204";
     public static final String ATTRIBUTE_TYPE_NAME_IS_EMPTY = "205";
+    public static final String ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY = "213";
 
     public static final String ATTRIBUTE_VALUE_NOT_FOUND = "206";
     public static final String ATTRIBUTE_VALUE_IS_EMPTY = "207";

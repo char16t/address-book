@@ -33,6 +33,10 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
             throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_NAME_IS_EMPTY);
         }
 
+        if (fieldType == null) {
+            throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY);
+        }
+
         AttributeType attributeType = new AttributeType(name, fieldType);
         return attributeTypeRepository.save(attributeType);
     }
