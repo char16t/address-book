@@ -1,5 +1,6 @@
 package com.vmanenkov.impl.contacts;
 
+import com.vmanenkov.addressbook.data.contacts.TagRepository;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
@@ -8,11 +9,16 @@ import com.vmanenkov.services.exceptions.TagNotValidException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class TagServiceImpl implements TagService {
+
+    @Inject
+    private TagRepository tagRepository;
+
     // TODO: Fill TagServiceImpl::create
     @Override
     public Tag create(String name, String description) throws TagNotValidException {
@@ -37,9 +43,8 @@ public class TagServiceImpl implements TagService {
 
     }
 
-    // TODO: Fill TagServiceImpl::getAll
     @Override
     public Collection<Tag> getAll() {
-        return null;
+        return tagRepository.findAll();
     }
 }

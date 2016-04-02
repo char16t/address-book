@@ -1,5 +1,6 @@
 package com.vmanenkov.impl.contacts;
 
+import com.vmanenkov.addressbook.data.contacts.AttributeValueRepository;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
@@ -8,11 +9,16 @@ import com.vmanenkov.services.exceptions.AttributeValueNotValidException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class AttributeValueServiceImpl implements AttributeValueService {
+
+    @Inject
+    private AttributeValueRepository attributeValueRepository;
+
     // TODO: Fill AttributeValueServiceImpl::create
     @Override
     public AttributeValue create(String textValue, byte[] blobValue) throws AttributeValueNotValidException {
@@ -37,9 +43,8 @@ public class AttributeValueServiceImpl implements AttributeValueService {
 
     }
 
-    // TODO: Fill AttributeValueServiceImpl::getAll
     @Override
     public Collection<AttributeValue> getAll() {
-        return null;
+        return attributeValueRepository.findAll();
     }
 }

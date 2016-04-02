@@ -1,5 +1,6 @@
 package com.vmanenkov.impl.contacts;
 
+import com.vmanenkov.addressbook.data.contacts.FieldTypeRepository;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.services.contacts.FieldTypeService;
@@ -9,12 +10,17 @@ import com.vmanenkov.services.exceptions.FieldTypeNotValidException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Set;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class FieldTypeServiceImpl implements FieldTypeService {
+
+    @Inject
+    private FieldTypeRepository fieldTypeRepository;
+
     // TODO: Fill FieldTypeServiceImpl::create
     @Override
     public FieldType create(String typeName, Set<AttributeType> attributeTypes) throws FieldTypeNotValidException {
@@ -39,9 +45,8 @@ public class FieldTypeServiceImpl implements FieldTypeService {
 
     }
 
-    // TODO: Fill FieldTypeServiceImpl::getAll
     @Override
     public Collection<FieldType> getAll() {
-        return null;
+        return fieldTypeRepository.findAll();
     }
 }

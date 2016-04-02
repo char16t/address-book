@@ -1,5 +1,6 @@
 package com.vmanenkov.impl.contacts;
 
+import com.vmanenkov.addressbook.data.contacts.NoteRepository;
 import com.vmanenkov.addressbook.model.contacts.Note;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.services.contacts.NoteService;
@@ -9,12 +10,17 @@ import com.vmanenkov.services.exceptions.NoteNotValidException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Date;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class NoteServiceImpl implements NoteService {
+
+    @Inject
+    private NoteRepository noteRepository;
+
     // TODO: Fill NoteServiceImpl::create
     @Override
     public Note create(Date date, String value, Person person) throws NoteNotValidException {
@@ -39,9 +45,8 @@ public class NoteServiceImpl implements NoteService {
 
     }
 
-    // TODO: Fill NoteServiceImpl::getAll
     @Override
     public Collection<Note> getAll() {
-        return null;
+        return noteRepository.findAll();
     }
 }
