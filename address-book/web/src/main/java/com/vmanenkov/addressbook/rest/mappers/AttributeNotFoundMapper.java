@@ -21,7 +21,7 @@ public class AttributeNotFoundMapper implements ExceptionMapper<AttributeNotFoun
 
         // Build result
         Response.ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
-        RestError restError = new RestgiError(ApplicationErrorCodes.ATTRIBUTE_NOT_FOUND, "Attribute not found in DB");
+        RestError restError = new RestError(ApplicationErrorCodes.ATTRIBUTE_NOT_FOUND, "Attribute not found in DB");
         builder.entity(restError);
         return builder.build();
     }
