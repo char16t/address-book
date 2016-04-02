@@ -10,26 +10,31 @@ import com.vmanenkov.services.exceptions.AttributeNotValidException;
 import java.util.Collection;
 
 public class AttributeTypeServiceImpl implements AttributeService {
+    // TODO: fill AttributeTypeServiceImpl::create
     @Override
     public Attribute create(String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) throws AttributeNotValidException {
         return null;
     }
 
+    // TODO: fill AttributeTypeServiceImpl::get
     @Override
     public Attribute get(Long id) throws AttributeNotFoundException {
         return null;
     }
 
+    // TODO: fill AttributeTypeServiceImpl::update
     @Override
     public Attribute update(Long id, String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) throws AttributeNotFoundException, AttributeNotValidException {
         return null;
     }
 
+    // TODO: fill AttributeTypeServiceImpl::delete
     @Override
     public void delete(Long id) throws AttributeNotFoundException {
 
     }
 
+    // TODO: fill AttributeTypeServiceImpl::getAll
     @Override
     public Collection<Attribute> getAll() {
         return null;
