@@ -41,10 +41,15 @@ public class FieldTypeServiceImpl implements FieldTypeService {
         return fieldType;
     }
 
-    // TODO: Fill FieldTypeServiceImpl::update
     @Override
     public FieldType update(Long id, String typeName) throws FieldTypeNotFoundException, FieldTypeNotValidException {
-        return null;
+        FieldType fieldType = get(id);
+
+        if (typeName != null || !("".equals(typeName))) {
+            fieldType.setTypeName(typeName);
+        }
+
+        return fieldTypeRepository.save(fieldType);
     }
 
     @Override
