@@ -1,11 +1,11 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.AttributeValueRepository;
-import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeValueNotValidException;
+import com.vmanenkov.services.exceptions.errortypes.AttributeValueErrorType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -20,22 +20,31 @@ public class AttributeValueServiceImpl implements AttributeValueService {
     @Inject
     private AttributeValueRepository attributeValueRepository;
 
-    // TODO: Fill AttributeValueServiceImpl::create
     @Override
     public AttributeValue create(String textValue, byte[] blobValue) throws AttributeValueNotValidException {
-        return null;
+        if (textValue == null && blobValue == null) {
+            throw new AttributeValueNotValidException(AttributeValueErrorType.ATTRIBUTE_VALUE_IS_EMPTY);
+        }
+        AttributeValue attributeValue = new AttributeValue(textValue, blobValue);
+        return attributeValueRepository.save(attributeValue);
     }
 
-    // TODO: Fill AttributeValueServiceImpl::get
     @Override
     public AttributeValue get(Long id) throws AttributeValueNotFoundException {
-        return null;
+        AttributeValue attributeValue = attributeValueRepository.findOptionalById(id);
+        return attributeValue;
     }
 
-    // TODO: Fill AttributeValueServiceImpl::update
     @Override
     public AttributeValue update(Long id, String textValue, byte[] blobValue) throws AttributeValueNotFoundException, AttributeValueNotValidException {
-        return null;
+        if (textValue == null && blobValue == null) {
+            throw new AttributeValueNotValidException(AttributeValueErrorType.ATTRIBUTE_VALUE_IS_EMPTY);
+        }
+        AttributeValue attributeValue = get(id);
+        attributeValue.setTextValue(textValue);
+        attributeValue.setBlobValue(blobValue);
+
+        return attributeValueRepository.save(attributeValue);
     }
 
     @Override
