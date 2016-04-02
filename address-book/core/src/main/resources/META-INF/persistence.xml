@@ -4,10 +4,18 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="addressbook" transaction-type="JTA">
         <jta-data-source>java:/address-list-ds</jta-data-source>
-        <class>com.vmanenkov.addressbook.model.test.Test</class>
         <class>com.vmanenkov.addressbook.model.account.Account</class>
         <class>com.vmanenkov.addressbook.model.account.Permission</class>
         <class>com.vmanenkov.addressbook.model.account.Role</class>
+        <class>com.vmanenkov.addressbook.model.contacts.Attribute</class>
+        <class>com.vmanenkov.addressbook.model.contacts.AttributeGroup</class>
+        <class>com.vmanenkov.addressbook.model.contacts.AttributeType</class>
+        <class>com.vmanenkov.addressbook.model.contacts.AttributeValue</class>
+        <class>com.vmanenkov.addressbook.model.contacts.FieldType</class>
+        <class>com.vmanenkov.addressbook.model.contacts.Note</class>
+        <class>com.vmanenkov.addressbook.model.contacts.Person</class>
+        <class>com.vmanenkov.addressbook.model.contacts.Tag</class>
+        <class>com.vmanenkov.addressbook.model.test.Test</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
