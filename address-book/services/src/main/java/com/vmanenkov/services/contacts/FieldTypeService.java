@@ -11,11 +11,11 @@ import java.util.Set;
 
 @Local
 public interface FieldTypeService {
-    FieldType create(String typeName, Set<AttributeType> attributeTypes) throws FieldTypeNotValidException;
+    FieldType create(String typeName) throws FieldTypeNotValidException;
 
     FieldType get(Long id) throws FieldTypeNotFoundException;
 
-    FieldType update(Long id, String typeName, Set<AttributeType> attributeTypes) throws FieldTypeNotFoundException, FieldTypeNotValidException;
+    FieldType update(Long id, String typeName) throws FieldTypeNotFoundException, FieldTypeNotValidException;
 
     void delete(Long id) throws FieldTypeNotFoundException;
 

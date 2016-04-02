@@ -6,6 +6,7 @@ import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.services.contacts.FieldTypeService;
 import com.vmanenkov.services.exceptions.FieldTypeNotFoundException;
 import com.vmanenkov.services.exceptions.FieldTypeNotValidException;
+import com.vmanenkov.services.exceptions.errortypes.FieldTypeErrorType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -21,10 +22,14 @@ public class FieldTypeServiceImpl implements FieldTypeService {
     @Inject
     private FieldTypeRepository fieldTypeRepository;
 
-    // TODO: Fill FieldTypeServiceImpl::create
     @Override
-    public FieldType create(String typeName, Set<AttributeType> attributeTypes) throws FieldTypeNotValidException {
-        return null;
+    public FieldType create(String typeName) throws FieldTypeNotValidException {
+        if (typeName == null || "".equals(typeName)) {
+            throw new FieldTypeNotValidException(FieldTypeErrorType.FIELD_TYPE_NAME_IS_EMPTY);
+        }
+
+        FieldType fieldType = new FieldType(typeName);
+        return fieldTypeRepository.save(fieldType);
     }
 
     // TODO: Fill FieldTypeServiceImpl::get
@@ -35,7 +40,7 @@ public class FieldTypeServiceImpl implements FieldTypeService {
 
     // TODO: Fill FieldTypeServiceImpl::update
     @Override
-    public FieldType update(Long id, String typeName, Set<AttributeType> attributeTypes) throws FieldTypeNotFoundException, FieldTypeNotValidException {
+    public FieldType update(Long id, String typeName) throws FieldTypeNotFoundException, FieldTypeNotValidException {
         return null;
     }
 
