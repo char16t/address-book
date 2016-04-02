@@ -3,46 +3,50 @@ package com.vmanenkov.impl.contacts;
 import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
-import com.vmanenkov.services.contacts.AttributeService;
+import com.vmanenkov.addressbook.model.contacts.FieldType;
+import com.vmanenkov.services.contacts.AttributeTypeService;
 import com.vmanenkov.services.exceptions.AttributeNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeNotValidException;
+import com.vmanenkov.services.exceptions.AttributeTypeNotFoundException;
+import com.vmanenkov.services.exceptions.AttributeTypeNotValidException;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import java.util.Collection;
+import java.util.Set;
 
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class AttributeTypeServiceImpl implements AttributeService {
-    // TODO: fill AttributeTypeServiceImpl::create
+public class AttributeTypeServiceImpl implements AttributeTypeService {
+    // TODO: Fill AttributeTypeServiceImpl::create
     @Override
-    public Attribute create(String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) throws AttributeNotValidException {
+    public AttributeType create(String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotValidException {
         return null;
     }
 
-    // TODO: fill AttributeTypeServiceImpl::get
+    // TODO: Fill AttributeTypeServiceImpl::get
     @Override
-    public Attribute get(Long id) throws AttributeNotFoundException {
+    public AttributeType get(Long id) throws AttributeTypeNotFoundException {
         return null;
     }
 
-    // TODO: fill AttributeTypeServiceImpl::update
+    // TODO: Fill AttributeTypeServiceImpl::update
     @Override
-    public Attribute update(Long id, String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) throws AttributeNotFoundException, AttributeNotValidException {
+    public AttributeType update(Long id, String name, Set<Attribute> attributes, FieldType fieldType) throws AttributeTypeNotFoundException, AttributeTypeNotValidException {
         return null;
     }
 
-    // TODO: fill AttributeTypeServiceImpl::delete
+    // TODO: Fill AttributeTypeServiceImpl::delete
     @Override
-    public void delete(Long id) throws AttributeNotFoundException {
+    public void delete(Long id) throws AttributeTypeNotFoundException {
 
     }
 
-    // TODO: fill AttributeTypeServiceImpl::getAll
+    // // TODO: Fill AttributeTypeServiceImpl::getAll
     @Override
-    public Collection<Attribute> getAll() {
+    public Collection<AttributeType> getAll() {
         return null;
     }
 }
