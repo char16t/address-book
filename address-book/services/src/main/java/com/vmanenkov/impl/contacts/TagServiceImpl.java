@@ -30,10 +30,14 @@ public class TagServiceImpl implements TagService {
         return tagRepository.save(tag);
     }
 
-    // TODO: Fill TagServiceImpl::get
     @Override
     public Tag get(Long id) throws TagNotFoundException {
-        return null;
+        Tag tag = tagRepository.findOptionalById(id);
+        if (tag == null) {
+            throw new TagNotFoundException();
+        }
+
+        return tagRepository.save(tag);
     }
 
     // TODO: Fill TagServiceImpl::update
