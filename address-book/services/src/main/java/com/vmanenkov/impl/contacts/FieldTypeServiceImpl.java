@@ -32,10 +32,13 @@ public class FieldTypeServiceImpl implements FieldTypeService {
         return fieldTypeRepository.save(fieldType);
     }
 
-    // TODO: Fill FieldTypeServiceImpl::get
     @Override
     public FieldType get(Long id) throws FieldTypeNotFoundException {
-        return null;
+        FieldType fieldType = fieldTypeRepository.findOptionalById(id);
+        if (fieldType == null) {
+            throw new FieldTypeNotFoundException();
+        }
+        return fieldType;
     }
 
     // TODO: Fill FieldTypeServiceImpl::update
