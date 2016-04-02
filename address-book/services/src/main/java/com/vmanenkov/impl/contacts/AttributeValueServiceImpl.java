@@ -5,8 +5,13 @@ import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeValueNotValidException;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import java.util.Collection;
 
+@Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class AttributeValueServiceImpl implements AttributeValueService {
     // TODO: Fill AttributeValueServiceImpl::create
     @Override
