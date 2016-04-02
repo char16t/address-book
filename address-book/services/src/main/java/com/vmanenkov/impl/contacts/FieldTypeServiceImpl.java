@@ -39,10 +39,10 @@ public class FieldTypeServiceImpl implements FieldTypeService {
         return null;
     }
 
-    // TODO: Fill FieldTypeServiceImpl::delete
     @Override
     public void delete(Long id) throws FieldTypeNotFoundException {
-
+        FieldType fieldType = get(id);
+        fieldTypeRepository.remove(fieldType);
     }
 
     @Override

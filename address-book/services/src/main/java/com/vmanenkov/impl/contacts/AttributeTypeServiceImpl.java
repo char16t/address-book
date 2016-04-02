@@ -44,10 +44,10 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
         return null;
     }
 
-    // TODO: Fill AttributeTypeServiceImpl::delete
     @Override
     public void delete(Long id) throws AttributeTypeNotFoundException {
-
+        AttributeType   attributeType = get(id);
+        attributeTypeRepository.remove(attributeType);
     }
 
     @Override

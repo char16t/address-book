@@ -39,10 +39,10 @@ public class NoteServiceImpl implements NoteService {
         return null;
     }
 
-    // TODO: Fill NoteServiceImpl::delete
     @Override
     public void delete(Long id) throws NoteNotFoundException {
-
+        Note note = get(id);
+        noteRepository.remove(note);
     }
 
     @Override

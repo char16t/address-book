@@ -1,6 +1,7 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.AttributeValueRepository;
+import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
@@ -37,10 +38,10 @@ public class AttributeValueServiceImpl implements AttributeValueService {
         return null;
     }
 
-    // TODO: Fill AttributeValueServiceImpl::delete
     @Override
     public void delete(Long id) throws AttributeValueNotFoundException {
-
+        AttributeValue attributeValue = get(id);
+        attributeValueRepository.remove(attributeValue);
     }
 
     @Override

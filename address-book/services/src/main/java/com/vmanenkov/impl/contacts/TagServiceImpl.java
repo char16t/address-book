@@ -37,10 +37,10 @@ public class TagServiceImpl implements TagService {
         return null;
     }
 
-    // TODO: Fill TagServiceImpl::delete
     @Override
     public void delete(Long id) throws TagNotFoundException {
-
+        Tag tag = get(id);
+        tagRepository.remove(tag);
     }
 
     @Override

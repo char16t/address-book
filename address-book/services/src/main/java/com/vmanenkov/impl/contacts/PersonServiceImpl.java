@@ -41,10 +41,10 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
-    // TODO: Fill PersonServiceImpl::delete
     @Override
     public void delete(Long id) throws PersonNotFoundException {
-
+        Person person = get(id);
+        personRepository.remove(person);
     }
 
     @Override
