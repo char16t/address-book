@@ -21,22 +21,28 @@ public class NoteServiceImpl implements NoteService {
     @Inject
     private NoteRepository noteRepository;
 
-    // TODO: Fill NoteServiceImpl::create
     @Override
     public Note create(Date date, String value, Person person) throws NoteNotValidException {
-        return null;
+        Note note = new Note(date, value, person);
+        return noteRepository.save(note);
     }
 
-    // TODO: Fill NoteServiceImpl::get
     @Override
     public Note get(Long id) throws NoteNotFoundException {
-        return null;
+        Note note = noteRepository.findOptionalById(id);
+        if(note == null) {
+            throw new NoteNotFoundException();
+        }
+        return note;
     }
 
-    // TODO: Fill NoteServiceImpl::update
     @Override
     public Note update(Long id, Date date, String value, Person person) throws NoteNotFoundException, NoteNotValidException {
-        return null;
+        Note note = get(id);
+        note.setDate(date);
+        note.setValue(value);
+        note.setPerson(person);
+        return noteRepository.save(note);
     }
 
     @Override
