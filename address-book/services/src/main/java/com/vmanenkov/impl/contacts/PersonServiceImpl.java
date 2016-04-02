@@ -8,6 +8,7 @@ import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotValidException;
+import com.vmanenkov.services.exceptions.errortypes.PersonErrorType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -23,22 +24,45 @@ public class PersonServiceImpl implements PersonService {
     @Inject
     private PersonRepository personRepository;
 
-    // TODO: Fill PersonServiceImpl::create
     @Override
     public Person create(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotValidException {
-        return null;
+        if (firstName == null || "".equals(firstName)) {
+            throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
+        }
+        if (lastName == null || "".equals(lastName)) {
+            throw new PersonNotValidException(PersonErrorType.PERSON_LAST_NAME_IS_EMPTY);
+        }
+        Person person = new Person(firstName, lastName, description, notes, tags, attributes);
+        return personRepository.save(person);
     }
 
-    // TODO: Fill PersonServiceImpl::get
     @Override
     public Person get(Long id) throws PersonNotFoundException {
-        return null;
+        Person person = personRepository.findOptionalById(id);
+        if (person == null) {
+            throw new PersonNotFoundException();
+        }
+        return person;
     }
 
-    // TODO: Fill PersonServiceImpl::update
     @Override
     public Person update(Long id, String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotFoundException, PersonNotValidException {
-        return null;
+        Person person = get(id);
+        if (firstName == null || "".equals(firstName)) {
+            throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
+        }
+        if (lastName == null || "".equals(lastName)) {
+            throw new PersonNotValidException(PersonErrorType.PERSON_LAST_NAME_IS_EMPTY);
+        }
+
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setDescription(description);
+        person.setNotes(notes);
+        person.setTags(tags);
+        person.setAttributes(attributes);
+
+        return personRepository.save(person);
     }
 
     @Override
