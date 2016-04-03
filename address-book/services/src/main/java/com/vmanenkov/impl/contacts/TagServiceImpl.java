@@ -43,7 +43,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag update(Long id, String name, String description) throws TagNotFoundException, TagNotValidException {
         Tag tag = get(id);
-        if (name != null && !("".equals(name))) {
+        if (name == null || ("".equals(name))) {
             throw new TagNotValidException(TagErrorType.TAG_NAME_IS_EMPTY);
         }
         tag.setName(name);
