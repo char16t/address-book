@@ -46,6 +46,12 @@ public class Person {
     public Person() {
     }
 
+    public Person(String firstName, String lastName, String description) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+    }
+
     public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) {
         this.firstName = firstName;
         this.lastName = lastName;

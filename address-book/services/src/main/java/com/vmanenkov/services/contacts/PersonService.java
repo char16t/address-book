@@ -13,11 +13,11 @@ import java.util.Set;
 
 @Local
 public interface PersonService {
-    Person create(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotValidException;
+    Person create(String firstName, String lastName, String description) throws PersonNotValidException;
 
     Person get(Long id) throws PersonNotFoundException;
 
-    Person update(Long id, String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotFoundException, PersonNotValidException;
+    Person update(Long id, String firstName, String lastName, String description) throws PersonNotFoundException, PersonNotValidException;
 
     void delete(Long id) throws PersonNotFoundException;
 

@@ -25,14 +25,14 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public Person create(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotValidException {
+    public Person create(String firstName, String lastName, String description) throws PersonNotValidException {
         if (firstName == null || "".equals(firstName)) {
             throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
         }
         if (lastName == null || "".equals(lastName)) {
             throw new PersonNotValidException(PersonErrorType.PERSON_LAST_NAME_IS_EMPTY);
         }
-        Person person = new Person(firstName, lastName, description, notes, tags, attributes);
+        Person person = new Person(firstName, lastName, description);
         return personRepository.save(person);
     }
 
@@ -46,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person update(Long id, String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) throws PersonNotFoundException, PersonNotValidException {
+    public Person update(Long id, String firstName, String lastName, String description) throws PersonNotFoundException, PersonNotValidException {
         Person person = get(id);
         if (firstName == null || "".equals(firstName)) {
             throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
@@ -58,9 +58,6 @@ public class PersonServiceImpl implements PersonService {
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setDescription(description);
-        person.setNotes(notes);
-        person.setTags(tags);
-        person.setAttributes(attributes);
 
         return personRepository.save(person);
     }
