@@ -1,10 +1,8 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
-import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
-import com.vmanenkov.addressbook.rest.model.contacts.FieldTypeRest;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeTypeService;
 import com.vmanenkov.services.contacts.FieldTypeService;

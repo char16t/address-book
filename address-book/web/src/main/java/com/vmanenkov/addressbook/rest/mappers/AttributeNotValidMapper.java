@@ -1,7 +1,6 @@
 package com.vmanenkov.addressbook.rest.mappers;
 
 
-import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.rest.model.RestError;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.services.exceptions.AttributeNotValidException;

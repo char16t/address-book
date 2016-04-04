@@ -1,10 +1,7 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.PersonRepository;
-import com.vmanenkov.addressbook.model.contacts.Attribute;
-import com.vmanenkov.addressbook.model.contacts.Note;
 import com.vmanenkov.addressbook.model.contacts.Person;
-import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotValidException;
@@ -15,7 +12,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.Set;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

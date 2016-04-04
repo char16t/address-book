@@ -1,13 +1,9 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.AttributeTypeRepository;
-import com.vmanenkov.addressbook.model.contacts.Attribute;
-import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.services.contacts.AttributeTypeService;
-import com.vmanenkov.services.exceptions.AttributeNotFoundException;
-import com.vmanenkov.services.exceptions.AttributeNotValidException;
 import com.vmanenkov.services.exceptions.AttributeTypeNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeTypeNotValidException;
 import com.vmanenkov.services.exceptions.errortypes.AttributeTypeErrorType;
@@ -17,7 +13,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.Set;
 
 
 @Stateless

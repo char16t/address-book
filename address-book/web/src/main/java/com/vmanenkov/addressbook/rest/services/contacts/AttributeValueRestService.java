@@ -1,7 +1,5 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
-import com.vmanenkov.addressbook.model.contacts.Attribute;
-import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
