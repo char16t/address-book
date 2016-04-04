@@ -1,7 +1,6 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.FieldTypeRepository;
-import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.services.contacts.FieldTypeService;
 import com.vmanenkov.services.exceptions.FieldTypeNotFoundException;
@@ -13,7 +12,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.Set;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
