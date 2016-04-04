@@ -61,10 +61,11 @@ public class AttributeRestService {
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeRest updateAttribute(
-            @PathParam("id") Long id,
             AttributeRest rest,
+            @PathParam("id") Long id,
             @QueryParam("type_id") Long typeId,
             @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException, AttributeNotFoundException {
         AttributeType attributeType = attributeTypeService.get(typeId);
@@ -83,7 +84,6 @@ public class AttributeRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
         attributeService.delete(id);
     }

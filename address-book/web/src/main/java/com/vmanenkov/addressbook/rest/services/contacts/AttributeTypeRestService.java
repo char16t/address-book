@@ -34,8 +34,8 @@ public class AttributeTypeRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeTypeRest createAttributeType(
             AttributeTypeRest rest,
-            @QueryParam("field_type_id") Long fieldTypeId
-    ) throws FieldTypeNotFoundException, AttributeTypeNotValidException {
+            @QueryParam("field_type_id") Long fieldTypeId)
+            throws FieldTypeNotFoundException, AttributeTypeNotValidException {
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
 
         return convertToRest(attributeTypeService.create(rest.getName(), fieldType));
@@ -45,17 +45,19 @@ public class AttributeTypeRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeTypeRest readAttributeType(@PathParam("id") Long id) throws AttributeTypeNotFoundException {
+    public AttributeTypeRest readAttributeType(@PathParam("id") Long id)
+            throws AttributeTypeNotFoundException {
         return convertToRest(attributeTypeService.get(id));
     }
 
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeTypeRest updateAttributeType(
-            @PathParam("id") Long id,
             AttributeTypeRest rest,
+            @PathParam("id") Long id,
             @QueryParam("field_type_id") Long fieldTypeId
     ) throws FieldTypeNotFoundException, AttributeTypeNotValidException, AttributeTypeNotFoundException {
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
@@ -65,7 +67,6 @@ public class AttributeTypeRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteAttributeType(@PathParam("id") Long id) throws AttributeTypeNotFoundException {
         attributeTypeService.delete(id);
     }

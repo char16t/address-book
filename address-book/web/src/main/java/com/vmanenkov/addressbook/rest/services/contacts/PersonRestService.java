@@ -41,15 +41,18 @@ public class PersonRestService {
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PersonRest updatePerson(@PathParam("id") Long id, PersonRest rest) throws PersonNotValidException, PersonNotFoundException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public PersonRest updatePerson(
+            PersonRest rest,
+            @PathParam("id") Long id)
+            throws PersonNotValidException, PersonNotFoundException {
         return convertToRest(personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription()));
     }
 
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
         personService.delete(id);
     }

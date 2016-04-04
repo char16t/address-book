@@ -24,7 +24,8 @@ public class FieldTypeRestService {
     @POST
     @NoCache
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest createFieldType(FieldTypeRest rest) throws FieldTypeNotValidException {
         return convertToRest(fieldTypeService.create(rest.getTypeName()));
     }
@@ -32,7 +33,7 @@ public class FieldTypeRestService {
     @GET
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest readFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
         return convertToRest(fieldTypeService.get(id));
     }
@@ -40,15 +41,18 @@ public class FieldTypeRestService {
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public FieldTypeRest updateFieldType(@PathParam("id") Long id, FieldTypeRest rest) throws FieldTypeNotValidException, FieldTypeNotFoundException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public FieldTypeRest updateFieldType(
+            FieldTypeRest rest,
+            @PathParam("id") Long id)
+            throws FieldTypeNotValidException, FieldTypeNotFoundException {
         return convertToRest(fieldTypeService.update(id, rest.getTypeName()));
     }
 
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
         fieldTypeService.delete(id);
     }

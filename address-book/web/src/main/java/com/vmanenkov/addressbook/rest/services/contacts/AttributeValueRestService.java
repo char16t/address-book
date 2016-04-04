@@ -1,5 +1,6 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
+import com.vmanenkov.addressbook.rest.model.contacts.AttributeValueRest;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
@@ -21,31 +22,32 @@ public class AttributeValueRestService {
     @POST
     @NoCache
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void createAttributeValue() {
-
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public AttributeValueRest createAttributeValue() {
+        return null;
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void readAttributeValue(@PathParam("id") Long id) {
-
+    public AttributeValueRest readAttributeValue(@PathParam("id") Long id) {
+        return null;
     }
 
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void updateAttributeValue(@PathParam("id") Long id) {
-
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public AttributeValueRest updateAttributeValue(@PathParam("id") Long id) {
+        return null;
     }
 
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteAttributeValue(@PathParam("id") Long id) throws AttributeValueNotFoundException {
         attributeValueService.delete(id);
     }

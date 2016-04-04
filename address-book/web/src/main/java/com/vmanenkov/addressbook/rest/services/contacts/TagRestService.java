@@ -24,7 +24,8 @@ public class TagRestService {
     @POST
     @NoCache
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest createTag(TagRest rest) throws TagNotValidException {
         return convertToRest(tagService.create(rest.getName(), rest.getDescription()));
     }
@@ -32,7 +33,7 @@ public class TagRestService {
     @GET
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest readTag(@PathParam("id") Long id) throws TagNotFoundException {
         return convertToRest(tagService.get(id));
     }
@@ -40,15 +41,18 @@ public class TagRestService {
     @PUT
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public TagRest updateTag(@PathParam("id") Long id, TagRest rest) throws TagNotValidException, TagNotFoundException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public TagRest updateTag(
+            TagRest rest,
+            @PathParam("id") Long id)
+            throws TagNotValidException, TagNotFoundException {
         return convertToRest(tagService.update(id, rest.getName(), rest.getDescription()));
     }
 
     @DELETE
     @NoCache
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteTag(@PathParam("id") Long id) throws TagNotFoundException {
         tagService.delete(id);
     }
