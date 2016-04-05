@@ -8,6 +8,12 @@ public class AttributeValueRest {
     public AttributeValueRest() {
     }
 
+    public AttributeValueRest(Long id, String textValue, byte[] blobValue) {
+        this.id = id;
+        this.textValue = textValue;
+        this.blobValue = blobValue;
+    }
+
     public Long getId() {
         return id;
     }
