@@ -30,7 +30,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Note get(Long id) throws NoteNotFoundException {
         Note note = noteRepository.findOptionalById(id);
-        if(note == null) {
+        if (note == null) {
             throw new NoteNotFoundException();
         }
         return note;

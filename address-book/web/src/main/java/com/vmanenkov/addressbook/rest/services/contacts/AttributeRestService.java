@@ -72,12 +72,12 @@ public class AttributeRestService {
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
 
         return convertToRest(attributeService.update(
-                id,
-                rest.getName(),
-                rest.getDescription(),
-                attributeGroup,
-                attributeType
-            )
+                                     id,
+                                     rest.getName(),
+                                     rest.getDescription(),
+                                     attributeGroup,
+                                     attributeType
+                             )
         );
     }
 
@@ -93,7 +93,7 @@ public class AttributeRestService {
                 attribute.getId(),
                 attribute.getName(),
                 attribute.getDescription(),
-                new AttributeGroupRest (attribute.getAttributeGroup().getId(), attribute.getAttributeGroup().getName(), attribute.getAttributeGroup().getDescription()),
+                new AttributeGroupRest(attribute.getAttributeGroup().getId(), attribute.getAttributeGroup().getName(), attribute.getAttributeGroup().getDescription()),
                 new AttributeTypeRest(attribute.getAttributeType().getId(), attribute.getAttributeGroup().getName())
         );
     }

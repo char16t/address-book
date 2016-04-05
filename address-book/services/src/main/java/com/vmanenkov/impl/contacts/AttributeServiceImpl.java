@@ -55,7 +55,7 @@ public class AttributeServiceImpl implements AttributeService {
             attribute.setDescription(description);
         }
 
-        if(attributeGroup != null) {
+        if (attributeGroup != null) {
             attribute.setAttributeGroup(attributeGroup);
         }
 
