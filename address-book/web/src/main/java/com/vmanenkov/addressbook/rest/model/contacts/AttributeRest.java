@@ -13,6 +13,23 @@ public class AttributeRest {
     public AttributeRest() {
     }
 
+    public AttributeRest(Long id, String name, String description, AttributeGroupRest attributeGroup, AttributeTypeRest attributeType) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.attributeGroup = attributeGroup;
+        this.attributeType = attributeType;
+    }
+
+    public AttributeRest(Long id, String name, String description, AttributeGroupRest attributeGroup, AttributeTypeRest attributeType, AttributeValue attributeValue) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.attributeGroup = attributeGroup;
+        this.attributeType = attributeType;
+        this.attributeValue = attributeValue;
+    }
+
     public Long getId() {
         return id;
     }

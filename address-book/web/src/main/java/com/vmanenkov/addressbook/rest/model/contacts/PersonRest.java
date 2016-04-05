@@ -17,6 +17,19 @@ public class PersonRest {
     public PersonRest() {
     }
 
+    public PersonRest(String description, String lastName, String firstName) {
+        this.description = description;
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+
+    public PersonRest(Long id, String firstName, String lastName, String description) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }

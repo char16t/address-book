@@ -21,6 +21,10 @@ public class FieldType {
     public FieldType() {
     }
 
+    public FieldType(String typeName) {
+        this.typeName = typeName;
+    }
+
     public FieldType(String typeName, Set<AttributeType> attributeTypes) {
         this.typeName = typeName;
         this.attributeTypes = attributeTypes;

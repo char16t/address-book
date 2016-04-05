@@ -27,11 +27,27 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_GROUP_NOT_FOUND = "200";
     public static final String ATTRIBUTE_GROUP_NAME_IS_EMPTY = "201";
 
+    public static final String ATTRIBUTE_NOT_FOUND = "202";
+    public static final String ATTRIBUTE_NAME_IS_EMPTY = "203";
+
+    public static final String ATTRIBUTE_TYPE_NOT_FOUND = "204";
+    public static final String ATTRIBUTE_TYPE_NAME_IS_EMPTY = "205";
+    public static final String ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY = "213";
+
+    public static final String ATTRIBUTE_VALUE_NOT_FOUND = "206";
+    public static final String ATTRIBUTE_VALUE_IS_EMPTY = "207";
+
+    public static final String FIELD_TYPE_NOT_FOUND = "208";
+    public static final String FIELD_TYPE_NAME_IS_EMPTY = "209";
 
     public static final String NOTE_DATE_IS_NOT_VALID = "210";
     public static final String NOTE_VALUE_IS_EMPTY = "211";
+    public static final String NOTE_NOT_FOUND = "212";
 
+    public static final String TAG_NOT_FOUND = "221";
+    public static final String TAG_NAME_IS_EMPTY = "222";
 
+    public static final String PERSON_NOT_FOUND = "219";
     public static final String PERSON_NAME_IS_NOT_VALID = "220";
 
 

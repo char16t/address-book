@@ -8,6 +8,11 @@ public class AttributeTypeRest {
     public AttributeTypeRest() {
     }
 
+    public AttributeTypeRest(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

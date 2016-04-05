@@ -7,6 +7,11 @@ public class FieldTypeRest {
     public FieldTypeRest() {
     }
 
+    public FieldTypeRest(Long id, String typeName) {
+        this.id = id;
+        this.typeName = typeName;
+    }
+
     public Long getId() {
         return id;
     }

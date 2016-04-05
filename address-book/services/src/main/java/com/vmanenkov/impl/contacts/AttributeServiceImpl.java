@@ -42,7 +42,6 @@ public class AttributeServiceImpl implements AttributeService {
         return attribute;
     }
 
-    // TODO: Update type and group
     @Override
     public Attribute update(Long id, String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) throws AttributeNotFoundException, AttributeNotValidException {
         Attribute attribute = get(id);
@@ -50,11 +49,20 @@ public class AttributeServiceImpl implements AttributeService {
             if ("".equals(name)) {
                 throw new AttributeNotValidException(AttributeErrorType.ATTRIBUTE_NAME_IS_EMPTY);
             }
-            attributeGroup.setName(name);
+            attribute.setName(name);
         }
         if (description != null) {
-            attributeGroup.setDescription(description);
+            attribute.setDescription(description);
         }
+
+        if(attributeGroup != null) {
+            attribute.setAttributeGroup(attributeGroup);
+        }
+
+        if (attributeType != null) {
+            attribute.setAttributeType(attributeType);
+        }
+
         return attributeRepository.save(attribute);
     }
 
