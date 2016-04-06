@@ -27,4 +27,12 @@ public class FieldTypeRest {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+    @Override
+    public String toString() {
+        return "FieldTypeRest{" +
+                "id=" + id +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
 }

@@ -58,4 +58,14 @@ public class AttributeRest {
         this.attributeType = attributeType;
     }
 
+    @Override
+    public String toString() {
+        return "AttributeRest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", attributeGroup=" + attributeGroup +
+                ", attributeType=" + attributeType +
+                '}';
+    }
 }

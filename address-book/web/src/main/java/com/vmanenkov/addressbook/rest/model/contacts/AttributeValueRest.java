@@ -47,4 +47,13 @@ public class AttributeValueRest {
     public void setAttribute(AttributeRest attribute) {
         this.attribute = attribute;
     }
+
+    @Override
+    public String toString() {
+        return "AttributeValueRest{" +
+                "id=" + id +
+                ", textValue='" + textValue + '\'' +
+                ", attribute=" + attribute +
+                '}';
+    }
 }

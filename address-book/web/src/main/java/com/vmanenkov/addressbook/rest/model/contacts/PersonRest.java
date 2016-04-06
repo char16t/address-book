@@ -93,4 +93,18 @@ public class PersonRest {
     public void setAccounts(Set<AccountRest> accounts) {
         this.accounts = accounts;
     }
+
+    @Override
+    public String toString() {
+        return "PersonRest{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", description='" + description + '\'' +
+                ", notes=" + notes +
+                ", tags=" + tags +
+                ", attributeValues=" + attributeValues +
+                ", accounts=" + accounts +
+                '}';
+    }
 }

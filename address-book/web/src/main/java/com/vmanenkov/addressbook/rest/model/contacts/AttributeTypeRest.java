@@ -38,4 +38,13 @@ public class AttributeTypeRest {
     public void setFieldType(FieldTypeRest fieldType) {
         this.fieldType = fieldType;
     }
+
+    @Override
+    public String toString() {
+        return "AttributeTypeRest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fieldType=" + fieldType +
+                '}';
+    }
 }

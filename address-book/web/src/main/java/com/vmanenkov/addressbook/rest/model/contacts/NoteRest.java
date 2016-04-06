@@ -51,4 +51,14 @@ public class NoteRest {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    @Override
+    public String toString() {
+        return "NoteRest{" +
+                "id=" + id +
+                ", date=" + date +
+                ", value='" + value + '\'' +
+                ", person=" + person + // todo: VM fix, please
+                '}';
+    }
 }

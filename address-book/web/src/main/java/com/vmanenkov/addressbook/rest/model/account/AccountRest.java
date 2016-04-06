@@ -49,4 +49,14 @@ public class AccountRest {
     public void setRoles(Set<RoleRest> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "AccountRest{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
