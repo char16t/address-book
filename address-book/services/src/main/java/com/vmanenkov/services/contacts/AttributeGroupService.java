@@ -13,6 +13,8 @@ public interface AttributeGroupService {
 
     AttributeGroup get(Long id) throws AttributeGroupNotFoundException;
 
+    AttributeGroup getByName(String name);
+
     AttributeGroup update(Long id, String name, String description) throws AttributeGroupNotFoundException, AttributeGroupNotValidException;
 
     void delete(Long id) throws AttributeGroupNotFoundException;

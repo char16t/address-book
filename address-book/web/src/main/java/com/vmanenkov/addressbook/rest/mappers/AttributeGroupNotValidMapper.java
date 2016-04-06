@@ -28,6 +28,10 @@ public class AttributeGroupNotValidMapper implements ExceptionMapper<AttributeGr
                 errorCode = ApplicationErrorCodes.ATTRIBUTE_GROUP_NAME_IS_EMPTY;
                 description = "Attribute group name should not be empty";
                 break;
+            case ATTRIBUTE_GROUP_NAME_IS_NOT_UNIQIE:
+                errorCode = ApplicationErrorCodes.ATTRIBUTE_GROUP_NAME_IS_NOT_UNIQIE;
+                description = "Attribute group name should be unique";
+                break;
             default:
                 break;
         }

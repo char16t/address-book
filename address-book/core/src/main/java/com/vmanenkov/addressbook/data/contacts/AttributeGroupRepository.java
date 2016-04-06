@@ -8,4 +8,6 @@ import org.apache.deltaspike.data.api.Repository;
 public interface AttributeGroupRepository extends EntityRepository<AttributeGroup, Long> {
 
     AttributeGroup findOptionalById(Long id);
+
+    AttributeGroup findOptionalByName(String name);
 }

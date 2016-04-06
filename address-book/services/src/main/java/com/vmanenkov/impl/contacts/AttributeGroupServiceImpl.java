@@ -22,9 +22,8 @@ public class AttributeGroupServiceImpl implements AttributeGroupService {
 
     @Override
     public AttributeGroup create(String name, String description) throws AttributeGroupNotValidException {
-        if (name == null || "".equals(name)) {
-            throw new AttributeGroupNotValidException(AttributeGroupErrorType.ATTRIBUTE_GROUP_NAME_IS_EMPTY);
-        }
+
+        validate(name);
 
         AttributeGroup attributeGroup = new AttributeGroup(name, description);
         return attributeGroupRepository.save(attributeGroup);
@@ -40,14 +39,17 @@ public class AttributeGroupServiceImpl implements AttributeGroupService {
     }
 
     @Override
+    public AttributeGroup getByName(String name) {
+        return attributeGroupRepository.findOptionalByName(name);
+    }
+
+    @Override
     public AttributeGroup update(Long id, String name,
                                  String description)
             throws AttributeGroupNotFoundException, AttributeGroupNotValidException {
         AttributeGroup attributeGroup = get(id);
         if (name != null) {
-            if ("".equals(name)) {
-                throw new AttributeGroupNotValidException(AttributeGroupErrorType.ATTRIBUTE_GROUP_NAME_IS_EMPTY);
-            }
+            validate(name);
             attributeGroup.setName(name);
         }
         if (description != null) {
@@ -65,5 +67,15 @@ public class AttributeGroupServiceImpl implements AttributeGroupService {
     @Override
     public Collection<AttributeGroup> getAll() {
         return attributeGroupRepository.findAll();
+    }
+
+    private void validate(String name) throws AttributeGroupNotValidException {
+        if (name == null || "".equals(name)) {
+            throw new AttributeGroupNotValidException(AttributeGroupErrorType.ATTRIBUTE_GROUP_NAME_IS_EMPTY);
+        }
+
+        if (getByName(name) != null) {
+            throw new AttributeGroupNotValidException(AttributeGroupErrorType.ATTRIBUTE_GROUP_NAME_IS_NOT_UNIQIE);
+        }
     }
 }
