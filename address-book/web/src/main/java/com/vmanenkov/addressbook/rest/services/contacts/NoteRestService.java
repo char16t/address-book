@@ -50,7 +50,7 @@ public class NoteRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public NoteRest updateNote(NoteRest rest,@QueryParam("person_id") Long personId, @PathParam("id") Long id) throws PersonNotFoundException, NoteNotValidException, NoteNotFoundException {
+    public NoteRest updateNote(NoteRest rest, @QueryParam("person_id") Long personId, @PathParam("id") Long id) throws PersonNotFoundException, NoteNotValidException, NoteNotFoundException {
         Person person = personService.get(personId);
         return convertToRest(noteService.update(id, rest.getDate(), rest.getValue(), person));
     }

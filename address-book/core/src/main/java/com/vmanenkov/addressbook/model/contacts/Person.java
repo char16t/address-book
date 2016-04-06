@@ -22,7 +22,7 @@ public class Person {
     @Column(name = "description")
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "person")
     private Set<Note> notes;
 
     @ManyToMany
@@ -31,11 +31,8 @@ public class Person {
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private Set<Tag> tags;
 
-    @ManyToMany
-    @JoinTable(name = "attribute_value",
-            joinColumns = {@JoinColumn(name = "person_id")},
-            inverseJoinColumns = {@JoinColumn(name = "attribute_id")})
-    private Set<Attribute> attributes;
+    @OneToMany(mappedBy = "person")
+    private Set<AttributeValue> attributesValue;
 
     @ManyToMany
     @JoinTable(name = "person_account",
@@ -52,22 +49,22 @@ public class Person {
         this.description = description;
     }
 
-    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes) {
+    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributesValue) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.notes = notes;
         this.tags = tags;
-        this.attributes = attributes;
+        this.attributesValue = attributesValue;
     }
 
-    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<Attribute> attributes, Set<Account> accounts) {
+    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributesValue, Set<Account> accounts) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.notes = notes;
         this.tags = tags;
-        this.attributes = attributes;
+        this.attributesValue = attributesValue;
         this.accounts = accounts;
     }
 
@@ -119,12 +116,12 @@ public class Person {
         this.tags = tags;
     }
 
-    public Set<Attribute> getAttributes() {
-        return attributes;
+    public Set<AttributeValue> getAttributesValue() {
+        return attributesValue;
     }
 
-    public void setAttributes(Set<Attribute> attributes) {
-        this.attributes = attributes;
+    public void setAttributesValue(Set<AttributeValue> attributesValue) {
+        this.attributesValue = attributesValue;
     }
 
     public Set<Account> getAccounts() {

@@ -1,7 +1,9 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.AttributeValueRepository;
+import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
+import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.exceptions.AttributeValueNotFoundException;
 import com.vmanenkov.services.exceptions.AttributeValueNotValidException;
@@ -21,18 +23,17 @@ public class AttributeValueServiceImpl implements AttributeValueService {
     private AttributeValueRepository attributeValueRepository;
 
     @Override
-    public AttributeValue create(String textValue, byte[] blobValue) throws AttributeValueNotValidException {
+    public AttributeValue create(String textValue, byte[] blobValue, Person person, Attribute attribute) throws AttributeValueNotValidException {
         if (textValue == null && blobValue == null) {
             throw new AttributeValueNotValidException(AttributeValueErrorType.ATTRIBUTE_VALUE_IS_EMPTY);
         }
-        AttributeValue attributeValue = new AttributeValue(textValue, blobValue);
+        AttributeValue attributeValue = new AttributeValue(textValue, blobValue, person, attribute);
         return attributeValueRepository.save(attributeValue);
     }
 
     @Override
     public AttributeValue get(Long id) throws AttributeValueNotFoundException {
-        AttributeValue attributeValue = attributeValueRepository.findOptionalById(id);
-        return attributeValue;
+        return attributeValueRepository.findOptionalById(id);
     }
 
     @Override

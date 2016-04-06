@@ -11,7 +11,7 @@ public class PersonRest {
     private String description;
     private Set<NoteRest> notes;
     private Set<TagRest> tags;
-    private Set<AttributeRest> attributes;
+    private Set<AttributeValueRest> attributeValues;
     private Set<AccountRest> accounts;
 
     public PersonRest() {
@@ -78,12 +78,12 @@ public class PersonRest {
         this.tags = tags;
     }
 
-    public Set<AttributeRest> getAttributes() {
-        return attributes;
+    public Set<AttributeValueRest> getAttributeValues() {
+        return attributeValues;
     }
 
-    public void setAttributes(Set<AttributeRest> attributes) {
-        this.attributes = attributes;
+    public void setAttributeValues(Set<AttributeValueRest> attributeValues) {
+        this.attributeValues = attributeValues;
     }
 
     public Set<AccountRest> getAccounts() {
