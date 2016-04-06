@@ -16,7 +16,8 @@ public class AttributeValue {
     @Column(name = "blob_value")
     private byte[] blobValue;
 
-    @Column(name = "attribute_id")
+    @JoinColumn(name = "attribute_id")
+    @ManyToOne(optional = false)
     private Attribute attribute;
 
     @JoinColumn(name = "person_id")

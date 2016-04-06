@@ -10,10 +10,7 @@ import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeGroupService;
 import com.vmanenkov.services.contacts.AttributeService;
 import com.vmanenkov.services.contacts.AttributeTypeService;
-import com.vmanenkov.services.exceptions.AttributeGroupNotFoundException;
-import com.vmanenkov.services.exceptions.AttributeNotFoundException;
-import com.vmanenkov.services.exceptions.AttributeNotValidException;
-import com.vmanenkov.services.exceptions.AttributeTypeNotFoundException;
+import com.vmanenkov.services.exceptions.*;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
@@ -43,11 +40,14 @@ public class AttributeRestService {
     public AttributeRest createAttribute(
             AttributeRest rest,
             @QueryParam("type_id") Long typeId,
-            @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException {
+            @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException, PersonNotFoundException {
 
         AttributeType attributeType = attributeTypeService.get(typeId);
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
-        return convertToRest(attributeService.create(rest.getName(), rest.getDescription(), attributeGroup, attributeType));
+        return convertToRest(attributeService.create(
+                                     rest.getName(), rest.getDescription(),
+                                     attributeGroup, attributeType)
+        );
     }
 
     @GET

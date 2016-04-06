@@ -29,7 +29,7 @@ public class AttributeServiceImpl implements AttributeService {
             throw new AttributeNotValidException(AttributeErrorType.ATTRIBUTE_NAME_IS_EMPTY);
         }
 
-        Attribute attribute = new Attribute(name, description, attributeGroup, attributeType);
+        Attribute attribute = new Attribute(name, description, null, attributeGroup, attributeType);
         return attributeRepository.save(attribute);
     }
 

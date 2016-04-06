@@ -17,6 +17,9 @@ public class Attribute {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "attribute")
+    private Set<AttributeValue> attributeValues;
+
     @ManyToOne(optional = false)
     @JoinColumn(name="group_id")
     private AttributeGroup attributeGroup;
@@ -25,18 +28,14 @@ public class Attribute {
     @JoinColumn(name="type_id")
     private AttributeType attributeType;
 
-    @ManyToMany
-    @JoinTable(name = "attribute_value",
-            joinColumns = {@JoinColumn(name = "attribute_id")},
-            inverseJoinColumns = {@JoinColumn(name = "person_id")})
-    private Set<Person> persons;
-
     public Attribute() {
     }
 
-    public Attribute(String name, String description, AttributeGroup attributeGroup, AttributeType attributeType) {
+    public Attribute(String name, String description, Set<AttributeValue> attributeValues,
+                     AttributeGroup attributeGroup, AttributeType attributeType) {
         this.name = name;
         this.description = description;
+        this.attributeValues = attributeValues;
         this.attributeGroup = attributeGroup;
         this.attributeType = attributeType;
     }
@@ -81,11 +80,11 @@ public class Attribute {
         this.attributeType = attributeType;
     }
 
-    public Set<Person> getPersons() {
-        return persons;
+    public Set<AttributeValue> getAttributeValues() {
+        return attributeValues;
     }
 
-    public void setPersons(Set<Person> persons) {
-        this.persons = persons;
+    public void setAttributeValues(Set<AttributeValue> attributeValues) {
+        this.attributeValues = attributeValues;
     }
 }
