@@ -1,12 +1,14 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 // TODO: test OneToMany relations
 @Entity
 @Table(name = "field_type")
-public class FieldType {
+public class FieldType implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")

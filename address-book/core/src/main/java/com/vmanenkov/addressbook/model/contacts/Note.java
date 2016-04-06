@@ -1,11 +1,13 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "note")
-public class Note {
+public class Note implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")

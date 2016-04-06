@@ -1,5 +1,6 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
 import com.vmanenkov.addressbook.model.account.Account;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
