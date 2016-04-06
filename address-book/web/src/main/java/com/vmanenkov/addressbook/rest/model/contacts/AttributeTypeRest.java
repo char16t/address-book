@@ -5,6 +5,8 @@ public class AttributeTypeRest {
     private String name;
     private FieldTypeRest fieldType;
 
+// todo: add other fields
+
     public AttributeTypeRest() {
     }
 

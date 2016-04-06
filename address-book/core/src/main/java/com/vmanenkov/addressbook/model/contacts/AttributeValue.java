@@ -16,12 +16,21 @@ public class AttributeValue {
     @Column(name = "blob_value")
     private byte[] blobValue;
 
+    @Column(name = "attribute_id")
+    private Attribute attribute;
+
+    @JoinColumn(name = "person_id")
+    @ManyToOne(optional = false)
+    private Person person;
+
     public AttributeValue() {
     }
 
-    public AttributeValue(String textValue, byte[] blobValue) {
+    public AttributeValue(String textValue, byte[] blobValue, Person person, Attribute attribute) {
         this.textValue = textValue;
         this.blobValue = blobValue;
+        this.person = person;
+        this.attribute = attribute;
     }
 
     public Long getId() {
@@ -46,5 +55,21 @@ public class AttributeValue {
 
     public void setBlobValue(byte[] blobValue) {
         this.blobValue = blobValue;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
