@@ -3,7 +3,6 @@ package com.vmanenkov.addressbook.model.contacts;
 import javax.persistence.*;
 import java.util.Set;
 
-// TODO: test onetomany relation
 @Entity
 @Table(name = "attribute_type")
 public class AttributeType {
@@ -15,7 +14,7 @@ public class AttributeType {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "attributeType")
     private Set<Attribute> attributes;
 
     @ManyToOne
