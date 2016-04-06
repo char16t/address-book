@@ -4,8 +4,16 @@ public class AttributeValueRest {
     private Long id;
     private String textValue;
     private byte[] blobValue;
+    private AttributeRest attribute;
 
     public AttributeValueRest() {
+    }
+
+    public AttributeValueRest(Long id, String textValue, byte[] blobValue, AttributeRest attribute) {
+        this.id = id;
+        this.textValue = textValue;
+        this.blobValue = blobValue;
+        this.attribute = attribute;
     }
 
     public Long getId() {
@@ -30,5 +38,13 @@ public class AttributeValueRest {
 
     public void setBlobValue(byte[] blobValue) {
         this.blobValue = blobValue;
+    }
+
+    public AttributeRest getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(AttributeRest attribute) {
+        this.attribute = attribute;
     }
 }
