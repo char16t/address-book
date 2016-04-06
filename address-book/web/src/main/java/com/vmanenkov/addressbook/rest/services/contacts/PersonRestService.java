@@ -2,6 +2,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
@@ -19,6 +20,9 @@ import javax.ws.rs.core.MediaType;
 public class PersonRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private PersonService personService;
 
     @POST
@@ -27,6 +31,7 @@ public class PersonRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public PersonRest createPerson(PersonRest rest) throws PersonNotValidException {
+        log.fine("createPerson(PersonRest rest = {0})", rest);
         return convertToRest(personService.create(rest.getFirstName(), rest.getLastName(), rest.getDescription()));
     }
 
@@ -35,6 +40,7 @@ public class PersonRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public PersonRest readPerson(@PathParam("id") Long id) throws PersonNotFoundException {
+        log.fine("readPerson(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(personService.get(id));
     }
 
@@ -45,8 +51,12 @@ public class PersonRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public PersonRest updatePerson(
             PersonRest rest,
-            @PathParam("id") Long id)
-            throws PersonNotValidException, PersonNotFoundException {
+            @PathParam("id") Long id
+    ) throws PersonNotValidException, PersonNotFoundException {
+        log.fine("updatePerson(\n" +
+                         "            PersonRest rest = {0},\n" +
+                         "            @PathParam(\"id\") Long id = {1}\n" +
+                         "    )", rest, id);
         return convertToRest(personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription()));
     }
 
@@ -54,6 +64,7 @@ public class PersonRestService {
     @NoCache
     @Path("/{id}")
     public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
+        log.fine("deletePerson(@PathParam(\"id\") Long id = {0})", id);
         personService.delete(id);
     }
 

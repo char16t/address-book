@@ -2,6 +2,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.contacts.FieldTypeRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.FieldTypeService;
 import com.vmanenkov.services.exceptions.FieldTypeNotFoundException;
@@ -19,6 +20,9 @@ import javax.ws.rs.core.MediaType;
 public class FieldTypeRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private FieldTypeService fieldTypeService;
 
     @POST
@@ -27,6 +31,7 @@ public class FieldTypeRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest createFieldType(FieldTypeRest rest) throws FieldTypeNotValidException {
+        log.fine("createFieldType(FieldTypeRest rest = {0})", rest);
         return convertToRest(fieldTypeService.create(rest.getTypeName()));
     }
 
@@ -35,6 +40,7 @@ public class FieldTypeRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest readFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
+        log.fine("readFieldType(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(fieldTypeService.get(id));
     }
 
@@ -47,6 +53,9 @@ public class FieldTypeRestService {
             FieldTypeRest rest,
             @PathParam("id") Long id)
             throws FieldTypeNotValidException, FieldTypeNotFoundException {
+        log.fine("updateFieldType(\n" +
+                         "            FieldTypeRest rest = {0},\n" +
+                         "            @PathParam(\"id\") Long id = {1})", rest, id);
         return convertToRest(fieldTypeService.update(id, rest.getTypeName()));
     }
 
@@ -54,6 +63,7 @@ public class FieldTypeRestService {
     @NoCache
     @Path("/{id}")
     public void deleteFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
+        log.fine("deleteFieldType(@PathParam(\"id\") Long id = {0})", id);
         fieldTypeService.delete(id);
     }
 

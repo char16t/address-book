@@ -2,6 +2,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeGroupService;
 import com.vmanenkov.services.exceptions.AttributeGroupNotFoundException;
@@ -21,6 +22,9 @@ import java.util.HashSet;
 public class AttributeGroupRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private AttributeGroupService attributeGroupService;
 
 
@@ -31,6 +35,7 @@ public class AttributeGroupRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeGroupRest createAttributeGroup(AttributeGroupRest rest)
             throws AttributeGroupNotValidException {
+        log.fine("createAttributeGroup(AttributeGroupRest rest = {0})", rest);
         return convertToRest(attributeGroupService.create(rest.getName(), rest.getDescription()));
     }
 
@@ -40,6 +45,7 @@ public class AttributeGroupRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public AttributeGroupRest readAttributeGroup(@PathParam("id") Long id)
             throws AttributeGroupNotFoundException {
+        log.fine("readAttributeGroup(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(attributeGroupService.get(id));
     }
 
@@ -48,6 +54,7 @@ public class AttributeGroupRestService {
     @Path("/get_all")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<AttributeGroupRest> getAllAttributeGroup() {
+        log.fine("getAllAttributeGroup()");
         return convertToRests(attributeGroupService.getAll());
     }
 
@@ -58,6 +65,7 @@ public class AttributeGroupRestService {
     public AttributeGroupRest updateAttributeGroup(@PathParam("id") Long id,
                                                    AttributeGroupRest rest)
             throws AttributeGroupNotFoundException, AttributeGroupNotValidException {
+        log.fine("updateAttributeGroup(@PathParam(\"id\") Long id = {0}, AttributeGroupRest rest = {1})", id, rest);
         return convertToRest(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
     }
 
@@ -65,6 +73,7 @@ public class AttributeGroupRestService {
     @NoCache
     @Path("/{id}")
     public void deleteAttributeGroup(@PathParam("id") Long id) throws AttributeGroupNotFoundException {
+        log.fine("deleteAttributeGroup(@PathParam(\"id\") Long id = {0})", id);
         attributeGroupService.delete(id);
     }
 

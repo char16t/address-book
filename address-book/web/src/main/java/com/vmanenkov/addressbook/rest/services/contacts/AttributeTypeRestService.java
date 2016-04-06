@@ -3,6 +3,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeTypeService;
 import com.vmanenkov.services.contacts.FieldTypeService;
@@ -22,6 +23,9 @@ import javax.ws.rs.core.MediaType;
 public class AttributeTypeRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private AttributeTypeService attributeTypeService;
 
     @Inject
@@ -36,8 +40,10 @@ public class AttributeTypeRestService {
             AttributeTypeRest rest,
             @QueryParam("field_type_id") Long fieldTypeId)
             throws FieldTypeNotFoundException, AttributeTypeNotValidException {
+        log.fine("createAttributeType(\n" +
+                         "            AttributeTypeRest rest = {0},\n" +
+                         "            @QueryParam(\"field_type_id\") Long fieldTypeId = {1})", rest, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
-
         return convertToRest(attributeTypeService.create(rest.getName(), fieldType));
     }
 
@@ -47,6 +53,7 @@ public class AttributeTypeRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public AttributeTypeRest readAttributeType(@PathParam("id") Long id)
             throws AttributeTypeNotFoundException {
+        log.fine("readAttributeType(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(attributeTypeService.get(id));
     }
 
@@ -58,8 +65,12 @@ public class AttributeTypeRestService {
     public AttributeTypeRest updateAttributeType(
             AttributeTypeRest rest,
             @PathParam("id") Long id,
-            @QueryParam("field_type_id") Long fieldTypeId
-    ) throws FieldTypeNotFoundException, AttributeTypeNotValidException, AttributeTypeNotFoundException {
+            @QueryParam("field_type_id") Long fieldTypeId)
+            throws FieldTypeNotFoundException, AttributeTypeNotValidException, AttributeTypeNotFoundException {
+        log.fine("updateAttributeType(\n" +
+                         "            AttributeTypeRest rest = {0},\n" +
+                         "            @PathParam(\"id\") Long id = {1},\n" +
+                         "            @QueryParam(\"field_type_id\") Long fieldTypeId = {2})", rest, id, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
         return convertToRest(attributeTypeService.update(id, rest.getName(), fieldType));
     }
@@ -68,6 +79,7 @@ public class AttributeTypeRestService {
     @NoCache
     @Path("/{id}")
     public void deleteAttributeType(@PathParam("id") Long id) throws AttributeTypeNotFoundException {
+        log.fine("deleteAttributeType(@PathParam(\"id\") Long id = {0})", id);
         attributeTypeService.delete(id);
     }
 

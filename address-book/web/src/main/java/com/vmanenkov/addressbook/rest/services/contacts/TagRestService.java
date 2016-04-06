@@ -2,6 +2,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.addressbook.rest.model.contacts.TagRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
@@ -19,6 +20,9 @@ import javax.ws.rs.core.MediaType;
 public class TagRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private TagService tagService;
 
     @POST
@@ -27,6 +31,7 @@ public class TagRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest createTag(TagRest rest) throws TagNotValidException {
+        log.fine("createTag(TagRest rest = {0})", rest);
         return convertToRest(tagService.create(rest.getName(), rest.getDescription()));
     }
 
@@ -35,6 +40,7 @@ public class TagRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest readTag(@PathParam("id") Long id) throws TagNotFoundException {
+        log.fine("readTag(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(tagService.get(id));
     }
 
@@ -45,8 +51,12 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest updateTag(
             TagRest rest,
-            @PathParam("id") Long id)
-            throws TagNotValidException, TagNotFoundException {
+            @PathParam("id") Long id
+    ) throws TagNotValidException, TagNotFoundException {
+        log.fine("updateTag(\n" +
+                         "            TagRest rest = {0},\n" +
+                         "            @PathParam(\"id\") Long id = {1}\n" +
+                         "    )", rest, id);
         return convertToRest(tagService.update(id, rest.getName(), rest.getDescription()));
     }
 
@@ -54,6 +64,7 @@ public class TagRestService {
     @NoCache
     @Path("/{id}")
     public void deleteTag(@PathParam("id") Long id) throws TagNotFoundException {
+        log.fine("deleteTag(@PathParam(\"id\") Long id = {0})", id);
         tagService.delete(id);
     }
 

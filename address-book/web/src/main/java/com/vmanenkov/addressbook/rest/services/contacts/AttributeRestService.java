@@ -6,6 +6,7 @@ import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeGroupService;
 import com.vmanenkov.services.contacts.AttributeService;
@@ -22,6 +23,9 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 @Profiled
 public class AttributeRestService {
+
+    @Inject
+    private LoggerAB log;
 
     @Inject
     private AttributeService attributeService;
@@ -42,6 +46,10 @@ public class AttributeRestService {
             @QueryParam("type_id") Long typeId,
             @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException, PersonNotFoundException {
 
+        log.fine("createAttribute(\n" +
+                         "            AttributeRest rest = {0},\n" +
+                         "            @QueryParam(\"type_id\") Long typeId = {1},\n" +
+                         "            @QueryParam(\"group_id\") Long groupId = {2}", rest, typeId, groupId);
         AttributeType attributeType = attributeTypeService.get(typeId);
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
         return convertToRest(attributeService.create(
@@ -55,6 +63,7 @@ public class AttributeRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AttributeRest readAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
+        log.fine("readAttribute(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(attributeService.get(id));
     }
 
@@ -68,6 +77,11 @@ public class AttributeRestService {
             @PathParam("id") Long id,
             @QueryParam("type_id") Long typeId,
             @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException, AttributeNotFoundException {
+        log.fine("updateAttribute(\n" +
+                         "            AttributeRest rest = {0},\n" +
+                         "            @PathParam(\"id\") Long id = {1},\n" +
+                         "            @QueryParam(\"type_id\") Long typeId = {2},\n" +
+                         "            @QueryParam(\"group_id\") Long groupId = {3})", rest, typeId, groupId);
         AttributeType attributeType = attributeTypeService.get(typeId);
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
 
@@ -85,6 +99,7 @@ public class AttributeRestService {
     @NoCache
     @Path("/{id}")
     public void deleteAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
+        log.fine("deleteAttribute(@PathParam(\"id\") Long id = {0})", id);
         attributeService.delete(id);
     }
 

@@ -7,6 +7,7 @@ import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeValueRest;
+import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeService;
 import com.vmanenkov.services.contacts.AttributeValueService;
@@ -28,6 +29,9 @@ import javax.ws.rs.core.MediaType;
 public class AttributeValueRestService {
 
     @Inject
+    private LoggerAB log;
+
+    @Inject
     private AttributeValueService attributeValueService;
 
     @Inject
@@ -47,6 +51,11 @@ public class AttributeValueRestService {
             @QueryParam("attribute_id") Long attributeId
     ) throws AttributeValueNotValidException, PersonNotFoundException, AttributeNotFoundException {
 
+        log.fine("createAttributeValue(\n" +
+                         "            AttributeValueRest rest = {0},\n" +
+                         "            @QueryParam(\"person_id\") Long personId = {1},\n" +
+                         "            @QueryParam(\"attribute_id\") Long attributeId = {2}\n" +
+                         "    )", rest, personId, attributeId);
         Person person = personService.get(personId);
         Attribute attribute = attributeService.get(attributeId);
 
@@ -58,6 +67,7 @@ public class AttributeValueRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AttributeValueRest readAttributeValue(@PathParam("id") Long id) throws AttributeValueNotFoundException {
+        log.fine("readAttributeValue(@PathParam(\"id\") Long id = {0})", id);
         return convertToRest(attributeValueService.get(id));
     }
 
@@ -67,6 +77,7 @@ public class AttributeValueRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public AttributeValueRest updateAttributeValue(@PathParam("id") Long id, AttributeValueRest rest) throws AttributeValueNotValidException, AttributeValueNotFoundException {
+        log.fine("updateAttributeValue(@PathParam(\"id\") Long id = {0}, AttributeValueRest rest = {1})", id, rest);
         return convertToRest(attributeValueService.update(id, rest.getTextValue(), rest.getBlobValue()));
     }
 
@@ -74,6 +85,7 @@ public class AttributeValueRestService {
     @NoCache
     @Path("/{id}")
     public void deleteAttributeValue(@PathParam("id") Long id) throws AttributeValueNotFoundException {
+        log.fine("deleteAttributeValue(@PathParam(\"id\") Long id = {0})", id);
         attributeValueService.delete(id);
     }
 
