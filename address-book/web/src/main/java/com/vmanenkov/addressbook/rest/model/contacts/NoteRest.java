@@ -8,7 +8,7 @@ public class NoteRest {
     private Long id;
     private Date date;
     private String value;
-    private Person person;
+    private Person person; // todo: 2 VM this is strangely
 
     public NoteRest() {
     }
