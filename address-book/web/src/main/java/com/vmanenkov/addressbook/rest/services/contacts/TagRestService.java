@@ -76,6 +76,7 @@ public class TagRestService {
         tagService.delete(id);
     }
 
+    // TODO: Remove this
     /*
     private TagRest convertToRest(Tag tag) {
         return new TagRest(
