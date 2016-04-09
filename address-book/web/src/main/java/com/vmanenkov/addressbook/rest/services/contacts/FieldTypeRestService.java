@@ -2,7 +2,9 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.contacts.FieldTypeRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
+import com.vmanenkov.addressbook.utils.EntityConverterImpl;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.FieldTypeService;
 import com.vmanenkov.services.exceptions.FieldTypeNotFoundException;
@@ -25,6 +27,8 @@ public class FieldTypeRestService {
     @Inject
     private FieldTypeService fieldTypeService;
 
+    private EntityConverter converter = new EntityConverterImpl();
+
     @POST
     @NoCache
     @Path("/")
@@ -32,7 +36,8 @@ public class FieldTypeRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest createFieldType(FieldTypeRest rest) throws FieldTypeNotValidException {
         log.fine("createFieldType(FieldTypeRest rest = {0})", rest);
-        return convertToRest(fieldTypeService.create(rest.getTypeName()));
+        FieldType fieldType = fieldTypeService.create(rest.getTypeName());
+        return (FieldTypeRest) converter.convertToRest(fieldType);
     }
 
     @GET
@@ -41,7 +46,8 @@ public class FieldTypeRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public FieldTypeRest readFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
         log.fine("readFieldType(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(fieldTypeService.get(id));
+        FieldType fieldType = fieldTypeService.get(id);
+        return (FieldTypeRest) converter.convertToRest(fieldType);
     }
 
     @PUT
@@ -56,7 +62,8 @@ public class FieldTypeRestService {
         log.fine("updateFieldType(\n" +
                          "            FieldTypeRest rest = {0},\n" +
                          "            @PathParam(\"id\") Long id = {1})", rest, id);
-        return convertToRest(fieldTypeService.update(id, rest.getTypeName()));
+        FieldType fieldType = fieldTypeService.update(id, rest.getTypeName());
+        return (FieldTypeRest) converter.convertToRest(fieldType);
     }
 
     @DELETE
@@ -67,6 +74,7 @@ public class FieldTypeRestService {
         fieldTypeService.delete(id);
     }
 
+    // TODO: Remove this
     private FieldTypeRest convertToRest(FieldType fieldType) {
         return new FieldTypeRest(
                 fieldType.getId(),
