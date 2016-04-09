@@ -75,6 +75,7 @@ public class PersonRestService {
         personService.delete(id);
     }
 
+    // TODO: Remove this
     private PersonRest convertToRest(Person person) {
         return new PersonRest(
                 person.getId(),
