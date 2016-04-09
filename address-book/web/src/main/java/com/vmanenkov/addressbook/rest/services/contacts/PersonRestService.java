@@ -2,7 +2,9 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
+import com.vmanenkov.addressbook.utils.EntityConverterImpl;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
@@ -25,6 +27,8 @@ public class PersonRestService {
     @Inject
     private PersonService personService;
 
+    private EntityConverter converter = new EntityConverterImpl();
+
     @POST
     @NoCache
     @Path("/")
@@ -32,7 +36,8 @@ public class PersonRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public PersonRest createPerson(PersonRest rest) throws PersonNotValidException {
         log.fine("createPerson(PersonRest rest = {0})", rest);
-        return convertToRest(personService.create(rest.getFirstName(), rest.getLastName(), rest.getDescription()));
+        Person person = personService.create(rest.getFirstName(), rest.getLastName(), rest.getDescription());
+        return (PersonRest) converter.convertToRest(person);
     }
 
     @GET
@@ -41,7 +46,8 @@ public class PersonRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public PersonRest readPerson(@PathParam("id") Long id) throws PersonNotFoundException {
         log.fine("readPerson(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(personService.get(id));
+        Person person = personService.get(id);
+        return (PersonRest) converter.convertToRest(person);
     }
 
     @PUT
@@ -57,7 +63,8 @@ public class PersonRestService {
                          "            PersonRest rest = {0},\n" +
                          "            @PathParam(\"id\") Long id = {1}\n" +
                          "    )", rest, id);
-        return convertToRest(personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription()));
+        Person person = personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription());
+        return (PersonRest) converter.convertToRest(person);
     }
 
     @DELETE
