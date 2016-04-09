@@ -27,6 +27,8 @@ public class TagRestService {
     @Inject
     private TagService tagService;
 
+    private EntityConverter converter = new EntityConverterImpl();
+
     @POST
     @NoCache
     @Path("/")
@@ -34,7 +36,6 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest createTag(TagRest rest) throws TagNotValidException {
         log.fine("createTag(TagRest rest = {0})", rest);
-        EntityConverter converter = new EntityConverterImpl();
         Tag tag = tagService.create(rest.getName(), rest.getDescription());
         TagRest tagRest = (TagRest) converter.convertToRest(tag);
         return tagRest;
@@ -46,7 +47,8 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest readTag(@PathParam("id") Long id) throws TagNotFoundException {
         log.fine("readTag(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(tagService.get(id));
+        Tag tag = tagService.get(id);
+        return (TagRest) converter.convertToRest(tag);
     }
 
     @PUT
@@ -62,7 +64,8 @@ public class TagRestService {
                          "            TagRest rest = {0},\n" +
                          "            @PathParam(\"id\") Long id = {1}\n" +
                          "    )", rest, id);
-        return convertToRest(tagService.update(id, rest.getName(), rest.getDescription()));
+        Tag tag = tagService.update(id, rest.getName(), rest.getDescription());
+        return (TagRest) converter.convertToRest(tag);
     }
 
     @DELETE
@@ -73,6 +76,7 @@ public class TagRestService {
         tagService.delete(id);
     }
 
+    /*
     private TagRest convertToRest(Tag tag) {
         return new TagRest(
                 tag.getId(),
@@ -80,4 +84,5 @@ public class TagRestService {
                 tag.getDescription()
         );
     }
+    */
 }

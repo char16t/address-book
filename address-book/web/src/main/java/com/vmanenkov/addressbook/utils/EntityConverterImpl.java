@@ -46,8 +46,7 @@ public class EntityConverterImpl implements EntityConverter {
 
         }
         catch (ClassNotFoundException e) {
-
-
+            e.printStackTrace();
         }
         catch (InstantiationException e) {
             e.printStackTrace();
