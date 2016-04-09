@@ -2,7 +2,9 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.addressbook.rest.model.contacts.TagRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
+import com.vmanenkov.addressbook.utils.EntityConverterImpl;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
@@ -32,7 +34,10 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest createTag(TagRest rest) throws TagNotValidException {
         log.fine("createTag(TagRest rest = {0})", rest);
-        return convertToRest(tagService.create(rest.getName(), rest.getDescription()));
+        EntityConverter converter = new EntityConverterImpl();
+        Tag tag = tagService.create(rest.getName(), rest.getDescription());
+        TagRest tagRest = (TagRest) converter.convertToRest(tag);
+        return tagRest;
     }
 
     @GET
