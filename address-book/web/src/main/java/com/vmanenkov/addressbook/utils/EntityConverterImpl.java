@@ -6,6 +6,8 @@ import com.vmanenkov.addressbook.rest.services.EntityConverter;
 
 import javax.ejb.Stateless;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 @Stateless
 public class EntityConverterImpl implements EntityConverter {
@@ -25,6 +27,21 @@ public class EntityConverterImpl implements EntityConverter {
                 // todo: Если в классе-модели имеется поле, имеющее тип, унаследованный от DbEntity
                 // todo: можно вызвать текущий метод рекурсивно.
                 // todo: Чуть сложнее для полей, которые являются коллекциями, но принцип тот же
+                field.setAccessible(true);
+                String fieldName = field.getName();
+                Class type = field.getType();
+                Field fieldRest = restClass.getDeclaredField(fieldName);
+                fieldRest.setAccessible(true);
+
+                List<Class> interfaces = Arrays.asList(type.getInterfaces());
+
+                if (interfaces.contains(DbEntity.class)) {
+                    RestEntity restFieldValue = this.convertToRest((DbEntity) field.get(model));
+                    fieldRest.set(restEntity, restFieldValue);
+                }
+                else {
+                    fieldRest.set(restEntity, field.get(model));
+                }
             }
 
         }
@@ -36,6 +53,10 @@ public class EntityConverterImpl implements EntityConverter {
             e.printStackTrace();
         }
         catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
         return restEntity;
