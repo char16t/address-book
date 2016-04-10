@@ -27,7 +27,8 @@ public class FieldTypeRestService {
     @Inject
     private FieldTypeService fieldTypeService;
 
-    private EntityConverter converter = new EntityConverterImpl();
+    @Inject
+    private EntityConverter converter;
 
     @POST
     @NoCache

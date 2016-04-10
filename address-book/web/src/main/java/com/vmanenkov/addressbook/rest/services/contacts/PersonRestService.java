@@ -27,7 +27,8 @@ public class PersonRestService {
     @Inject
     private PersonService personService;
 
-    private EntityConverter converter = new EntityConverterImpl();
+    @Inject
+    private EntityConverter converter;
 
     @POST
     @NoCache

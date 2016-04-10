@@ -33,7 +33,8 @@ public class NoteRestService {
     @Inject
     private PersonService personService;
 
-    private EntityConverter converter = new EntityConverterImpl();
+    @Inject
+    private EntityConverter converter;
 
     @POST
     @NoCache
@@ -89,15 +90,5 @@ public class NoteRestService {
     public void deleteNote(@PathParam("id") Long id) throws NoteNotFoundException {
         log.fine("deleteNote(@PathParam(\"id\") Long id = {0})", id);
         noteService.delete(id);
-    }
-
-    // TODO: Remove this
-    private NoteRest convertToRest(Note note) {
-        return new NoteRest(
-                note.getId(),
-                note.getDate(),
-                note.getValue(),
-                note.getPerson()
-        );
     }
 }

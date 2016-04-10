@@ -1,25 +1,41 @@
 package com.vmanenkov.addressbook.utils;
 
 import com.vmanenkov.addressbook.model.DbEntity;
+import com.vmanenkov.addressbook.model.contacts.Note;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
+import com.vmanenkov.addressbook.rest.model.contacts.NoteRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 
 import javax.ejb.Stateless;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Stateless
 public class EntityConverterImpl implements EntityConverter {
+
+    public static final Map<Class, Class> CLASSES;
+
+    static {
+        Map<Class, Class> classMap = new HashMap<>();
+        classMap.put(Note.class, NoteRest.class);
+
+        CLASSES = Collections.unmodifiableMap(classMap);
+    }
+
 
     @Override
     public RestEntity convertToRest(DbEntity model) {
 
         RestEntity restEntity = null;
 
+
         try {
+            if (model == null) {
+                return null;
+            }
+
             Class dbClass = model.getClass();
-            Class restClass = Class.forName(dbClass.getName() + "Rest");
+            Class restClass = CLASSES.get(dbClass);
             restEntity = (RestEntity) restClass.newInstance();
             for (Field field : dbClass.getDeclaredFields()) {
                 // todo: тут надо перебрать все поля и установить значения в аналогичных полях такими же, как
@@ -29,8 +45,18 @@ public class EntityConverterImpl implements EntityConverter {
                 // todo: Чуть сложнее для полей, которые являются коллекциями, но принцип тот же
                 field.setAccessible(true);
                 String fieldName = field.getName();
+
+                Field fieldRest = null;
+                for (Field f : restClass.getDeclaredFields()) {
+                    if(f.getName().equals(fieldName)) {
+                        fieldRest = f;
+                    }
+                }
                 Class type = field.getType();
-                Field fieldRest = restClass.getDeclaredField(fieldName);
+                if (fieldRest == null) {
+                    continue;
+                }
+
                 fieldRest.setAccessible(true);
 
                 List<Class> interfaces = Arrays.asList(type.getInterfaces());
@@ -45,9 +71,6 @@ public class EntityConverterImpl implements EntityConverter {
             }
 
         }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         catch (InstantiationException e) {
             e.printStackTrace();
         }
@@ -55,9 +78,6 @@ public class EntityConverterImpl implements EntityConverter {
             e.printStackTrace();
         }
 
-        catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
         return restEntity;
     }
 

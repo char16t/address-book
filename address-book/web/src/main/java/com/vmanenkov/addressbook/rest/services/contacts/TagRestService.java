@@ -27,7 +27,8 @@ public class TagRestService {
     @Inject
     private TagService tagService;
 
-    private EntityConverter converter = new EntityConverterImpl();
+    @Inject
+    private EntityConverter converter;
 
     @POST
     @NoCache
