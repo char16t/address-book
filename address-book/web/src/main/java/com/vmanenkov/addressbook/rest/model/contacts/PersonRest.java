@@ -1,10 +1,11 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.account.AccountRest;
 
 import java.util.Set;
 
-public class PersonRest {
+public class PersonRest implements RestEntity {
     private Long id;
     private String firstName;
     private String lastName;

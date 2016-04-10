@@ -1,7 +1,9 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
 
-public class TagRest {
+import com.vmanenkov.addressbook.rest.model.RestEntity;
+
+public class TagRest implements RestEntity {
     private Long id;
     private String name;
     private String description;
