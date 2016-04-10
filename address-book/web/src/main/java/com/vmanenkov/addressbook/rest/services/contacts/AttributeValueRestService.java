@@ -3,10 +3,12 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeValueRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeService;
@@ -40,12 +42,15 @@ public class AttributeValueRestService {
     @Inject
     private PersonService personService;
 
+    @Inject
+    private EntityConverter converter;
+
     @POST
     @NoCache
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeValueRest createAttributeValue(
+    public RestEntity createAttributeValue(
             AttributeValueRest rest,
             @QueryParam("person_id") Long personId,
             @QueryParam("attribute_id") Long attributeId
@@ -58,17 +63,18 @@ public class AttributeValueRestService {
                          "    )", rest, personId, attributeId);
         Person person = personService.get(personId);
         Attribute attribute = attributeService.get(attributeId);
-
-        return convertToRest(attributeValueService.create(rest.getTextValue(), rest.getBlobValue(), person, attribute));
+        AttributeValue value = attributeValueService.create(rest.getTextValue(), rest.getBlobValue(),
+                                                            person, attribute);
+        return converter.convertToRest(value);
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeValueRest readAttributeValue(@PathParam("id") Long id) throws AttributeValueNotFoundException {
+    public RestEntity readAttributeValue(@PathParam("id") Long id) throws AttributeValueNotFoundException {
         log.fine("readAttributeValue(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(attributeValueService.get(id));
+        return converter.convertToRest(attributeValueService.get(id));
     }
 
     @PUT
@@ -76,9 +82,10 @@ public class AttributeValueRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeValueRest updateAttributeValue(@PathParam("id") Long id, AttributeValueRest rest) throws AttributeValueNotValidException, AttributeValueNotFoundException {
+    public RestEntity updateAttributeValue(@PathParam("id") Long id, AttributeValueRest rest) throws AttributeValueNotValidException, AttributeValueNotFoundException {
         log.fine("updateAttributeValue(@PathParam(\"id\") Long id = {0}, AttributeValueRest rest = {1})", id, rest);
-        return convertToRest(attributeValueService.update(id, rest.getTextValue(), rest.getBlobValue()));
+        AttributeValue value = attributeValueService.update(id, rest.getTextValue(), rest.getBlobValue());
+        return converter.convertToRest(value);
     }
 
     @DELETE

@@ -2,7 +2,9 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeTypeService;
@@ -31,12 +33,15 @@ public class AttributeTypeRestService {
     @Inject
     private FieldTypeService fieldTypeService;
 
+    @Inject
+    private EntityConverter converter;
+
     @POST
     @NoCache
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeTypeRest createAttributeType(
+    public RestEntity createAttributeType(
             AttributeTypeRest rest,
             @QueryParam("field_type_id") Long fieldTypeId)
             throws FieldTypeNotFoundException, AttributeTypeNotValidException {
@@ -44,17 +49,17 @@ public class AttributeTypeRestService {
                          "            AttributeTypeRest rest = {0},\n" +
                          "            @QueryParam(\"field_type_id\") Long fieldTypeId = {1})", rest, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
-        return convertToRest(attributeTypeService.create(rest.getName(), fieldType));
+        return converter.convertToRest(attributeTypeService.create(rest.getName(), fieldType));
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeTypeRest readAttributeType(@PathParam("id") Long id)
+    public RestEntity readAttributeType(@PathParam("id") Long id)
             throws AttributeTypeNotFoundException {
         log.fine("readAttributeType(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(attributeTypeService.get(id));
+        return converter.convertToRest(attributeTypeService.get(id));
     }
 
     @PUT
@@ -62,7 +67,7 @@ public class AttributeTypeRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeTypeRest updateAttributeType(
+    public RestEntity updateAttributeType(
             AttributeTypeRest rest,
             @PathParam("id") Long id,
             @QueryParam("field_type_id") Long fieldTypeId)
@@ -72,7 +77,7 @@ public class AttributeTypeRestService {
                          "            @PathParam(\"id\") Long id = {1},\n" +
                          "            @QueryParam(\"field_type_id\") Long fieldTypeId = {2})", rest, id, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
-        return convertToRest(attributeTypeService.update(id, rest.getName(), fieldType));
+        return converter.convertToRest(attributeTypeService.update(id, rest.getName(), fieldType));
     }
 
     @DELETE
@@ -84,10 +89,4 @@ public class AttributeTypeRestService {
         attributeTypeService.delete(id);
     }
 
-    private AttributeTypeRest convertToRest(AttributeType attributeType) {
-        return new AttributeTypeRest(
-                attributeType.getId(),
-                attributeType.getName()
-        );
-    }
 }

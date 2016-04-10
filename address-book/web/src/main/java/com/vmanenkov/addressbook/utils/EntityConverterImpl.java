@@ -93,6 +93,15 @@ public class EntityConverterImpl implements EntityConverter {
     }
 
     @Override
+    public Collection<RestEntity> convertAllToRest(Collection<DbEntity> models) {
+        Collection<RestEntity> restEntities = new HashSet<>(models.size());
+        for (DbEntity model : models) {
+            restEntities.add(convertToRest(model));
+        }
+        return restEntities;
+    }
+
+    @Override
     public DbEntity convertToDb(RestEntity model) {
         return null;
     }

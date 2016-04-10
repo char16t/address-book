@@ -1,6 +1,7 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Tag;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.TagRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
@@ -46,10 +47,10 @@ public class TagRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public TagRest readTag(@PathParam("id") Long id) throws TagNotFoundException {
+    public RestEntity readTag(@PathParam("id") Long id) throws TagNotFoundException {
         log.fine("readTag(@PathParam(\"id\") Long id = {0})", id);
         Tag tag = tagService.get(id);
-        return (TagRest) converter.convertToRest(tag);
+        return converter.convertToRest(tag);
     }
 
     @PUT
@@ -57,7 +58,7 @@ public class TagRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public TagRest updateTag(
+    public RestEntity updateTag(
             TagRest rest,
             @PathParam("id") Long id
     ) throws TagNotValidException, TagNotFoundException {
@@ -66,7 +67,7 @@ public class TagRestService {
                          "            @PathParam(\"id\") Long id = {1}\n" +
                          "    )", rest, id);
         Tag tag = tagService.update(id, rest.getName(), rest.getDescription());
-        return (TagRest) converter.convertToRest(tag);
+        return converter.convertToRest(tag);
     }
 
     @DELETE
@@ -77,15 +78,4 @@ public class TagRestService {
         log.fine("deleteTag(@PathParam(\"id\") Long id = {0})", id);
         tagService.delete(id);
     }
-
-    // TODO: Remove this
-    /*
-    private TagRest convertToRest(Tag tag) {
-        return new TagRest(
-                tag.getId(),
-                tag.getName(),
-                tag.getDescription()
-        );
-    }
-    */
 }

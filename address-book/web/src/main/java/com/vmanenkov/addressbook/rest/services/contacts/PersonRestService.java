@@ -1,6 +1,7 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Person;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
@@ -35,20 +36,20 @@ public class PersonRestService {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public PersonRest createPerson(PersonRest rest) throws PersonNotValidException {
+    public RestEntity createPerson(PersonRest rest) throws PersonNotValidException {
         log.fine("createPerson(PersonRest rest = {0})", rest);
         Person person = personService.create(rest.getFirstName(), rest.getLastName(), rest.getDescription());
-        return (PersonRest) converter.convertToRest(person);
+        return converter.convertToRest(person);
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public PersonRest readPerson(@PathParam("id") Long id) throws PersonNotFoundException {
+    public RestEntity readPerson(@PathParam("id") Long id) throws PersonNotFoundException {
         log.fine("readPerson(@PathParam(\"id\") Long id = {0})", id);
         Person person = personService.get(id);
-        return (PersonRest) converter.convertToRest(person);
+        return converter.convertToRest(person);
     }
 
     @PUT
@@ -56,7 +57,7 @@ public class PersonRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public PersonRest updatePerson(
+    public RestEntity updatePerson(
             PersonRest rest,
             @PathParam("id") Long id
     ) throws PersonNotValidException, PersonNotFoundException {
@@ -65,7 +66,7 @@ public class PersonRestService {
                          "            @PathParam(\"id\") Long id = {1}\n" +
                          "    )", rest, id);
         Person person = personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription());
-        return (PersonRest) converter.convertToRest(person);
+        return converter.convertToRest(person);
     }
 
     @DELETE
@@ -75,15 +76,5 @@ public class PersonRestService {
     public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
         log.fine("deletePerson(@PathParam(\"id\") Long id = {0})", id);
         personService.delete(id);
-    }
-
-    // TODO: Remove this
-    private PersonRest convertToRest(Person person) {
-        return new PersonRest(
-                person.getId(),
-                person.getFirstName(),
-                person.getLastName(),
-                person.getDescription()
-        );
     }
 }

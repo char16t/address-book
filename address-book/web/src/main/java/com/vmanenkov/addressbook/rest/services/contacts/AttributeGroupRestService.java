@@ -1,7 +1,9 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeGroupService;
@@ -27,33 +29,36 @@ public class AttributeGroupRestService {
     @Inject
     private AttributeGroupService attributeGroupService;
 
+    @Inject
+    private EntityConverter converter;
 
     @POST
     @NoCache
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeGroupRest createAttributeGroup(AttributeGroupRest rest)
+    public RestEntity createAttributeGroup(AttributeGroupRest rest)
             throws AttributeGroupNotValidException {
         log.fine("createAttributeGroup(AttributeGroupRest rest = {0})", rest);
-        return convertToRest(attributeGroupService.create(rest.getName(), rest.getDescription()));
+        AttributeGroup group = attributeGroupService.create(rest.getName(), rest.getDescription());
+        return converter.convertToRest(group);
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeGroupRest readAttributeGroup(@PathParam("id") Long id)
+    public RestEntity readAttributeGroup(@PathParam("id") Long id)
             throws AttributeGroupNotFoundException {
         log.fine("readAttributeGroup(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(attributeGroupService.get(id));
+        return converter.convertToRest(attributeGroupService.get(id));
     }
 
     @GET
     @NoCache
     @Path("/get_all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<AttributeGroupRest> getAllAttributeGroup() {
+    public Collection<RestEntity> getAllAttributeGroup() {
         log.fine("getAllAttributeGroup()");
         return convertToRests(attributeGroupService.getAll());
     }
@@ -62,11 +67,11 @@ public class AttributeGroupRestService {
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeGroupRest updateAttributeGroup(@PathParam("id") Long id,
+    public RestEntity updateAttributeGroup(@PathParam("id") Long id,
                                                    AttributeGroupRest rest)
             throws AttributeGroupNotFoundException, AttributeGroupNotValidException {
         log.fine("updateAttributeGroup(@PathParam(\"id\") Long id = {0}, AttributeGroupRest rest = {1})", id, rest);
-        return convertToRest(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
+        return converter.convertToRest(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
     }
 
     @DELETE
@@ -78,16 +83,10 @@ public class AttributeGroupRestService {
         attributeGroupService.delete(id);
     }
 
-    private AttributeGroupRest convertToRest(AttributeGroup attributeGroup) {
-        return new AttributeGroupRest(attributeGroup.getId(),
-                                      attributeGroup.getName(),
-                                      attributeGroup.getDescription());
-    }
-
-    private Collection<AttributeGroupRest> convertToRests(Collection<AttributeGroup> models) {
-        Collection<AttributeGroupRest> rests = new HashSet<>(models.size());
+    private Collection<RestEntity> convertToRests(Collection<AttributeGroup> models) {
+        Collection<RestEntity> rests = new HashSet<>(models.size());
         for (AttributeGroup model : models) {
-            rests.add(convertToRest(model));
+            rests.add(converter.convertToRest(model));
         }
         return rests;
     }

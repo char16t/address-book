@@ -2,6 +2,7 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.contacts.Note;
 import com.vmanenkov.addressbook.model.contacts.Person;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.NoteRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
@@ -41,7 +42,7 @@ public class NoteRestService {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public NoteRest createNote(
+    public RestEntity createNote(
             NoteRest rest,
             @QueryParam("person_id") Long personId
     ) throws NoteNotValidException, PersonNotFoundException {
@@ -51,17 +52,17 @@ public class NoteRestService {
                          "    )", rest, personId);
         Person person = personService.get(personId);
         Note note = noteService.create(rest.getDate(), rest.getValue(), person);
-        return (NoteRest) converter.convertToRest(note);
+        return converter.convertToRest(note);
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public NoteRest readNote(@PathParam("id") Long id) throws NoteNotFoundException {
+    public RestEntity readNote(@PathParam("id") Long id) throws NoteNotFoundException {
         log.fine("readNote(@PathParam(\"id\") Long id = {0})", id);
         Note note = noteService.get(id);
-        return (NoteRest) converter.convertToRest(note);
+        return converter.convertToRest(note);
     }
 
     @PUT
@@ -69,7 +70,7 @@ public class NoteRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public NoteRest updateNote(
+    public RestEntity updateNote(
             NoteRest rest,
             @QueryParam("person_id") Long personId,
             @PathParam("id") Long id
@@ -81,7 +82,7 @@ public class NoteRestService {
                          "    )", rest, personId, id);
         Person person = personService.get(personId);
         Note note = noteService.update(id, rest.getDate(), rest.getValue(), person);
-        return (NoteRest) converter.convertToRest(note);
+        return converter.convertToRest(note);
     }
 
     @DELETE
