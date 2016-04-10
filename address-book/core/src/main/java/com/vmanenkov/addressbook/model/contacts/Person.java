@@ -44,6 +44,12 @@ public class Person implements DbEntity {
     public Person() {
     }
 
+    public Person(String firstName, String lastName, String description) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+    }
+
     public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributeValues, Set<Account> accounts) {
         this.firstName = firstName;
         this.lastName = lastName;

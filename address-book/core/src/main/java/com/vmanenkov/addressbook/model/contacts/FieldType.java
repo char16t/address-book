@@ -28,6 +28,10 @@ public class FieldType implements DbEntity {
         this.attributeTypes = attributeTypes;
     }
 
+    public FieldType(String typeName) {
+        this.typeName = typeName;
+    }
+
     public Long getId() {
         return id;
     }
