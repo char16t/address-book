@@ -17,14 +17,10 @@ public class FieldType implements DbEntity {
     @Column(name = "type_name")
     private String typeName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "fieldType")
     private Set<AttributeType> attributeTypes;
 
     public FieldType() {
-    }
-
-    public FieldType(String typeName) {
-        this.typeName = typeName;
     }
 
     public FieldType(String typeName, Set<AttributeType> attributeTypes) {

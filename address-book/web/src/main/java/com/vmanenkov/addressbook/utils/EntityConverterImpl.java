@@ -49,17 +49,12 @@ public class EntityConverterImpl implements EntityConverter {
             Class restClass = CLASSES.get(dbClass);
             restEntity = (RestEntity) restClass.newInstance();
             for (Field field : dbClass.getDeclaredFields()) {
-                // todo: тут надо перебрать все поля и установить значения в аналогичных полях такими же, как
-                // todo: и в классе-модели (считаем, что в restEntity поля имеют такое же имя, как и в dbEntity).
-                // todo: Если в классе-модели имеется поле, имеющее тип, унаследованный от DbEntity
-                // todo: можно вызвать текущий метод рекурсивно.
-                // todo: Чуть сложнее для полей, которые являются коллекциями, но принцип тот же
                 field.setAccessible(true);
                 String fieldName = field.getName();
 
                 Field fieldRest = null;
                 for (Field f : restClass.getDeclaredFields()) {
-                    if(f.getName().equals(fieldName)) {
+                    if (f.getName().equals(fieldName)) {
                         fieldRest = f;
                     }
                 }
@@ -75,6 +70,14 @@ public class EntityConverterImpl implements EntityConverter {
                 if (interfaces.contains(DbEntity.class)) {
                     RestEntity restFieldValue = this.convertToRest((DbEntity) field.get(model));
                     fieldRest.set(restEntity, restFieldValue);
+                }
+                else if (interfaces.contains(Collection.class)) {
+                    Collection<DbEntity> dbValues = (Collection) field.get(model);
+                    Collection<RestEntity> restValues = new HashSet<>(dbValues.size());
+                    for (DbEntity dbValue : dbValues) {
+                        restValues.add(this.convertToRest(dbValue));
+                    }
+                    fieldRest.set(restEntity, restValues);
                 }
                 else {
                     fieldRest.set(restEntity, field.get(model));

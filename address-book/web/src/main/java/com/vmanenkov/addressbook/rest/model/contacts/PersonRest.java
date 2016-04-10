@@ -13,22 +13,18 @@ public class PersonRest implements RestEntity {
     private Set<NoteRest> notes;
     private Set<TagRest> tags;
     private Set<AttributeValueRest> attributeValues;
-    private Set<AccountRest> accounts;
 
     public PersonRest() {
     }
 
-    public PersonRest(String description, String lastName, String firstName) {
-        this.description = description;
-        this.lastName = lastName;
-        this.firstName = firstName;
-    }
-
-    public PersonRest(Long id, String firstName, String lastName, String description) {
+    public PersonRest(Long id, String firstName, String lastName, String description, Set<NoteRest> notes, Set<TagRest> tags, Set<AttributeValueRest> attributeValues) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
+        this.notes = notes;
+        this.tags = tags;
+        this.attributeValues = attributeValues;
     }
 
     public Long getId() {
@@ -87,14 +83,6 @@ public class PersonRest implements RestEntity {
         this.attributeValues = attributeValues;
     }
 
-    public Set<AccountRest> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(Set<AccountRest> accounts) {
-        this.accounts = accounts;
-    }
-
     @Override
     public String toString() {
         return "PersonRest{" +
@@ -105,7 +93,6 @@ public class PersonRest implements RestEntity {
                 ", notes=" + notes +
                 ", tags=" + tags +
                 ", attributeValues=" + attributeValues +
-                ", accounts=" + accounts +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
-import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 
 import java.util.Date;

@@ -23,6 +23,8 @@ public class AttributeType implements DbEntity {
     @JoinColumn(name="field_type_id")
     private FieldType fieldType;
 
+    // todo: add other fields
+
     public AttributeType() {
     }
 

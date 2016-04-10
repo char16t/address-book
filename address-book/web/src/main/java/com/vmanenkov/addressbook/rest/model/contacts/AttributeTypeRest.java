@@ -12,9 +12,10 @@ public class AttributeTypeRest implements RestEntity {
     public AttributeTypeRest() {
     }
 
-    public AttributeTypeRest(Long id, String name) {
+    public AttributeTypeRest(Long id, String name, FieldTypeRest fieldType) {
         this.id = id;
         this.name = name;
+        this.fieldType = fieldType;
     }
 
     public Long getId() {

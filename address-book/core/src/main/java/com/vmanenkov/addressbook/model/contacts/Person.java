@@ -33,7 +33,7 @@ public class Person implements DbEntity {
     private Set<Tag> tags;
 
     @OneToMany(mappedBy = "person")
-    private Set<AttributeValue> attributesValue;
+    private Set<AttributeValue> attributeValues;
 
     @ManyToMany
     @JoinTable(name = "person_account",
@@ -44,28 +44,13 @@ public class Person implements DbEntity {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String description) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-    }
-
-    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributesValue) {
+    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributeValues, Set<Account> accounts) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.notes = notes;
         this.tags = tags;
-        this.attributesValue = attributesValue;
-    }
-
-    public Person(String firstName, String lastName, String description, Set<Note> notes, Set<Tag> tags, Set<AttributeValue> attributesValue, Set<Account> accounts) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-        this.notes = notes;
-        this.tags = tags;
-        this.attributesValue = attributesValue;
+        this.attributeValues = attributeValues;
         this.accounts = accounts;
     }
 
@@ -117,12 +102,12 @@ public class Person implements DbEntity {
         this.tags = tags;
     }
 
-    public Set<AttributeValue> getAttributesValue() {
-        return attributesValue;
+    public Set<AttributeValue> getAttributeValues() {
+        return attributeValues;
     }
 
-    public void setAttributesValue(Set<AttributeValue> attributesValue) {
-        this.attributesValue = attributesValue;
+    public void setAttributeValues(Set<AttributeValue> attributeValues) {
+        this.attributeValues = attributeValues;
     }
 
     public Set<Account> getAccounts() {
