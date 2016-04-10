@@ -1,9 +1,11 @@
 package com.vmanenkov.addressbook.utils;
 
 import com.vmanenkov.addressbook.model.DbEntity;
-import com.vmanenkov.addressbook.model.contacts.Note;
+import com.vmanenkov.addressbook.model.account.*;
+import com.vmanenkov.addressbook.model.contacts.*;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
-import com.vmanenkov.addressbook.rest.model.contacts.NoteRest;
+import com.vmanenkov.addressbook.rest.model.account.*;
+import com.vmanenkov.addressbook.rest.model.contacts.*;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 
 import javax.ejb.Stateless;
@@ -17,7 +19,16 @@ public class EntityConverterImpl implements EntityConverter {
 
     static {
         Map<Class, Class> classMap = new HashMap<>();
+        classMap.put(Account.class, AccountRest.class);
+        classMap.put(Role.class, RoleRest.class);
+        classMap.put(Attribute.class, AttributeRest.class);
+        classMap.put(AttributeGroup.class, AttributeGroupRest.class);
+        classMap.put(AttributeType.class, AttributeTypeRest.class);
+        classMap.put(AttributeValue.class, AttributeValueRest.class);
+        classMap.put(FieldType.class, FieldTypeRest.class);
         classMap.put(Note.class, NoteRest.class);
+        classMap.put(Person.class, PersonRest.class);
+        classMap.put(Tag.class, TagRest.class);
 
         CLASSES = Collections.unmodifiableMap(classMap);
     }
