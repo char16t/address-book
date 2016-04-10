@@ -98,6 +98,7 @@ public class AttributeRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
         log.fine("deleteAttribute(@PathParam(\"id\") Long id = {0})", id);
         attributeService.delete(id);

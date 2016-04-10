@@ -71,6 +71,7 @@ public class PersonRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
         log.fine("deletePerson(@PathParam(\"id\") Long id = {0})", id);
         personService.delete(id);

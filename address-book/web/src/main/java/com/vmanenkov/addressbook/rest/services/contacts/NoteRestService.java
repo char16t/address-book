@@ -87,6 +87,7 @@ public class NoteRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteNote(@PathParam("id") Long id) throws NoteNotFoundException {
         log.fine("deleteNote(@PathParam(\"id\") Long id = {0})", id);
         noteService.delete(id);

@@ -72,6 +72,7 @@ public class TagRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteTag(@PathParam("id") Long id) throws TagNotFoundException {
         log.fine("deleteTag(@PathParam(\"id\") Long id = {0})", id);
         tagService.delete(id);

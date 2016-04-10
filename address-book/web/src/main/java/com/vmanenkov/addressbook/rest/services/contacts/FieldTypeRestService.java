@@ -70,6 +70,7 @@ public class FieldTypeRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteFieldType(@PathParam("id") Long id) throws FieldTypeNotFoundException {
         log.fine("deleteFieldType(@PathParam(\"id\") Long id = {0})", id);
         fieldTypeService.delete(id);

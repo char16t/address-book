@@ -72,6 +72,7 @@ public class AttributeGroupRestService {
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteAttributeGroup(@PathParam("id") Long id) throws AttributeGroupNotFoundException {
         log.fine("deleteAttributeGroup(@PathParam(\"id\") Long id = {0})", id);
         attributeGroupService.delete(id);
