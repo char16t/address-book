@@ -73,6 +73,10 @@ public class EntityConverterImpl implements EntityConverter {
                 }
                 else if (interfaces.contains(Collection.class)) {
                     Collection<DbEntity> dbValues = (Collection) field.get(model);
+                    if (dbValues == null) {
+                        continue;
+                    }
+
                     Collection<RestEntity> restValues = new HashSet<>(dbValues.size());
                     for (DbEntity dbValue : dbValues) {
                         restValues.add(this.convertToRest(dbValue));
