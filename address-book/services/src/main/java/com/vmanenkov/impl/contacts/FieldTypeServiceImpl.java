@@ -25,6 +25,9 @@ public class FieldTypeServiceImpl implements FieldTypeService {
         if (typeName == null || "".equals(typeName)) {
             throw new FieldTypeNotValidException(FieldTypeErrorType.FIELD_TYPE_NAME_IS_EMPTY);
         }
+        if (getByName(typeName) != null) {
+            throw new FieldTypeNotValidException(FieldTypeErrorType.FIELD_TYPE_NAME_IS_NOT_UNIQUE);
+        }
 
         FieldType fieldType = new FieldType(typeName);
         return fieldTypeRepository.save(fieldType);
@@ -48,6 +51,11 @@ public class FieldTypeServiceImpl implements FieldTypeService {
         }
 
         return fieldTypeRepository.save(fieldType);
+    }
+
+    @Override
+    public FieldType getByName(String name) {
+        return fieldTypeRepository.findOptionalByTypeName(name);
     }
 
     @Override

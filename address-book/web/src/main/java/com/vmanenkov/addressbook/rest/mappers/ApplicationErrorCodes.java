@@ -41,14 +41,15 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_VALUE_IS_EMPTY = "240";
 
     public static final String FIELD_TYPE_NOT_FOUND = "241";
-    public static final String FIELD_TYPE_NAME_IS_EMPTY = "250";
-    public static final String NOTE_DATE_IS_NOT_VALID = "251";
+    public static final String FIELD_TYPE_NAME_IS_EMPTY = "242";
+    public static final String FIELD_TYPE_NAME_IS_NOT_UNIQUE = "243";
 
-    public static final String NOTE_VALUE_IS_EMPTY = "2252";
-    public static final String NOTE_NOT_FOUND = "260";
+    public static final String NOTE_DATE_IS_NOT_VALID = "250";
+    public static final String NOTE_VALUE_IS_EMPTY = "251";
+    public static final String NOTE_NOT_FOUND = "252";
 
-    public static final String TAG_NOT_FOUND = "261";
-    public static final String TAG_NAME_IS_EMPTY = "270";
+    public static final String TAG_NOT_FOUND = "260";
+    public static final String TAG_NAME_IS_EMPTY = "261";
 
 
     public static final String PERSON_NOT_FOUND = "271";
