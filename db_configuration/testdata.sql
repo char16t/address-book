@@ -37,5 +37,5 @@ insert into person_note(person_id, note_id) values (1, 1);
 insert into attribute(id, name, type_id, group_id, description) values (1, 'Email', 1, 1, 'Электронная почта');
 insert into attribute(id, name, type_id, group_id, description) values (2, 'Телефон', 1, 1, 'Личный телефон');
 
-insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (1, 1, 1, '+7(000)000-00-00', null);
-insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (2, 1, 2, 'aaaa@mail.ru', null);
+insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (1, 1, 2, '+7(000)000-00-00', null);
+insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (2, 1, 1, 'aaaa@mail.ru', null);
