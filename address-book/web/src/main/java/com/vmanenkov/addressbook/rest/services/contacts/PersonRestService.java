@@ -1,5 +1,6 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
+import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
@@ -16,6 +17,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 @Path("/contacts")
 @RequestScoped
@@ -62,9 +66,9 @@ public class PersonRestService {
             @PathParam("id") Long id
     ) throws PersonNotValidException, PersonNotFoundException {
         log.fine("updatePerson(\n" +
-                         "            PersonRest rest = {0},\n" +
-                         "            @PathParam(\"id\") Long id = {1}\n" +
-                         "    )", rest, id);
+                "            PersonRest rest = {0},\n" +
+                "            @PathParam(\"id\") Long id = {1}\n" +
+                "    )", rest, id);
         Person person = personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription());
         return converter.convertToRest(person);
     }
@@ -76,5 +80,23 @@ public class PersonRestService {
     public void deletePerson(@PathParam("id") Long id) throws PersonNotFoundException {
         log.fine("deletePerson(@PathParam(\"id\") Long id = {0})", id);
         personService.delete(id);
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<RestEntity> getPersonsByAccount(@QueryParam("account_id") Long accountId) {
+        Collection<Person> persons = personService.getByAccountId(accountId);
+        return convertToRests(persons);
+    }
+
+    private Collection<RestEntity> convertToRests(Collection<Person> models) {
+        Collection<RestEntity> rests = new HashSet<>(models.size());
+        for (Person model : models) {
+            rests.add(converter.convertToRest(model));
+        }
+        return rests;
     }
 }

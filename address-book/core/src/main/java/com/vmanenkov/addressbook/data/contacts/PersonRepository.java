@@ -12,6 +12,6 @@ import java.util.List;
 public interface PersonRepository extends EntityRepository<Person, Long> {
     Person findOptionalById(Long id);
 
-    @Query("select p.* from person p, person_account pa where p.id = pa.user_id and pa.user_id=?1")
+    @Query("select p from person p, person_account pa where p.id = pa.user_id and pa.user_id=?1")
     List<Person> findByAccountId(Long id);
 }
