@@ -1,7 +1,9 @@
 package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.PersonRepository;
+import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.contacts.Person;
+import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotValidException;
@@ -13,7 +15,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -77,7 +78,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Collection<Person> getByTag(Long accountId, Long tagId) {
-        return new HashSet<>(personRepository.findByTag(accountId, tagId));
+    public Collection<Person> getByAccountAndTag(Account account, Tag tag) {
+        return new HashSet<>(personRepository.findOptionalByAccountAndTag(account, tag));
     }
 }

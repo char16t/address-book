@@ -1,6 +1,8 @@
 package com.vmanenkov.services.contacts;
 
+import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.contacts.Person;
+import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotValidException;
 
@@ -21,5 +23,5 @@ public interface PersonService {
 
     Collection<Person> getByAccountId(Long id);
 
-    Collection<Person> getByTag(Long accountId, Long tagId);
+    Collection<Person> getByAccountAndTag(Account account, Tag tag);
 }
