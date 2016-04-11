@@ -18,4 +18,6 @@ public interface PersonService {
     void delete(Long id) throws PersonNotFoundException;
 
     Collection<Person> getAll();
+
+    Collection<Person> getByAccountId(Long id);
 }
