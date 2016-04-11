@@ -1,7 +1,7 @@
 -- -----------------------------------------------------
 -- Test data for account
 -- -----------------------------------------------------
-INSERT INTO public.account (id, email, password) VALUES (1, 'test@test.com', 'passwd');
+--INSERT INTO public.account (id, email, password) VALUES (1, 'test@test.com', 'passwd');
 
 -- -----------------------------------------------------
 -- Test data for role

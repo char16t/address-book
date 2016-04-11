@@ -48,6 +48,8 @@
     shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
   - name: Import test data
     shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata.sql"
+  - name: Import test data (contacts)
+    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata_persons_and_accounts.sql"
   - name: Start Postgresql on boot
     shell: "update-rc.d postgresql defaults"
     become: yes
@@ -68,49 +70,49 @@
      state=link
     become: yes
   - name: Configure Wildfly
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# JBOSS_HOME'
       insertafter='^JBOSS_HOME'
       line='JBOSS_HOME="/opt/wildfly"'
     become: yes
   - name: Configure Wildfly
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# JBOSS_USER'
       insertafter='^JBOSS_USER'
       line='JBOSS_USER=wildfly'
     become: yes
   - name: Configure Wildfly (1 / 5)
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# JBOSS_MODE'
       insertafter='^JBOSS_MODE'
       line='JBOSS_MODE=standalone'
     become: yes
   - name: Configure Wildfly (2 / 5)
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# JBOSS_CONFIG'
       insertafter='^JBOSS_CONFIG'
       line='JBOSS_CONFIG=standalone-full.xml'
     become: yes
   - name: Configure Wildfly (3 / 5)
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# STARTUP_WAIT'
       insertafter='^STARTUP_WAIT'
       line='STARTUP_WAIT=120'
     become: yes
   - name: Configure Wildfly (4 / 5)
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# SHUTDOWN_WAIT'
       insertafter='^SHUTDOWN_WAIT'
       line='SHUTDOWN_WAIT=120'
     become: yes
   - name: Configure Wildfly (5 / 5)
-    lineinfile: 
+    lineinfile:
       dest=/opt/wildfly/bin/init.d/wildfly.conf
       regexp='^# JBOSS_CONSOLE_LOG'
       insertafter='^JBOSS_CONSOLE_LOG'
@@ -142,7 +144,7 @@
     become: yes
   - name: Restart Wildfly service
     service: name=wildfly state=restarted
-    become: yes  
+    become: yes
   - name: Build and deploy webapp
     shell: sh /vagrant/deploy.sh
     become: yes
