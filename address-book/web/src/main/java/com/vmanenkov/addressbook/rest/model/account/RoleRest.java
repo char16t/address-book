@@ -8,10 +8,6 @@ public class RoleRest {
     public RoleRest() {
     }
 
-    public RoleRest(String name) {
-        this.name = name;
-    }
-
     public RoleRest(Long id, String name) {
         this.id = id;
         this.name = name;
