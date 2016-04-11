@@ -87,15 +87,15 @@ public class PersonRestService {
     @Path("/get_all")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Collection<RestEntity> getPersonsByAccount(@QueryParam("account_id") Long accountId) {
+    public Collection<PersonRest> getPersonsByAccount(@QueryParam("account_id") Long accountId) {
         Collection<Person> persons = personService.getByAccountId(accountId);
         return convertToRests(persons);
     }
 
-    private Collection<RestEntity> convertToRests(Collection<Person> models) {
-        Collection<RestEntity> rests = new HashSet<>(models.size());
+    private Collection<PersonRest> convertToRests(Collection<Person> models) {
+        Collection<PersonRest> rests = new HashSet<>(models.size());
         for (Person model : models) {
-            rests.add(converter.convertToRest(model));
+            rests.add((PersonRest) converter.convertToRest(model));
         }
         return rests;
     }
