@@ -5,6 +5,7 @@ import com.vmanenkov.addressbook.model.contacts.Person;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
+import org.apache.deltaspike.data.api.SingleResultType;
 
 import java.util.List;
 
@@ -12,6 +13,10 @@ import java.util.List;
 public interface PersonRepository extends EntityRepository<Person, Long> {
     Person findOptionalById(Long id);
 
-    @Query("select p from person p, person_account pa where p.id = pa.user_id and pa.user_id=?1")
+    @Query(value = "" +
+            "SELECT p " +
+            "  FROM Person    p " +
+            "  JOIN p.accounts pa " +
+            " WHERE pa.id = ?1", singleResult = SingleResultType.OPTIONAL)
     List<Person> findByAccountId(Long id);
 }
