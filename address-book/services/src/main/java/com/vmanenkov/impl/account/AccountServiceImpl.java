@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,5 +22,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Set<Account> getAccountsByRole(Role role) {
         return new HashSet<>(accountRepository.findAccountsByRole(role.getName()));
+    }
+
+    @Override
+    public Account getById(Long id) throws AccountNotFoundException {
+        Account account = accountRepository.findOptionalById(id);
+        if (account == null) {
+            throw new AccountNotFoundException();
+        }
+
+        return account;
     }
 }
