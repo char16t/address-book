@@ -12,6 +12,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Stateless
@@ -72,7 +73,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Collection<Person> getByAccountId(Long id) {
-        List<Person> persons = personRepository.findByAccountId(id);
-        return persons;
+        return new HashSet<>(personRepository.findByAccountId(id));
     }
 }
