@@ -28,12 +28,21 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
             throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_NAME_IS_EMPTY);
         }
 
+        if (getByName(name) != null) {
+            throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_NAME_IS_NOT_UNIQUE);
+        }
+
         if (fieldType == null) {
             throw new AttributeTypeNotValidException(AttributeTypeErrorType.ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY);
         }
 
         AttributeType attributeType = new AttributeType(name, fieldType);
         return attributeTypeRepository.save(attributeType);
+    }
+
+    @Override
+    public AttributeType getByName(String name) {
+        return attributeTypeRepository.findOptionalByName(name);
     }
 
     @Override
@@ -69,4 +78,5 @@ public class AttributeTypeServiceImpl implements AttributeTypeService {
     public Collection<AttributeType> getAll() {
         return attributeTypeRepository.findAll();
     }
+
 }

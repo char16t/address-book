@@ -1,10 +1,12 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "attribute_value")
-public class AttributeValue {
+public class AttributeValue implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")

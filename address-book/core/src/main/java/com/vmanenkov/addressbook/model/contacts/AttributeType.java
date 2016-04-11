@@ -1,11 +1,13 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "attribute_type")
-public class AttributeType {
+public class AttributeType implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -20,6 +22,8 @@ public class AttributeType {
     @ManyToOne
     @JoinColumn(name="field_type_id")
     private FieldType fieldType;
+
+    // todo: add other fields
 
     public AttributeType() {
     }

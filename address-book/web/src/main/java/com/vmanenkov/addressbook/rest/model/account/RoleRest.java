@@ -2,27 +2,38 @@ package com.vmanenkov.addressbook.rest.model.account;
 
 
 public class RoleRest {
-    private String role;
+    private Long id;
+    private String name;
 
     public RoleRest() {
     }
 
-    public RoleRest(String role) {
-        this.role = role;
+    public RoleRest(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "RoleRest{" +
-                "role='" + role + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

@@ -30,6 +30,11 @@ public class AttributeTypeNotValidMapper implements ExceptionMapper<AttributeTyp
             case ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY:
                 errorCode = ApplicationErrorCodes.ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY;
                 description = "Attribute type field type should not be empty";
+                break;
+            case ATTRIBUTE_TYPE_NAME_IS_NOT_UNIQUE:
+                errorCode = ApplicationErrorCodes.ATTRIBUTE_TYPE_NAME_IS_NOT_UNIQUE;
+                description = "Attribute type name should be unique";
+                break;
             default:
                 break;
         }

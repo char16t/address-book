@@ -1,12 +1,14 @@
 package com.vmanenkov.addressbook.model.contacts;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 // TODO: test OneToMany relations
 @Entity
 @Table(name = "field_type")
-public class FieldType {
+public class FieldType implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -15,19 +17,19 @@ public class FieldType {
     @Column(name = "type_name")
     private String typeName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "fieldType")
     private Set<AttributeType> attributeTypes;
 
     public FieldType() {
     }
 
-    public FieldType(String typeName) {
-        this.typeName = typeName;
-    }
-
     public FieldType(String typeName, Set<AttributeType> attributeTypes) {
         this.typeName = typeName;
         this.attributeTypes = attributeTypes;
+    }
+
+    public FieldType(String typeName) {
+        this.typeName = typeName;
     }
 
     public Long getId() {

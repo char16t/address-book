@@ -27,6 +27,10 @@ public class FieldTypeNotValidMapper implements ExceptionMapper<FieldTypeNotVali
                 errorCode = ApplicationErrorCodes.FIELD_TYPE_NAME_IS_EMPTY;
                 description = "Field type name should not be empty";
                 break;
+            case FIELD_TYPE_NAME_IS_NOT_UNIQUE:
+                errorCode = ApplicationErrorCodes.FIELD_TYPE_NAME_IS_NOT_UNIQUE;
+                description = "Field type name should be unique";
+                break;
             default:
                 break;
         }

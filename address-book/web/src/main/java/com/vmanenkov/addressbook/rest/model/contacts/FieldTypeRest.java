@@ -1,6 +1,8 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
-public class FieldTypeRest {
+import com.vmanenkov.addressbook.rest.model.RestEntity;
+
+public class FieldTypeRest implements RestEntity {
     private Long id;
     private String typeName;
 

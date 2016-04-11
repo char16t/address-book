@@ -3,9 +3,11 @@ package com.vmanenkov.addressbook.rest.services.contacts;
 import com.vmanenkov.addressbook.model.contacts.Attribute;
 import com.vmanenkov.addressbook.model.contacts.AttributeGroup;
 import com.vmanenkov.addressbook.model.contacts.AttributeType;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeGroupRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeRest;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.AttributeGroupService;
@@ -36,12 +38,15 @@ public class AttributeRestService {
     @Inject
     private AttributeGroupService attributeGroupService;
 
+    @Inject
+    private EntityConverter converter;
+
     @POST
     @NoCache
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeRest createAttribute(
+    public RestEntity createAttribute(
             AttributeRest rest,
             @QueryParam("type_id") Long typeId,
             @QueryParam("group_id") Long groupId) throws AttributeTypeNotFoundException, AttributeGroupNotFoundException, AttributeNotValidException, PersonNotFoundException {
@@ -52,19 +57,18 @@ public class AttributeRestService {
                          "            @QueryParam(\"group_id\") Long groupId = {2}", rest, typeId, groupId);
         AttributeType attributeType = attributeTypeService.get(typeId);
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
-        return convertToRest(attributeService.create(
-                                     rest.getName(), rest.getDescription(),
-                                     attributeGroup, attributeType)
-        );
+        Attribute attribute = attributeService.create(rest.getName(), rest.getDescription(),
+                                                      attributeGroup, attributeType);
+        return converter.convertToRest(attribute);
     }
 
     @GET
     @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AttributeRest readAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
+    public RestEntity readAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
         log.fine("readAttribute(@PathParam(\"id\") Long id = {0})", id);
-        return convertToRest(attributeService.get(id));
+        return converter.convertToRest(attributeService.get(id));
     }
 
     @PUT
@@ -72,7 +76,7 @@ public class AttributeRestService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public AttributeRest updateAttribute(
+    public RestEntity updateAttribute(
             AttributeRest rest,
             @PathParam("id") Long id,
             @QueryParam("type_id") Long typeId,
@@ -84,32 +88,17 @@ public class AttributeRestService {
                          "            @QueryParam(\"group_id\") Long groupId = {3})", rest, typeId, groupId);
         AttributeType attributeType = attributeTypeService.get(typeId);
         AttributeGroup attributeGroup = attributeGroupService.get(groupId);
-
-        return convertToRest(attributeService.update(
-                                     id,
-                                     rest.getName(),
-                                     rest.getDescription(),
-                                     attributeGroup,
-                                     attributeType
-                             )
-        );
+        Attribute attribute = attributeService.update(id, rest.getName(), rest.getDescription(),
+                                                      attributeGroup, attributeType);
+        return converter.convertToRest(attribute);
     }
 
     @DELETE
     @NoCache
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void deleteAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
         log.fine("deleteAttribute(@PathParam(\"id\") Long id = {0})", id);
         attributeService.delete(id);
-    }
-
-    private AttributeRest convertToRest(Attribute attribute) {
-        return new AttributeRest(
-                attribute.getId(),
-                attribute.getName(),
-                attribute.getDescription(),
-                new AttributeGroupRest(attribute.getAttributeGroup().getId(), attribute.getAttributeGroup().getName(), attribute.getAttributeGroup().getDescription()),
-                new AttributeTypeRest(attribute.getAttributeType().getId(), attribute.getAttributeGroup().getName())
-        );
     }
 }

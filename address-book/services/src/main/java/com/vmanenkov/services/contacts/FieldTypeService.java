@@ -15,6 +15,8 @@ public interface FieldTypeService {
 
     FieldType update(Long id, String typeName) throws FieldTypeNotFoundException, FieldTypeNotValidException;
 
+    FieldType getByName(String name);
+
     void delete(Long id) throws FieldTypeNotFoundException;
 
     Collection<FieldType> getAll();

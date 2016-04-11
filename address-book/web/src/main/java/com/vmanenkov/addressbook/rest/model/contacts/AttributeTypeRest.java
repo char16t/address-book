@@ -1,6 +1,8 @@
 package com.vmanenkov.addressbook.rest.model.contacts;
 
-public class AttributeTypeRest {
+import com.vmanenkov.addressbook.rest.model.RestEntity;
+
+public class AttributeTypeRest implements RestEntity {
     private Long id;
     private String name;
     private FieldTypeRest fieldType;
@@ -10,9 +12,10 @@ public class AttributeTypeRest {
     public AttributeTypeRest() {
     }
 
-    public AttributeTypeRest(Long id, String name) {
+    public AttributeTypeRest(Long id, String name, FieldTypeRest fieldType) {
         this.id = id;
         this.name = name;
+        this.fieldType = fieldType;
     }
 
     public Long getId() {

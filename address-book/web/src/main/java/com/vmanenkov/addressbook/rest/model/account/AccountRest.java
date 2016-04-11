@@ -1,5 +1,7 @@
 package com.vmanenkov.addressbook.rest.model.account;
 
+import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
+
 import java.util.Set;
 
 public class AccountRest {
@@ -7,15 +9,17 @@ public class AccountRest {
     private String email;
     private String password;
     private Set<RoleRest> roles;
+    private Set<PersonRest> persons;
 
     public AccountRest() {
     }
 
-    public AccountRest(Long id, String email, String password, Set<RoleRest> roles) {
+    public AccountRest(Long id, String email, String password, Set<RoleRest> roles, Set<PersonRest> persons) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.persons = persons;
     }
 
     public Long getId() {
@@ -50,12 +54,21 @@ public class AccountRest {
         this.roles = roles;
     }
 
+    public Set<PersonRest> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<PersonRest> persons) {
+        this.persons = persons;
+    }
+
     @Override
     public String toString() {
         return "AccountRest{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", persons=[" + persons + "]" +
                 ", roles=" + roles +
                 '}';
     }

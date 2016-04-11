@@ -1,11 +1,13 @@
 package com.vmanenkov.addressbook.model.account;
 
+import com.vmanenkov.addressbook.model.DbEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements DbEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")

@@ -1,9 +1,12 @@
 package com.vmanenkov.addressbook.rest.services.account;
 
+import com.vmanenkov.addressbook.model.DbEntity;
 import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.account.AccountRest;
 import com.vmanenkov.addressbook.rest.model.account.RoleRest;
+import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
@@ -35,38 +38,25 @@ public class AccountRestService {
     @Inject
     private RoleService roleService;
 
+    @Inject
+    private EntityConverter converter;
+
     @GET
     @NoCache
     @Path("/getAllByRole/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<AccountRest> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
+    public Set<RestEntity> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
         log.fine("getAllByRole(@QueryParam(\"role\") String role = {0})", role);
         Role roleObject = roleService.getByName(role);
         return convertUsersToRests(accountService.getAccountsByRole(roleObject));
     }
 
-    private Set<RoleRest> convertRolesToRests(Set<Role> roles) {
-        Set<RoleRest> roleRests = new HashSet<>(roles.size());
-        for (Role role : roles) {
-            roleRests.add(new RoleRest(role.getName()));
-        }
-        return roleRests;
-    }
-
-    private Set<AccountRest> convertUsersToRests(Set<Account> users) {
-        Set<AccountRest> accountRests = new HashSet<>(users.size());
-        for (Account user : users) {
-            accountRests.add(convertToRest(user));
+    private Set<RestEntity> convertUsersToRests(Set<Account> users) {
+        Set<RestEntity> accountRests = new HashSet<>(users.size());
+        for (DbEntity user : users) {
+            accountRests.add(converter.convertToRest(user));
         }
         return accountRests;
     }
 
-    private AccountRest convertToRest(Account model) {
-        if (model != null) {
-            return new AccountRest(model.getId(), model.getEmail(), model.getPassword(), convertRolesToRests(model.getRoles()));
-        }
-        else {
-            return null;
-        }
-    }
 }

@@ -19,4 +19,6 @@ public interface AttributeTypeService {
     void delete(Long id) throws AttributeTypeNotFoundException;
 
     Collection<AttributeType> getAll();
+
+    AttributeType getByName(String name);
 }
