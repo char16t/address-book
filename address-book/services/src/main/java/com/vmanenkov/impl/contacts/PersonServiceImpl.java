@@ -75,4 +75,9 @@ public class PersonServiceImpl implements PersonService {
     public Collection<Person> getByAccountId(Long id) {
         return new HashSet<>(personRepository.findByAccountId(id));
     }
+
+    @Override
+    public Collection<Person> getByTag(Long accountId, Long tagId) {
+        return new HashSet<>(personRepository.findByTag(accountId, tagId));
+    }
 }

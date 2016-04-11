@@ -20,4 +20,6 @@ public interface PersonService {
     Collection<Person> getAll();
 
     Collection<Person> getByAccountId(Long id);
+
+    Collection<Person> getByTag(Long accountId, Long tagId);
 }

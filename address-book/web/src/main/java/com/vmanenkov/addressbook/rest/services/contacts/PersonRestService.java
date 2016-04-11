@@ -92,6 +92,19 @@ public class PersonRestService {
         return convertToRests(persons);
     }
 
+    @GET
+    @NoCache
+    @Path("/get_by_tag")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<PersonRest> getPersonsByTag(
+            @QueryParam("account_id") Long accountId,
+            @QueryParam("tag_id") Long tagId) {
+        Collection<Person> persons = personService.getByTag(accountId, tagId);
+        return convertToRests(persons);
+    }
+
+
     private Collection<PersonRest> convertToRests(Collection<Person> models) {
         Collection<PersonRest> rests = new HashSet<>(models.size());
         for (Person model : models) {

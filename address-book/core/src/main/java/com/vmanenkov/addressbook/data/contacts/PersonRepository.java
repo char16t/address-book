@@ -19,4 +19,12 @@ public interface PersonRepository extends EntityRepository<Person, Long> {
             "  JOIN p.accounts pa " +
             " WHERE pa.id = ?1", singleResult = SingleResultType.OPTIONAL)
     List<Person> findByAccountId(Long id);
+
+    @Query(value = "" +
+            "SELECT p " +
+            "  FROM Person     p  " +
+            "  JOIN p.accounts pa " +
+            "  JOIN p.tags     t  " +
+            " WHERE pa.id = ?1 and t.id = ?2", singleResult = SingleResultType.OPTIONAL)
+    List<Person> findByTag(Long accountId, Long tagId);
 }
