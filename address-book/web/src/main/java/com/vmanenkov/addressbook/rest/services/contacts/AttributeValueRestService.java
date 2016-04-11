@@ -96,22 +96,4 @@ public class AttributeValueRestService {
         log.fine("deleteAttributeValue(@PathParam(\"id\") Long id = {0})", id);
         attributeValueService.delete(id);
     }
-
-    private AttributeValueRest convertToRest(AttributeValue attributeValue) {
-
-        Attribute attribute = attributeValue.getAttribute();
-        // todo: to VM - this isn't beautiful
-        return new AttributeValueRest(
-                attributeValue.getId(),
-                attributeValue.getTextValue(),
-                attributeValue.getBlobValue(),
-                new AttributeRest(attribute.getId(), attribute.getName(), attribute.getDescription(),
-                                  new AttributeGroupRest(attribute.getAttributeGroup().getId(),
-                                                         attribute.getAttributeGroup().getName(),
-                                                         attribute.getAttributeGroup().getDescription()),
-                                  new AttributeTypeRest(attribute.getAttributeType().getId(),
-                                                        attribute.getAttributeType().getName())
-                )
-        );
-    }
 }

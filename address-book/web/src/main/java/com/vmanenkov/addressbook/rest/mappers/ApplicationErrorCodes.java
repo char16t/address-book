@@ -33,24 +33,25 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_NAME_IS_EMPTY = "220";
     public static final String ATTRIBUTE_TYPE_NOT_FOUND = "221";
     public static final String ATTRIBUTE_TYPE_NAME_IS_EMPTY = "222";
+    public static final String ATTRIBUTE_TYPE_NAME_IS_NOT_UNIQUE = "223";
 
     public static final String ATTRIBUTE_TYPE_FIELD_TYPE_IS_EMPTY = "230";
+
     public static final String ATTRIBUTE_VALUE_NOT_FOUND = "231";
-
     public static final String ATTRIBUTE_VALUE_IS_EMPTY = "240";
-    public static final String FIELD_TYPE_NOT_FOUND = "241";
 
+    public static final String FIELD_TYPE_NOT_FOUND = "241";
     public static final String FIELD_TYPE_NAME_IS_EMPTY = "250";
     public static final String NOTE_DATE_IS_NOT_VALID = "251";
+
     public static final String NOTE_VALUE_IS_EMPTY = "2252";
-
     public static final String NOTE_NOT_FOUND = "260";
+
     public static final String TAG_NOT_FOUND = "261";
-
     public static final String TAG_NAME_IS_EMPTY = "270";
+
+
     public static final String PERSON_NOT_FOUND = "271";
-
-
     public static final String PERSON_NAME_IS_NOT_VALID = "220";
     public static final String TEST_ERROR = "990";
     public static final String ACCESS_FORBIDDEN = "991";
