@@ -88,7 +88,7 @@ public class AccountRestService {
 
         log.fine("addRole(@PathParam(\"id\") Long id = {0},\n" +
                          "        @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
-        Role role = roleService.get(roleId);
+        Role role = roleService.getById(roleId);
         return converter.convertToRest(accountService.addRole(id, role));
     }
 
@@ -103,7 +103,7 @@ public class AccountRestService {
 
         log.fine("removeRole(@PathParam(\"id\") Long id = {0},\n" +
                          "           @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
-        Role role = roleService.get(roleId);
+        Role role = roleService.getById(roleId);
         return converter.convertToRest(accountService.removeRole(id, role));
     }
 

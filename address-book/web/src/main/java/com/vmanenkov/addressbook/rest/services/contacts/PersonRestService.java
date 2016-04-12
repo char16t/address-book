@@ -11,6 +11,7 @@ import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.contacts.TagService;
+import com.vmanenkov.services.exceptions.AccountNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.PersonNotValidException;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
@@ -18,7 +19,6 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.security.auth.login.AccountNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;

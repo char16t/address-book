@@ -8,6 +8,6 @@ import org.apache.deltaspike.data.api.SingleResultType;
 
 @Repository
 public interface RoleRepository extends EntityRepository<Role, Long> {
-    @Query(singleResult = SingleResultType.OPTIONAL)
-    Role findByName(String name);
+    Role findOptionalByName(String name);
+    Role findOptionalById(Long id);
 }

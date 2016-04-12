@@ -9,5 +9,5 @@ import javax.ejb.Local;
 public interface RoleService {
     Role getByName(String string) throws UserRoleNotFoundException;
 
-    Role get(Long id) throws UserRoleNotFoundException;
+    Role getById(Long id) throws UserRoleNotFoundException;
 }
