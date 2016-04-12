@@ -38,6 +38,6 @@ public interface PersonRepository extends EntityRepository<Person, Long> {
             "  JOIN p.accounts pa " +
             "  JOIN p.attributeValues pav " +
             " WHERE pa = ?1 " +
-            "   AND pav.textValue like '%?2%'", singleResult = SingleResultType.OPTIONAL)
+            "   AND pav.textValue like ?2", singleResult = SingleResultType.OPTIONAL)
     List<Person> findOptionalByAllFields(Account account, String query);
 }

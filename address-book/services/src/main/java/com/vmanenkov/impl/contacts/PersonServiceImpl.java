@@ -85,6 +85,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Collection<Person> getByAllFields(Account account, String query) {
-        return new HashSet<>(personRepository.findOptionalByAllFields(account, query));
+        return new HashSet<>(personRepository.findOptionalByAllFields(account, "%" + query + "%"));
     }
 }
