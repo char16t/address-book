@@ -3,6 +3,13 @@ insert into account(id, email, password) values(1, 'aaa@mail.ru', 'hash');
 insert into account(id, email, password) values(2, 'bbb@mail.ru', 'hash');
 insert into account(id, email, password) values(3, 'ccc@mail.ru', 'hash');
 insert into account(id, email, password) values(4, 'ddd@mail.ru', 'hash');
+
+insert into account_role(user_id, role_id) values (1, 1);
+insert into account_role(user_id, role_id) values (2, 2);
+insert into account_role(user_id, role_id) values (3, 3);
+insert into account_role(user_id, role_id) values (4, 1);
+insert into account_role(user_id, role_id) values (4, 3);
+
 insert into person(id, first_name, last_name, description) values(1,'Joseph','Wilcox','Furthermore, any associated supporting element is to be regarded as the
 traditional practice of grammarians.');
 insert into person(id, first_name, last_name, description) values(2,'Thomas','Marine','Comparing these examples with their parasitic gap counterparts in (96)
