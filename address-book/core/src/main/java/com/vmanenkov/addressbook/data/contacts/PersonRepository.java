@@ -35,10 +35,9 @@ public interface PersonRepository extends EntityRepository<Person, Long> {
     @Query(value = "" +
             "SELECT p " +
             "  FROM Person p " +
-            "  JOIN p.accounts pa " +
-            "  JOIN p.attributeValues pav " +
-            " WHERE pa = ?1 " +
-            "   AND (lower(pav.textValue) like ?2 OR lower(pav.textValue) like ?2 OR lower(p.firstName) like ?2 " +
-            "   OR lower(p.lastName) like ?2)", singleResult = SingleResultType.OPTIONAL)
+            "  WHERE "+
+            "      p.id in (select p1.id from Person p1 join p1.accounts pa1 join p1.attributeValues pav1 where pa1 = ?1 and lower(pav1.textValue) like ?2)" +
+            "   or p.id in (select p2.id from Person p2 join p2.accounts pa2 where pa2 = ?1 and (lower(p2.firstName) like ?2 OR lower(p2.lastName) like ?2))"
+            , singleResult = SingleResultType.OPTIONAL)
     List<Person> findOptionalByAllFields(Account account, String query);
 }
