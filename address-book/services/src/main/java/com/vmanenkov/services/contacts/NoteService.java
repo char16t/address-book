@@ -20,4 +20,6 @@ public interface NoteService {
     void delete(Long id) throws NoteNotFoundException;
 
     Collection<Note> getAll();
+
+    Collection<Note> getByPersonId(Long personId);
 }
