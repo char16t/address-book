@@ -1,7 +1,9 @@
 package com.vmanenkov.addressbook.rest.model.account;
 
 
-public class RoleRest {
+import com.vmanenkov.addressbook.rest.model.RestEntity;
+
+public class RoleRest implements RestEntity {
     private Long id;
     private String name;
 

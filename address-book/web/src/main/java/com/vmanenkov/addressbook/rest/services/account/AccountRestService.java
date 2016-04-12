@@ -45,16 +45,16 @@ public class AccountRestService {
     @NoCache
     @Path("/getAllByRole/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<RestEntity> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
+    public Set<AccountRest> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
         log.fine("getAllByRole(@QueryParam(\"role\") String role = {0})", role);
         Role roleObject = roleService.getByName(role);
         return convertUsersToRests(accountService.getAccountsByRole(roleObject));
     }
 
-    private Set<RestEntity> convertUsersToRests(Set<Account> users) {
-        Set<RestEntity> accountRests = new HashSet<>(users.size());
+    private Set<AccountRest> convertUsersToRests(Set<Account> users) {
+        Set<AccountRest> accountRests = new HashSet<>(users.size());
         for (DbEntity user : users) {
-            accountRests.add(converter.convertToRest(user));
+            accountRests.add((AccountRest) converter.convertToRest(user));
         }
         return accountRests;
     }
