@@ -85,6 +85,7 @@ public class AccountServiceImpl implements AccountService {
     public Account addRole(Long accountId, Role role) throws AccountNotFoundException {
         Account account = getById(accountId);
         account.getRoles().add(role);
+        accountRepository.save(account);
         return account;
     }
 

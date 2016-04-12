@@ -66,7 +66,6 @@ public class AccountRestService {
     @PUT
     @NoCache
     @Path("/{id}/update_email")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public RestEntity updateEmail(@PathParam("id") Long id,
                                   @QueryParam("email") String email)
@@ -80,7 +79,6 @@ public class AccountRestService {
     @PUT
     @NoCache
     @Path("/{id}/add_role")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public RestEntity addRole(@PathParam("id") Long id,
                               @QueryParam("role_id") Long roleId)
@@ -95,7 +93,6 @@ public class AccountRestService {
     @PUT
     @NoCache
     @Path("/{id}/remove_role")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public RestEntity removeRole(@PathParam("id") Long id,
                                  @QueryParam("role_id") Long roleId)
