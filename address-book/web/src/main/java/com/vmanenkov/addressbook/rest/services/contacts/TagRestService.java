@@ -16,6 +16,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/tags")
 @RequestScoped
@@ -77,5 +79,23 @@ public class TagRestService {
     public void deleteTag(@PathParam("id") Long id) throws TagNotFoundException {
         log.fine("deleteTag(@PathParam(\"id\") Long id = {0})", id);
         tagService.delete(id);
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<TagRest> getPersonsByAccount(@QueryParam("account_id") Long accountId) throws TagNotFoundException {
+        Collection<Tag> tags = tagService.getByAccount(accountId);
+        return convertToRests(tags);
+    }
+
+    private Collection<TagRest> convertToRests(Collection<Tag> models) {
+        Collection<TagRest> rests = new HashSet<>(models.size());
+        for (Tag model : models) {
+            rests.add((TagRest) converter.convertToRest(model));
+        }
+        return rests;
     }
 }
