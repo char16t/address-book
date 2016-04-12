@@ -12,6 +12,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -61,5 +62,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public Collection<Tag> getAll() {
         return tagRepository.findAll();
+    }
+
+    @Override
+    public Collection<Tag> getByAccount(Long accountId) throws TagNotFoundException {
+        return new HashSet<>(tagRepository.findByAccountId(accountId));
     }
 }

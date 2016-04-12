@@ -18,6 +18,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/notes")
 @RequestScoped
@@ -91,5 +93,23 @@ public class NoteRestService {
     public void deleteNote(@PathParam("id") Long id) throws NoteNotFoundException {
         log.fine("deleteNote(@PathParam(\"id\") Long id = {0})", id);
         noteService.delete(id);
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_by_person")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<NoteRest> getNotesByPerson(@QueryParam("person_id") Long personId) {
+        Collection<Note> notes = noteService.getByPersonId(personId);
+        return convertToRests(notes);
+    }
+
+    private Collection<NoteRest> convertToRests(Collection<Note> models) {
+        Collection<NoteRest> rests = new HashSet<>(models.size());
+        for (Note model : models) {
+            rests.add((NoteRest) converter.convertToRest(model));
+        }
+        return rests;
     }
 }

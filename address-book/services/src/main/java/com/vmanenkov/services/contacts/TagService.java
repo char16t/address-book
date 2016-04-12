@@ -18,4 +18,6 @@ public interface TagService {
     void delete(Long id) throws TagNotFoundException;
 
     Collection<Tag> getAll();
+
+    Collection<Tag> getByAccount(Long accountId) throws TagNotFoundException;
 }

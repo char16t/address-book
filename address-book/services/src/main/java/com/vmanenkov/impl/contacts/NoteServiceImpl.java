@@ -13,6 +13,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -54,5 +55,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Collection<Note> getAll() {
         return noteRepository.findAll();
+    }
+
+    @Override
+    public Collection<Note> getByPersonId(Long personId) {
+        return new HashSet<>(noteRepository.findByPersonId(personId));
     }
 }
