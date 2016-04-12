@@ -8,4 +8,6 @@ import javax.ejb.Local;
 @Local
 public interface RoleService {
     Role getByName(String string) throws UserRoleNotFoundException;
+
+    Role get(Long id) throws UserRoleNotFoundException;
 }

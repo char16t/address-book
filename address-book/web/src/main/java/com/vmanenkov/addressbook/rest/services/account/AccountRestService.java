@@ -5,23 +5,24 @@ import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.account.Role;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.account.AccountRest;
-import com.vmanenkov.addressbook.rest.model.account.RoleRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.account.RoleService;
+import com.vmanenkov.services.exceptions.AccountNotValidException;
+import com.vmanenkov.services.exceptions.AttributeGroupNotFoundException;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.security.auth.login.AccountNotFoundException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Path("/accounts")
@@ -41,19 +42,106 @@ public class AccountRestService {
     @Inject
     private EntityConverter converter;
 
+    @POST
+    @NoCache
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public RestEntity createAccount(AccountRest rest)
+            throws AccountNotValidException {
+        log.fine("createAccount(AccountRest rest = {0})", rest);
+        Account account = accountService.create(rest.getEmail(), rest.getPassword());
+        return converter.convertToRest(account);
+    }
+
+    @GET
+    @NoCache
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public RestEntity readAccount(@PathParam("id") Long id)
+            throws AccountNotFoundException {
+        log.fine("readAccount(@PathParam(\"id\") Long id = {0})", id);
+        return converter.convertToRest(accountService.get(id));
+    }
+
+    @PUT
+    @NoCache
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public RestEntity updateAccount(@PathParam("id") Long id,
+                                    AccountRest rest)
+            throws AccountNotFoundException, AccountNotValidException {
+
+        log.fine("updateAccount(@PathParam(\"id\") Long id = {0},\n" +
+                         "              AccountRest rest = {1})", id, rest);
+        Account account = accountService.get(id);
+        return converter.convertToRest(accountService.update(account, rest.getEmail(), rest.getPassword()));
+    }
+
+    @PUT
+    @NoCache
+    @Path("/{id}/add_role")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public RestEntity addRole(@PathParam("id") Long id,
+                              @QueryParam("role_id") Long roleId)
+            throws AccountNotFoundException, AccountNotValidException, UserRoleNotFoundException {
+
+        log.fine("addRole(@PathParam(\"id\") Long id = {0},\n" +
+                         "        @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
+        Account account = accountService.get(id);
+        Role role = roleService.get(roleId);
+        return converter.convertToRest(accountService.addRole(account, role));
+    }
+
+    @PUT
+    @NoCache
+    @Path("/{id}/remove_role")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public RestEntity removeRole(@PathParam("id") Long id,
+                                 @QueryParam("role_id") Long roleId)
+            throws AccountNotFoundException, AccountNotValidException, UserRoleNotFoundException {
+
+        log.fine("removeRole(@PathParam(\"id\") Long id = {0},\n" +
+                         "           @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
+        Account account = accountService.get(id);
+        Role role = roleService.get(roleId);
+        return converter.convertToRest(accountService.removeRole(account, role));
+    }
+
+    @DELETE
+    @NoCache
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public void deleteAccount(@PathParam("id") Long id) throws AccountNotFoundException {
+        log.fine("deleteAccount(@PathParam(\"id\") Long id = {0})", id);
+        accountService.delete(id);
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AccountRest> getAllAccount() {
+        log.fine("getAllAttributeGroup()");
+        return convertToRests(accountService.getAll());
+    }
+
     @GET
     @NoCache
     @Path("/getAllByRole/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<AccountRest> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
+    public Collection<AccountRest> getAllByRole(@QueryParam("role") String role) throws UserRoleNotFoundException {
         log.fine("getAllByRole(@QueryParam(\"role\") String role = {0})", role);
         Role roleObject = roleService.getByName(role);
-        return convertUsersToRests(accountService.getAccountsByRole(roleObject));
+        return convertToRests(accountService.getAccountsByRole(roleObject));
     }
 
-    private Set<AccountRest> convertUsersToRests(Set<Account> users) {
-        Set<AccountRest> accountRests = new HashSet<>(users.size());
-        for (DbEntity user : users) {
+    private Collection<AccountRest> convertToRests(Collection<Account> accounts) {
+        Set<AccountRest> accountRests = new HashSet<>(accounts.size());
+        for (DbEntity user : accounts) {
             accountRests.add((AccountRest) converter.convertToRest(user));
         }
         return accountRests;

@@ -12,13 +12,17 @@ public class ApplicationErrorCodes {
     public static final String USER_LOCKED = "005";
     public static final String CREDENTIAL_NOT_VALID = "006";
     public static final String CREDENTIAL_REQUEST_TOKEN_NOT_VALID = "007";
+
     public static final String PASSWORD_SIZE_ERROR = "008";
     public static final String PASSWORD_INVALID_CHARACTER_ERROR = "009";
-    public static final String PASSWORD_HISTORY_ERROR = "010";
-    public static final String USERNAME_DUPLICATED_ERROR = "011";
-    public static final String EMAIL_DUPLICATED_ERROR = "012";
-    public static final String EMAIL_NOT_FOUND = "013";
-    public static final String ACCOUNT_NOT_FOUND = "014";
+    public static final String PASSWORD_TO_SIMPLE = "010";
+
+    public static final String PASSWORD_HISTORY_ERROR = "020";
+    public static final String USERNAME_DUPLICATED_ERROR = "021";
+    public static final String EMAIL_DUPLICATED_ERROR = "022";
+    public static final String EMAIL_IS_NOT_VALID = "023";
+    public static final String EMAIL_NOT_FOUND = "024";
+    public static final String ACCOUNT_NOT_FOUND = "025";
 
 
     public static final String USER_ROLE_NOT_FOUND = "100";

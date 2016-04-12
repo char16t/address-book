@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.security.auth.login.AccountNotFoundException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public Set<Account> getAccountsByRole(Role role) {
+    public Collection<Account> getAccountsByRole(Role role) {
         return new HashSet<>(accountRepository.findAccountsByRole(role.getName()));
     }
 
