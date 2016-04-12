@@ -1,7 +1,6 @@
 package com.vmanenkov.addressbook.rest.model.account;
 
 import com.vmanenkov.addressbook.rest.model.RestEntity;
-import com.vmanenkov.addressbook.rest.model.contacts.PersonRest;
 
 import java.util.Set;
 

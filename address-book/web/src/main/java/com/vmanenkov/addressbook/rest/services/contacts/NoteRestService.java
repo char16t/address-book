@@ -6,7 +6,6 @@ import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.NoteRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
-import com.vmanenkov.addressbook.utils.EntityConverterImpl;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.NoteService;
 import com.vmanenkov.services.contacts.PersonService;

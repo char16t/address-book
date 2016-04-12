@@ -35,6 +35,11 @@ public class Account implements DbEntity {
     public Account() {
     }
 
+    public Account(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

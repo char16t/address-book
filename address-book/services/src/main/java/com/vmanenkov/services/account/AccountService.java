@@ -1,30 +1,28 @@
 package com.vmanenkov.services.account;
 
-import com.vmanenkov.addressbook.model.DbEntity;
 import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.services.exceptions.AccountNotFoundException;
+import com.vmanenkov.services.exceptions.AccountNotValidException;
+import com.vmanenkov.services.exceptions.EmailNotValidException;
 
 import javax.ejb.Local;
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.Collection;
-import java.util.Set;
 
 @Local
 public interface AccountService {
 
     Account getById(Long id) throws AccountNotFoundException;
 
-    Account create(String email, String password);
+    Account create(String email, String password) throws AccountNotValidException, EmailNotValidException;
 
-    Account get(Long id);
+    Account updateEmail(Long accountId, String email) throws AccountNotValidException, AccountNotFoundException, EmailNotValidException;
 
-    Account update(Account id, String email, String password);
+    Account addRole(Long accountId, Role role) throws AccountNotFoundException;
 
-    Account addRole(Account account, Role role);
+    Account removeRole(Long accountId, Role role) throws AccountNotFoundException;
 
-    Account removeRole(Account account, Role role);
-
-    void delete(Long id);
+    void delete(Long id) throws AccountNotFoundException;
 
     Collection<Account> getAll();
 

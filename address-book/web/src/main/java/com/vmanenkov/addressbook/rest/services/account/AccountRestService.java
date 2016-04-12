@@ -10,19 +10,18 @@ import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.account.RoleService;
+import com.vmanenkov.services.exceptions.AccountNotFoundException;
 import com.vmanenkov.services.exceptions.AccountNotValidException;
-import com.vmanenkov.services.exceptions.AttributeGroupNotFoundException;
+import com.vmanenkov.services.exceptions.EmailNotValidException;
 import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.security.auth.login.AccountNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Path("/accounts")
@@ -48,7 +47,7 @@ public class AccountRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public RestEntity createAccount(AccountRest rest)
-            throws AccountNotValidException {
+            throws AccountNotValidException, EmailNotValidException {
         log.fine("createAccount(AccountRest rest = {0})", rest);
         Account account = accountService.create(rest.getEmail(), rest.getPassword());
         return converter.convertToRest(account);
@@ -61,22 +60,21 @@ public class AccountRestService {
     public RestEntity readAccount(@PathParam("id") Long id)
             throws AccountNotFoundException {
         log.fine("readAccount(@PathParam(\"id\") Long id = {0})", id);
-        return converter.convertToRest(accountService.get(id));
+        return converter.convertToRest(accountService.getById(id));
     }
 
     @PUT
     @NoCache
-    @Path("/{id}")
+    @Path("/{id}/update_email")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public RestEntity updateAccount(@PathParam("id") Long id,
-                                    AccountRest rest)
-            throws AccountNotFoundException, AccountNotValidException {
+    public RestEntity updateEmail(@PathParam("id") Long id,
+                                  @QueryParam("email") String email)
+            throws AccountNotValidException, AccountNotFoundException, EmailNotValidException {
 
-        log.fine("updateAccount(@PathParam(\"id\") Long id = {0},\n" +
-                         "              AccountRest rest = {1})", id, rest);
-        Account account = accountService.get(id);
-        return converter.convertToRest(accountService.update(account, rest.getEmail(), rest.getPassword()));
+        log.fine("updateEmail(@PathParam(\"id\") Long id = {0},\n" +
+                 "            @QueryParam(\"email\") String email = {1})", id, email);
+        return converter.convertToRest(accountService.updateEmail(id, email));
     }
 
     @PUT
@@ -90,9 +88,8 @@ public class AccountRestService {
 
         log.fine("addRole(@PathParam(\"id\") Long id = {0},\n" +
                          "        @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
-        Account account = accountService.get(id);
         Role role = roleService.get(roleId);
-        return converter.convertToRest(accountService.addRole(account, role));
+        return converter.convertToRest(accountService.addRole(id, role));
     }
 
     @PUT
@@ -106,9 +103,8 @@ public class AccountRestService {
 
         log.fine("removeRole(@PathParam(\"id\") Long id = {0},\n" +
                          "           @QueryParam(\"role_id\") Long roleId = {1})", id, roleId);
-        Account account = accountService.get(id);
         Role role = roleService.get(roleId);
-        return converter.convertToRest(accountService.removeRole(account, role));
+        return converter.convertToRest(accountService.removeRole(id, role));
     }
 
     @DELETE

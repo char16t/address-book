@@ -4,9 +4,7 @@ package com.vmanenkov.addressbook.rest.mappers;
 import com.vmanenkov.addressbook.rest.model.RestError;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.services.exceptions.AccountNotValidException;
-import com.vmanenkov.services.exceptions.AttributeNotValidException;
 import com.vmanenkov.services.exceptions.errortypes.AccountErrorType;
-import com.vmanenkov.services.exceptions.errortypes.AttributeErrorType;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
@@ -27,16 +25,6 @@ public class AccountNotValidMapper implements ExceptionMapper<AccountNotValidExc
         String description = null;
         AccountErrorType error = exception.getError();
         switch (error) {
-            case EMAIL_IS_NOT_UNIQUE:
-                errorCode = ApplicationErrorCodes.EMAIL_DUPLICATED_ERROR;
-                description = "Email should be unique";
-                break;
-
-            case EMAIL_IS_EMPTY:
-            case EMAIL_IS_NOT_VALID:
-                errorCode = ApplicationErrorCodes.EMAIL_IS_NOT_VALID;
-                description = "Email is not valid";
-                break;
             case PASSWORD_IS_EMPTY:
             case PASSWORD_IS_TOO_LONG:
                 errorCode = ApplicationErrorCodes.PASSWORD_SIZE_ERROR;

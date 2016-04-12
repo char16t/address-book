@@ -21,4 +21,5 @@ public interface AccountRepository extends EntityRepository<Account, Long> {
             " WHERE r.name = ?1", singleResult = SingleResultType.OPTIONAL)
     List<Account> findAccountsByRole(String role);
 
+    Account findOptionalByEmail(String email);
 }

@@ -5,7 +5,6 @@ import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.FieldTypeRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
-import com.vmanenkov.addressbook.utils.EntityConverterImpl;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.contacts.FieldTypeService;
 import com.vmanenkov.services.exceptions.FieldTypeNotFoundException;

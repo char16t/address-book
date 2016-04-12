@@ -1,6 +1,5 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
-import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
