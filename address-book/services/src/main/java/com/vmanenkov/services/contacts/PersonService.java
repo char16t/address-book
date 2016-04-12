@@ -1,6 +1,7 @@
 package com.vmanenkov.services.contacts;
 
 import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.exceptions.PersonNotFoundException;
@@ -24,4 +25,6 @@ public interface PersonService {
     Collection<Person> getByAccountId(Long id);
 
     Collection<Person> getByAccountAndTag(Account account, Tag tag);
+
+    Collection<Person> getByAllFields(Account account, String query);
 }

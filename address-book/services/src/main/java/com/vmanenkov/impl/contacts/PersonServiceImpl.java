@@ -2,6 +2,7 @@ package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.PersonRepository;
 import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.PersonService;
@@ -80,5 +81,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Collection<Person> getByAccountAndTag(Account account, Tag tag) {
         return new HashSet<>(personRepository.findOptionalByAccountAndTag(account, tag));
+    }
+
+    @Override
+    public Collection<Person> getByAllFields(Account account, String query) {
+        return new HashSet<>(personRepository.findOptionalByAllFields(account, query));
     }
 }

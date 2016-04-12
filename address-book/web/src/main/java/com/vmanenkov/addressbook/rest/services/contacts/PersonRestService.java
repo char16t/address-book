@@ -1,6 +1,7 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.account.Account;
+import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
@@ -9,6 +10,7 @@ import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
+import com.vmanenkov.services.contacts.AttributeValueService;
 import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.AccountNotFoundException;
@@ -40,6 +42,9 @@ public class PersonRestService {
 
     @Inject
     private TagService tagService;
+
+    @Inject
+    private AttributeValueService attributeValueService;
 
     @Inject
     private EntityConverter converter;
@@ -114,6 +119,20 @@ public class PersonRestService {
         Tag tag = tagService.get(tagId);
 
         Collection<Person> persons = personService.getByAccountAndTag(account, tag);
+        return convertToRests(persons);
+    }
+
+    @GET
+    @NoCache
+    @Path("/search")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<PersonRest> getPersonsByQuery(
+            @QueryParam("account_id") Long accountId,
+            @QueryParam("query") String query) throws AccountNotFoundException {
+
+        Account account = accountService.getById(accountId);
+        Collection<Person> persons = personService.getByAllFields(account, query);
         return convertToRests(persons);
     }
 
