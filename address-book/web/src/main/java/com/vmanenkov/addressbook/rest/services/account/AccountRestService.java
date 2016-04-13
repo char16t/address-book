@@ -3,6 +3,7 @@ package com.vmanenkov.addressbook.rest.services.account;
 import com.vmanenkov.addressbook.model.DbEntity;
 import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.account.Role;
+import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.account.AccountRest;
 import com.vmanenkov.addressbook.rest.services.EntityConverter;
@@ -10,6 +11,7 @@ import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.account.RoleService;
+import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.AccountNotFoundException;
 import com.vmanenkov.services.exceptions.AccountNotValidException;
 import com.vmanenkov.services.exceptions.EmailNotValidException;
@@ -61,6 +63,18 @@ public class AccountRestService {
             throws AccountNotFoundException {
         log.fine("readAccount(@PathParam(\"id\") Long id = {0})", id);
         return converter.convertToRest(accountService.getById(id));
+    }
+
+    @GET
+    @NoCache
+    @Path("/{id}/info")
+    @Produces(MediaType.APPLICATION_JSON)
+    public RestEntity readAccountInfo(@PathParam("id") Long id)
+            throws AccountNotFoundException {
+        log.fine("readAccount(@PathParam(\"id\") Long id = {0})", id);
+        Account account = accountService.getById(id);
+        Person person = account.getPerson();
+        return converter.convertToRest(person);
     }
 
     @PUT
