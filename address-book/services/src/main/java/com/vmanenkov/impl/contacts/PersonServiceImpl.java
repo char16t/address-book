@@ -2,7 +2,6 @@ package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.PersonRepository;
 import com.vmanenkov.addressbook.model.account.Account;
-import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.services.contacts.PersonService;
@@ -75,7 +74,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Collection<Person> getByAccountId(Long id) {
-        return new HashSet<>(personRepository.findByAccountId(id));
+        return new HashSet<>(personRepository.findOptionalByAccountId(id));
     }
 
     @Override

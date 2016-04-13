@@ -21,7 +21,7 @@ public interface PersonRepository extends EntityRepository<Person, Long> {
             "  FROM Person     p " +
             "  JOIN p.accounts pa " +
             " WHERE pa.id = ?1", singleResult = SingleResultType.OPTIONAL)
-    List<Person> findByAccountId(Long id);
+    List<Person> findOptionalByAccountId(Long id);
 
     @Query(value = "" +
             "SELECT p " +
