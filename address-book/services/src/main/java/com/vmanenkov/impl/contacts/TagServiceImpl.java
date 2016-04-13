@@ -65,7 +65,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Collection<Tag> getByAccount(Long accountId) throws TagNotFoundException {
-        return new HashSet<>(tagRepository.findByAccountId(accountId));
+    public Collection<Tag> getByAccount(Long accountId) {
+        return new HashSet<>(tagRepository.findOptionalByAccountId(accountId));
     }
 }

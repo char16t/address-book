@@ -19,5 +19,5 @@ public interface TagService {
 
     Collection<Tag> getAll();
 
-    Collection<Tag> getByAccount(Long accountId) throws TagNotFoundException;
+    Collection<Tag> getByAccount(Long accountId);
 }

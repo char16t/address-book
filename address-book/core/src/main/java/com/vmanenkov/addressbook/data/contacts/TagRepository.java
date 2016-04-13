@@ -1,6 +1,5 @@
 package com.vmanenkov.addressbook.data.contacts;
 
-import com.vmanenkov.addressbook.model.account.Account;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
@@ -15,9 +14,9 @@ public interface TagRepository extends EntityRepository<Tag, Long> {
 
     @Query(value = "" +
             "SELECT t " +
-            "  FROM Tag     t " +
-            "  JOIN t.persons tp " +
+            "  FROM Tag         t " +
+            "  JOIN t.persons   tp " +
             "  JOIN tp.accounts tpa " +
             " WHERE tpa.id = ?1", singleResult = SingleResultType.OPTIONAL)
-    List<Tag> findByAccountId(Long accountId);
+    List<Tag> findOptionalByAccountId(Long accountId);
 }
