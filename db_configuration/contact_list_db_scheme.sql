@@ -207,10 +207,16 @@ DROP TABLE IF EXISTS public.account ;
 
 CREATE TABLE IF NOT EXISTS public.account (
   id INT NOT NULL,
+  person_id INT NULL,
   email VARCHAR(45) NULL,
   password VARCHAR(45) NULL,
-  PRIMARY KEY (id))
-;
+  PRIMARY KEY (id),
+  CONSTRAINT fk
+    FOREIGN KEY (person_id)
+    REFERENCES public.person(id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
 
 
 -- -----------------------------------------------------
