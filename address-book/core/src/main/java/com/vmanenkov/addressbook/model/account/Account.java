@@ -26,6 +26,9 @@ public class Account implements DbEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
+    @OneToOne
+    private Person person;
+
     @ManyToMany
     @JoinTable(name = "person_account",
             joinColumns = {@JoinColumn(name = "user_id")},

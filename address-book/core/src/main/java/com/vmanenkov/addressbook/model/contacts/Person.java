@@ -41,6 +41,9 @@ public class Person implements DbEntity {
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<Account> accounts;
 
+    @OneToOne(mappedBy = "person")
+    private Account account;
+
     public Person() {
     }
 
