@@ -12,10 +12,7 @@ import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.account.RoleService;
 import com.vmanenkov.services.contacts.PersonService;
-import com.vmanenkov.services.exceptions.AccountNotFoundException;
-import com.vmanenkov.services.exceptions.AccountNotValidException;
-import com.vmanenkov.services.exceptions.EmailNotValidException;
-import com.vmanenkov.services.exceptions.UserRoleNotFoundException;
+import com.vmanenkov.services.exceptions.*;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.enterprise.context.RequestScoped;
@@ -70,10 +67,13 @@ public class AccountRestService {
     @Path("/{id}/info")
     @Produces(MediaType.APPLICATION_JSON)
     public RestEntity readAccountInfo(@PathParam("id") Long id)
-            throws AccountNotFoundException {
+            throws AccountNotFoundException, PersonNotFoundException {
         log.fine("readAccount(@PathParam(\"id\") Long id = {0})", id);
         Account account = accountService.getById(id);
         Person person = account.getPerson();
+        if (person == null) {
+            throw new PersonNotFoundException();
+        }
         return converter.convertToRest(person);
     }
 
