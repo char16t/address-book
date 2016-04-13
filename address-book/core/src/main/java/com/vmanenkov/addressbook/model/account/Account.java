@@ -82,4 +82,12 @@ public class Account implements DbEntity {
     public void setPersons(Set<Person> persons) {
         this.persons = persons;
     }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }

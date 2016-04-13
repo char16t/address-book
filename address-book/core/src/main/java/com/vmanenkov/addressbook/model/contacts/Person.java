@@ -126,4 +126,12 @@ public class Person implements DbEntity {
     public void setAccounts(Set<Account> accounts) {
         this.accounts = accounts;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
