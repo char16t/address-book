@@ -12,6 +12,7 @@
       - default-jre
       - default-jdk
       - maven
+      - nginx
     become: yes
 
 - hosts: all
@@ -56,6 +57,12 @@
 
 - hosts: all
   tasks:
+  - name: Copy nginx config
+    copy: src=/vagrant/nginx_configuration/default dest=/etc/nginx/sites-enabled/default
+    become: yes
+  - name: Restart Nginx service
+    service: name=nginx state=restarted
+    become: yes
   - name: Add Wildfly user
     user: name=wildfly
     become: yes
