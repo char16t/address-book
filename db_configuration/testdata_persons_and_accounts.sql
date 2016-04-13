@@ -1,5 +1,4 @@
-
-insert into account(id, email, password) values(1, 'aaa@mail.ru', 'hash');
+insert into account(id, person_id, email, password) values(1, 1, 'aaa@mail.ru', 'hash');
 insert into account(id, email, password) values(2, 'bbb@mail.ru', 'hash');
 insert into account(id, email, password) values(3, 'ccc@mail.ru', 'hash');
 insert into account(id, email, password) values(4, 'ddd@mail.ru', 'hash');
