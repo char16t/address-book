@@ -91,8 +91,14 @@ public class TagRestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
-        accountService.getById(accountId);
-        Collection<Tag> tags = tagService.getByAccount(accountId);
+        Collection<Tag> tags;
+        if (accountId == null) {
+            tags = tagService.getAll();
+        }
+        else {
+            accountService.getById(accountId);
+            tags = tagService.getByAccount(accountId);
+        }
         return convertToRests(tags);
     }
 

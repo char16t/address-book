@@ -18,6 +18,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/attributes")
 @RequestScoped
@@ -62,6 +64,15 @@ public class AttributeRestService {
 
     @GET
     @NoCache
+    @Path("/get_all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AttributeRest> getAllAttributes() {
+        log.fine("getAllAttributes()");
+        return convertToRests(attributeService.getAll());
+    }
+
+    @GET
+    @NoCache
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public RestEntity readAttribute(@PathParam("id") Long id) throws AttributeNotFoundException {
@@ -99,4 +110,13 @@ public class AttributeRestService {
         log.fine("deleteAttribute(@PathParam(\"id\") Long id = {0})", id);
         attributeService.delete(id);
     }
+
+    private Collection<AttributeRest> convertToRests(Collection<Attribute> models) {
+        Collection<AttributeRest> rests = new HashSet<>(models.size());
+        for (Attribute model : models) {
+            rests.add((AttributeRest) converter.convertToRest(model));
+        }
+        return rests;
+    }
+
 }

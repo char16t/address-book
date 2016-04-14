@@ -1,5 +1,6 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
+import com.vmanenkov.addressbook.model.contacts.AttributeType;
 import com.vmanenkov.addressbook.model.contacts.FieldType;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
 import com.vmanenkov.addressbook.rest.model.contacts.AttributeTypeRest;
@@ -17,6 +18,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/attribute_types")
 @RequestScoped
@@ -49,6 +52,15 @@ public class AttributeTypeRestService {
                          "            @QueryParam(\"field_type_id\") Long fieldTypeId = {1})", rest, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
         return converter.convertToRest(attributeTypeService.create(rest.getName(), fieldType));
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AttributeTypeRest> getAllAttributeType() {
+        log.fine("getAllAttributeType()");
+        return convertToRests(attributeTypeService.getAll());
     }
 
     @GET
@@ -88,4 +100,11 @@ public class AttributeTypeRestService {
         attributeTypeService.delete(id);
     }
 
+    private Collection<AttributeTypeRest> convertToRests(Collection<AttributeType> models) {
+        Collection<AttributeTypeRest> rests = new HashSet<>(models.size());
+        for (AttributeType model : models) {
+            rests.add((AttributeTypeRest) converter.convertToRest(model));
+        }
+        return rests;
+    }
 }
