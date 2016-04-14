@@ -107,8 +107,8 @@ CREATE TABLE IF NOT EXISTS public.attribute_group (
   name VARCHAR(45) NOT NULL,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id),
-  CONSTRAINT name_UNIQUE UNIQCASCADEE;
-
+  CONSTRAINT name_UNIQUE UNIQUE  (name)
+);
 
 -- -----------------------------------------------------
 -- Table `public`.`attribute`
