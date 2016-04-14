@@ -83,13 +83,6 @@ public class AttributeGroupRestService {
         attributeGroupService.delete(id);
     }
 
-    /*   private Collection<NoteRest> convertToRests(Collection<Note> models) {
-        Collection<NoteRest> rests = new HashSet<>(models.size());
-        for (Note model : models) {
-            rests.add((NoteRest) converter.convertToRest(model));
-        }
-        return rests;
-    }*/
     private Collection<AttributeGroupRest> convertToRests(Collection<AttributeGroup> models) {
         Collection<AttributeGroupRest> rests = new HashSet<>(models.size());
         for (AttributeGroup model : models) {
