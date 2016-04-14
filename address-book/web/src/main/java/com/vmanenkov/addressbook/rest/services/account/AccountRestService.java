@@ -11,7 +11,6 @@ import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
 import com.vmanenkov.services.account.RoleService;
-import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.exceptions.*;
 import org.jboss.resteasy.annotations.cache.NoCache;
 

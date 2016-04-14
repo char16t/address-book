@@ -1,7 +1,6 @@
 package com.vmanenkov.addressbook.rest.services.contacts;
 
 import com.vmanenkov.addressbook.model.account.Account;
-import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.addressbook.model.contacts.Tag;
 import com.vmanenkov.addressbook.rest.model.RestEntity;
