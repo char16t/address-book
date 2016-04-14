@@ -46,11 +46,11 @@
     service: name=postgresql state=restarted
     become: yes
   - name: Init database
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/contact_list_db_scheme.sql"
   - name: Import test data
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/testdata.sql"
   - name: Import test data (contacts)
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata_persons_and_accounts.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/testdata_persons_and_accounts.sql"
   - name: Start Postgresql on boot
     shell: "update-rc.d postgresql defaults"
     become: yes
