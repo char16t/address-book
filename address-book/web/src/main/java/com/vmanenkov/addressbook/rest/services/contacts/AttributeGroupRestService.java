@@ -58,7 +58,7 @@ public class AttributeGroupRestService {
     @NoCache
     @Path("/get_all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<RestEntity> getAllAttributeGroup() {
+    public Collection<AttributeGroupRest> getAllAttributeGroup() {
         log.fine("getAllAttributeGroup()");
         return convertToRests(attributeGroupService.getAll());
     }
@@ -68,7 +68,7 @@ public class AttributeGroupRestService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public RestEntity updateAttributeGroup(@PathParam("id") Long id,
-                                                   AttributeGroupRest rest)
+                                           AttributeGroupRest rest)
             throws AttributeGroupNotFoundException, AttributeGroupNotValidException {
         log.fine("updateAttributeGroup(@PathParam(\"id\") Long id = {0}, AttributeGroupRest rest = {1})", id, rest);
         return converter.convertToRest(attributeGroupService.update(id, rest.getName(), rest.getDescription()));
@@ -83,10 +83,17 @@ public class AttributeGroupRestService {
         attributeGroupService.delete(id);
     }
 
-    private Collection<RestEntity> convertToRests(Collection<AttributeGroup> models) {
-        Collection<RestEntity> rests = new HashSet<>(models.size());
+    /*   private Collection<NoteRest> convertToRests(Collection<Note> models) {
+        Collection<NoteRest> rests = new HashSet<>(models.size());
+        for (Note model : models) {
+            rests.add((NoteRest) converter.convertToRest(model));
+        }
+        return rests;
+    }*/
+    private Collection<AttributeGroupRest> convertToRests(Collection<AttributeGroup> models) {
+        Collection<AttributeGroupRest> rests = new HashSet<>(models.size());
         for (AttributeGroup model : models) {
-            rests.add(converter.convertToRest(model));
+            rests.add((AttributeGroupRest) converter.convertToRest(model));
         }
         return rests;
     }
