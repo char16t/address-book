@@ -46,18 +46,17 @@ CREATE TABLE IF NOT EXISTS public.person_tag (
   CONSTRAINT FK_person_tag_person_id
     FOREIGN KEY (person_id)
     REFERENCES public.person (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT FK_person_tag_tag_id
     FOREIGN KEY (tag_id)
     REFERENCES public.tag (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX FK_person_tag_person_id_idx ON public.person_tag (person_id);
 CREATE INDEX FK_person_tag_tag_id_idx ON public.person_tag (tag_id);
-
 
 -- -----------------------------------------------------
 -- Table `public`.`field_type`
@@ -91,8 +90,8 @@ CREATE TABLE IF NOT EXISTS public.attribute_type (
   CONSTRAINT FK_Attribute_type_field_type_id
     FOREIGN KEY (field_type_id)
     REFERENCES public.field_type (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ;
 
 CREATE INDEX FK_Attribute_type_field_type_id_idx ON public.attribute_type (field_type_id);
@@ -108,8 +107,7 @@ CREATE TABLE IF NOT EXISTS public.attribute_group (
   name VARCHAR(45) NOT NULL,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id),
-  CONSTRAINT name_UNIQUE UNIQUE  (name))
-;
+  CONSTRAINT name_UNIQUE UNIQCASCADEE;
 
 
 -- -----------------------------------------------------
@@ -128,13 +126,13 @@ CREATE TABLE IF NOT EXISTS public.attribute (
   CONSTRAINT FK_attribute_type_id
     FOREIGN KEY (type_id)
     REFERENCES public.attribute_type (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT FK_attribute_group_id
     FOREIGN KEY (group_id)
     REFERENCES public.attribute_group (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX FK_attribute_type_id_idx ON public.attribute (type_id);
@@ -157,13 +155,13 @@ CREATE TABLE IF NOT EXISTS public.attribute_value (
   CONSTRAINT FK_attribute_value_person_id
     FOREIGN KEY (person_id)
     REFERENCES public.person (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT FK_attribute_value_attribute_id
     FOREIGN KEY (attribute_id)
     REFERENCES public.attribute (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX FK_attribute_value_person_id_idx ON public.attribute_value (person_id);
@@ -184,8 +182,8 @@ CREATE TABLE IF NOT EXISTS public.note (
   CONSTRAINT FK_note_person_id
     FOREIGN KEY (person_id)
     REFERENCES public.person (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -214,8 +212,8 @@ CREATE TABLE IF NOT EXISTS public.account (
   CONSTRAINT fk
     FOREIGN KEY (person_id)
     REFERENCES public.person(id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
 );
 
 
@@ -256,13 +254,13 @@ CREATE TABLE IF NOT EXISTS public.account_role (
   CONSTRAINT fk_user_has_role_user1
     FOREIGN KEY (user_id)
     REFERENCES public.account (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_user_has_role_role1
     FOREIGN KEY (role_id)
     REFERENCES public.role (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX fk_user_has_role_role1_idx ON public.account_role (role_id);
@@ -282,13 +280,13 @@ CREATE TABLE IF NOT EXISTS public.role_permission (
   CONSTRAINT fk_role_has_permission_role1
     FOREIGN KEY (role_id)
     REFERENCES public.role (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_role_has_permission_permission1
     FOREIGN KEY (permission_id)
     REFERENCES public.permission (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX fk_role_has_permission_permission1_idx ON public.role_permission (permission_id);
@@ -308,13 +306,13 @@ CREATE TABLE IF NOT EXISTS public.person_account (
   CONSTRAINT fk_person_has_user_person1
     FOREIGN KEY (person_id)
     REFERENCES public.person (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_person_has_user_user1
     FOREIGN KEY (user_id)
     REFERENCES public.account (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ;
 
 CREATE INDEX fk_person_has_user_user1_idx ON public.person_account (user_id);
