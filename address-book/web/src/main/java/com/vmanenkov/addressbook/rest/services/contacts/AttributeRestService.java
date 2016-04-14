@@ -70,7 +70,7 @@ public class AttributeRestService {
         log.fine("getAllAttributes()");
         return convertToRests(attributeService.getAll());
     }
-    
+
     @GET
     @NoCache
     @Path("/{id}")

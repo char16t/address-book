@@ -15,6 +15,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Path("/field_types")
 @RequestScoped
@@ -39,6 +41,15 @@ public class FieldTypeRestService {
         log.fine("createFieldType(FieldTypeRest rest = {0})", rest);
         FieldType fieldType = fieldTypeService.create(rest.getTypeName());
         return converter.convertToRest(fieldType);
+    }
+
+    @GET
+    @NoCache
+    @Path("/get_all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<FieldTypeRest> getAllAttributeGroup() {
+        log.fine("getAllAttributeGroup()");
+        return convertToRests(fieldTypeService.getAll());
     }
 
     @GET
@@ -76,4 +87,11 @@ public class FieldTypeRestService {
         fieldTypeService.delete(id);
     }
 
+    private Collection<FieldTypeRest> convertToRests(Collection<FieldType> models) {
+        Collection<FieldTypeRest> rests = new HashSet<>(models.size());
+        for (FieldType model : models) {
+            rests.add((FieldTypeRest) converter.convertToRest(model));
+        }
+        return rests;
+    }
 }
