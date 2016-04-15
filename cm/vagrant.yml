@@ -26,10 +26,10 @@
     port: 5433
   tasks:
   - name: Copy Prostgres config (1 / 2)
-    copy: src=/vagrant/postgresql_configuration/postgresql.conf dest=/etc/postgresql/9.3/main/postgresql.conf owner=postgres group=postgres
+    copy: src=/vagrant/cm/postgresql_configuration/postgresql.conf dest=/etc/postgresql/9.3/main/postgresql.conf owner=postgres group=postgres
     become: yes
   - name: Copy Prostgres config (2 / 2)
-    copy: src=/vagrant/postgresql_configuration/pg_hba.conf dest=/etc/postgresql/9.3/main/pg_hba.conf owner=postgres group=postgres
+    copy: src=/vagrant/cm/postgresql_configuration/pg_hba.conf dest=/etc/postgresql/9.3/main/pg_hba.conf owner=postgres group=postgres
     become: yes
   - name: Restart Postgres service
     service: name=postgresql state=restarted
@@ -46,11 +46,11 @@
     service: name=postgresql state=restarted
     become: yes
   - name: Init database
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/contact_list_db_scheme.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/contact_list_db_scheme.sql"
   - name: Import test data
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/testdata.sql"
   - name: Import test data (contacts)
-    shell: "psql -d {{dbname}} -a -f /vagrant/db_configuration/testdata_persons_and_accounts.sql"
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/testdata_persons_and_accounts.sql"
   - name: Start Postgresql on boot
     shell: "update-rc.d postgresql defaults"
     become: yes
@@ -58,7 +58,7 @@
 - hosts: all
   tasks:
   - name: Copy nginx config
-    copy: src=/vagrant/nginx_configuration/default dest=/etc/nginx/sites-enabled/default
+    copy: src=/vagrant/cm/nginx_configuration/default dest=/etc/nginx/sites-enabled/default
     become: yes
   - name: Restart Nginx service
     service: name=nginx state=restarted
@@ -138,16 +138,16 @@
     shell: "update-rc.d wildfly defaults"
     become: yes
   - name: Copy Wildfly config (1 / 2)
-    copy: src=/vagrant/wildfly_standalone_configuration/ dest=/opt/wildfly/standalone/configuration/ owner=wildfly group=wildfly directory_mode=yes
+    copy: src=/vagrant/cm/wildfly_standalone_configuration/ dest=/opt/wildfly/standalone/configuration/ owner=wildfly group=wildfly directory_mode=yes
     become: yes
   - name: Creates directory
     file: path=/opt/wildfly/modules/org/postgresql/main/ state=directory
     become: yes
   - name: Copy Wildfly config (2 / 2)
-    copy: src=/vagrant/wildfly_postgresql/ dest=/opt/wildfly/modules/org/postgresql/main/ owner=wildfly group=wildfly directory_mode=yes
+    copy: src=/vagrant/cm/wildfly_postgresql/ dest=/opt/wildfly/modules/org/postgresql/main/ owner=wildfly group=wildfly directory_mode=yes
     become: yes
   - name: Copy Wildfly config (debug setting)
-    copy: src=/vagrant/wildfly_bin_configuration/standalone.conf dest=/opt/wildfly/bin/standalone.conf owner=wildfly group=wildfly
+    copy: src=/vagrant/cm/wildfly_bin_configuration/standalone.conf dest=/opt/wildfly/bin/standalone.conf owner=wildfly group=wildfly
     become: yes
   - name: Restart Wildfly service
     service: name=wildfly state=restarted
