@@ -33,6 +33,10 @@ server {
 		try_files $uri $uri/ =404;
 		# Uncomment to enable naxsi on this location
 		# include /etc/nginx/naxsi.rules
+		access_log        off;
+		expires           off;
+		add_header        Cache-Control private;
+		sendfile          off;
 	}
 
 	  location ~ /addressbook/rest/* {
