@@ -177,7 +177,7 @@
     npm: name=generator-angular global=yes
     become: yes
   - name: (frontend) npm install
-    npm: path=/vagrant/frontend
+    shell: npm install --no-bin-links chdir=/vagrant/frontend
     become: yes
   - name: (frontend) grunt
     shell: grunt --force chdir=/vagrant/frontend
