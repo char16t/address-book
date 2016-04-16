@@ -182,6 +182,8 @@
   - name: (frontend) grunt
     shell: grunt --force chdir=/vagrant/frontend
     become: yes
+  - name: (frontend) bower install
+    shell: bower install chdir=/vagrant/frontend
   - name: (frontend) grunt build
     shell: grunt build --force chdir=/vagrant/frontend
     become: yes
