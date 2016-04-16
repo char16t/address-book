@@ -183,5 +183,5 @@
     shell: grunt --force chdir=/vagrant/frontend
     become: yes
   - name: (frontend) grunt build
-    shell: grunt build chdir=/vagrant/frontend
+    shell: grunt build --force chdir=/vagrant/frontend
     become: yes
