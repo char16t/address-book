@@ -13,6 +13,9 @@
       - default-jdk
       - maven
       - nginx
+      - nodejs-legacy
+      - npm
+      - git
     become: yes
 
 - hosts: all
@@ -154,4 +157,31 @@
     become: yes
   - name: Build and deploy webapp
     shell: sh /vagrant/deploy.sh
+    become: yes
+  - name: Update npm
+    npm: name=npm global=yes
+    become: yes
+  - name: npm install -g yo
+    npm: name=yo global=yes
+    become: yes
+  - name: npm install -g bower
+    npm: name=bower global=yes
+    become: yes
+  - name: npm install -g grunt-cli
+    npm: name=grunt-cli global=yes
+    become: yes
+  - name: npm install -g generator-karma
+    npm: name=generator-karma global=yes
+    become: yes
+  - name: npm install -g generator-angular
+    npm: name=generator-angular global=yes
+    become: yes
+  - name: (frontend) npm install
+    npm: path=/vagrant/frontend
+    become: yes
+  - name: (frontend) grunt
+    shell: grunt --force chdir=/vagrant/frontend
+    become: yes
+  - name: (frontend) grunt build
+    shell: grunt build chdir=/vagrant/frontend
     become: yes

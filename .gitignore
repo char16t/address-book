@@ -1,6 +1,6 @@
 Thumbs.db
 .vagrant/
-/*.retry
+*.retry
 *.iml
 .idea/
 target/
