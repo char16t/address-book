@@ -183,7 +183,8 @@
     shell: grunt --force chdir=/vagrant/frontend
     become: yes
   - name: (frontend) bower install
-    shell: bower install chdir=/vagrant/frontend
+    shell: bower install --allow-root chdir=/vagrant/frontend
+    become: yes
   - name: (frontend) grunt build
     shell: grunt build --force chdir=/vagrant/frontend
     become: yes
