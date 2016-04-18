@@ -47,17 +47,21 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person update(Long id, String firstName, String lastName, String description) throws PersonNotFoundException, PersonNotValidException {
         Person person = get(id);
-        if (firstName == null || "".equals(firstName)) {
-            throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
+        if (firstName != null) {
+            if ("".equals(firstName)) {
+                throw new PersonNotValidException(PersonErrorType.PERSON_FIRST_NAME_IS_EMPTY);
+            }
+            person.setFirstName(firstName);
         }
-        if (lastName == null || "".equals(lastName)) {
-            throw new PersonNotValidException(PersonErrorType.PERSON_LAST_NAME_IS_EMPTY);
+        if (lastName != null) {
+            if ("".equals(lastName)) {
+                throw new PersonNotValidException(PersonErrorType.PERSON_LAST_NAME_IS_EMPTY);
+            }
+            person.setLastName(lastName);
         }
-
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        person.setDescription(description);
-
+        if (description != null) {
+            person.setDescription(description);
+        }
         return personRepository.save(person);
     }
 
