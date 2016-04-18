@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Address Book</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Address Book" src="...">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Новый контакт</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+            role="button" aria-haspopup="true" aria-expanded="false"><span
+              class="glyphicon glyphicon-import"
+              aria-hidden="true"></span> Импорт
+            контактов <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Друзья ВКонтакте</a></li>
+            <li><a href="#">vCard (Apple Address Book)</a></li>
+            <li><a href="#">Outlook CSV</a></li>
+            <li><a href="#">Google CSV</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Выйти</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-md-4" style="padding-left: 15px">
+  <form style="text-align: center">
+      <input type="text" class="form-control" id="exampleInputEmail1"
+      placeholder="Поиск по контактам..">
+  </form>
+  <div class="media">
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQyOGUyMjYwMyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDI4ZTIyNjAzIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNC41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">Petr Ivanov</h4>
+      <div>+ 7 (234) 123 45 67</div>
+      <div>
+        <span class="label label-default">Семья</span>
+        <span class="label label-default">Лучшие друзья</span>
+      </div>
+    </div>
+  </div>
+  <div class="media">
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQyOGUyMjYwMyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDI4ZTIyNjAzIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNC41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">Vasya Pertrov</h4>
+      <div>+ 7 (234) 123 45 67</div>
+      <div>qwerty@123.com</div>
+      <div>
+        <span class="label label-default">Семья</span>
+        <span class="label label-default">Одноклассники</span>
+        <span class="label label-default">Коллеги</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-8">
+    <div class="text-center">
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQyOGUyMjYwMyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDI4ZTIyNjAzIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNC41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" alt="...">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">Vasya Pertrov</h4>
+        <div>+ 7 (234) 123 45 67</div>
+        <div>qwerty@123.com</div>
+        <div>
+          <span class="label label-default">Семья</span>
+          <span class="label label-default">Одноклассники</span>
+          <span class="label label-default">Коллеги</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>Личная информация</h3>
+  <div class="panel panel-default">
+    <div class="panel-heading">Контактная информация</div>
+    <ul class="list-group">
+      <li class="list-group-item">Email: vsfsf@rsf.rt</li>
+      <li class="list-group-item">Телефон: dfsdfs.er</li>
+      <li class="list-group-item">Skype: ssdffd</li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Образование</div>
+    <ul class="list-group">
+      <li class="list-group-item">Школа: 20</li>
+      <li class="list-group-item">ВУЗ: ННГУ</li>
+    </ul>
+  </div>
+
+  <h3>Заметки</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div><b>21 Jan 2013</b></div>
+      Заметка 1
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div><b>22 Sep 2010</b></div>
+      Заметка 2
+    </div>
+  </div>
+  </div>
+</div>
+</body>
+</html>
