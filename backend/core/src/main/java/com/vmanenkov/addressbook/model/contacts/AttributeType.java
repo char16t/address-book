@@ -24,7 +24,19 @@ public class AttributeType implements DbEntity {
     private FieldType fieldType;
 
     // todo: add other fields
-
+    @Column(name="regex", length=1024)
+    private String regex;
+    
+    @Column(name="required")
+    private boolean required;
+    
+    @Column(name="hidden")
+    private boolean hidden;
+    
+    @Column(name="description", length=1024)
+    private String description;
+    
+    
     public AttributeType() {
     }
 
@@ -70,4 +82,38 @@ public class AttributeType implements DbEntity {
     public void setFieldType(FieldType fieldType) {
         this.fieldType = fieldType;
     }
+
+    public String getRegex() {
+        return regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
 }
