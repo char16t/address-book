@@ -5,7 +5,12 @@ import com.vmanenkov.addressbook.rest.model.RestEntity;
 public class AttributeTypeRest implements RestEntity {
     private Long id;
     private String name;
+    private String regex;
+    private boolean required;
+    private boolean hidden;
+    private String description;
     private FieldTypeRest fieldType;
+    
 
 // todo: add other fields
 
@@ -34,6 +39,39 @@ public class AttributeTypeRest implements RestEntity {
         this.name = name;
     }
 
+    public String getRegex() {
+        return regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
     public FieldTypeRest getFieldType() {
         return fieldType;
     }
