@@ -51,7 +51,7 @@ public class AttributeTypeRestService {
                          "            AttributeTypeRest rest = {0},\n" +
                          "            @QueryParam(\"field_type_id\") Long fieldTypeId = {1})", rest, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
-        return converter.convertToRest(attributeTypeService.create(rest.getName(), fieldType));
+        return converter.convertToRest(attributeTypeService.create(rest.getName(), rest.getRegex(), rest.isRequired(), rest.isHidden(), rest.getDescription(), fieldType));
     }
 
     @GET
@@ -88,7 +88,7 @@ public class AttributeTypeRestService {
                          "            @PathParam(\"id\") Long id = {1},\n" +
                          "            @QueryParam(\"field_type_id\") Long fieldTypeId = {2})", rest, id, fieldTypeId);
         FieldType fieldType = fieldTypeService.get(fieldTypeId);
-        return converter.convertToRest(attributeTypeService.update(id, rest.getName(), fieldType));
+        return converter.convertToRest(attributeTypeService.update(id, rest.getName(), rest.getRegex(), rest.isRequired(), rest.isHidden(), rest.getDescription(), fieldType));
     }
 
     @DELETE

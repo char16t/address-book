@@ -28,10 +28,10 @@ public class AttributeType implements DbEntity {
     private String regex;
     
     @Column(name="required")
-    private boolean required;
+    private Boolean required;
     
     @Column(name="hidden")
-    private boolean hidden;
+    private Boolean hidden;
     
     @Column(name="description", length=1024)
     private String description;
@@ -48,6 +48,15 @@ public class AttributeType implements DbEntity {
     public AttributeType(String name, Set<Attribute> attributes, FieldType fieldType) {
         this.name = name;
         this.attributes = attributes;
+        this.fieldType = fieldType;
+    }
+
+    public AttributeType(String name, String regex, Boolean required, Boolean hidden, String description, FieldType fieldType) {
+        this.name = name;
+        this.regex = regex;
+        this.required = required;
+        this.hidden = hidden;
+        this.description = description;
         this.fieldType = fieldType;
     }
 
@@ -91,19 +100,19 @@ public class AttributeType implements DbEntity {
         this.regex = regex;
     }
 
-    public boolean isRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
-    public void setRequired(boolean required) {
+    public void setRequired(Boolean required) {
         this.required = required;
     }
 
-    public boolean isHidden() {
+    public Boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
+    public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 

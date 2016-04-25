@@ -6,8 +6,8 @@ public class AttributeTypeRest implements RestEntity {
     private Long id;
     private String name;
     private String regex;
-    private boolean required;
-    private boolean hidden;
+    private Boolean required;
+    private Boolean hidden;
     private String description;
     private FieldTypeRest fieldType;
     
@@ -47,19 +47,19 @@ public class AttributeTypeRest implements RestEntity {
         this.regex = regex;
     }
 
-    public boolean isRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
-    public void setRequired(boolean required) {
+    public void setRequired(Boolean required) {
         this.required = required;
     }
 
-    public boolean isHidden() {
+    public Boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
+    public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 
