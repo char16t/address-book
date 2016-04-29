@@ -68,4 +68,10 @@ public class TagServiceImpl implements TagService {
     public Collection<Tag> getByAccount(Long accountId) {
         return new HashSet<>(tagRepository.findOptionalByAccountId(accountId));
     }
+
+    @Override
+    public Collection<Tag> getByPerson(Long personId) {
+        return new HashSet<>(tagRepository.findOptionalByPersonId(personId)); 
+    }
+    
 }

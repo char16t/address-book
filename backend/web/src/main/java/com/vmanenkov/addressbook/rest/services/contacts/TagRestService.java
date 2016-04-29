@@ -7,8 +7,10 @@ import com.vmanenkov.addressbook.rest.services.EntityConverter;
 import com.vmanenkov.addressbook.util.LoggerAB;
 import com.vmanenkov.profile.Profiled;
 import com.vmanenkov.services.account.AccountService;
+import com.vmanenkov.services.contacts.PersonService;
 import com.vmanenkov.services.contacts.TagService;
 import com.vmanenkov.services.exceptions.AccountNotFoundException;
+import com.vmanenkov.services.exceptions.PersonNotFoundException;
 import com.vmanenkov.services.exceptions.TagNotFoundException;
 import com.vmanenkov.services.exceptions.TagNotValidException;
 import org.jboss.resteasy.annotations.cache.NoCache;
@@ -102,6 +104,23 @@ public class TagRestService {
         return convertToRests(tags);
     }
 
+    @GET
+    @NoCache
+    @Path("/get_all_by_person")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<TagRest> getTagsByPerson(@QueryParam("person_id") Long personId) throws PersonNotFoundException {
+        Collection<Tag> tags;
+        if (personId == null) {
+            tags = tagService.getAll();
+        }
+        else {
+            //personService.getById(personId);
+            tags = tagService.getByPerson(personId);
+        }
+        return convertToRests(tags);
+    }
+    
     private Collection<TagRest> convertToRests(Collection<Tag> models) {
         Collection<TagRest> rests = new HashSet<>(models.size());
         for (Tag model : models) {
