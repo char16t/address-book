@@ -8,6 +8,7 @@ import com.vmanenkov.services.exceptions.PersonNotValidException;
 
 import javax.ejb.Local;
 import java.util.Collection;
+import java.util.Set;
 
 @Local
 public interface PersonService {
@@ -16,6 +17,8 @@ public interface PersonService {
     Person get(Long id) throws PersonNotFoundException;
 
     Person update(Long id, String firstName, String lastName, String description) throws PersonNotFoundException, PersonNotValidException;
+    
+    public Person updateTags(Long id, Set<Tag> tags) throws PersonNotFoundException;
 
     void delete(Long id) throws PersonNotFoundException;
 

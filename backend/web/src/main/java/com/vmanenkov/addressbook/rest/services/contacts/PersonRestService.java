@@ -24,6 +24,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Path("/contacts")
 @RequestScoped
@@ -86,6 +88,34 @@ public class PersonRestService {
         return converter.convertToRest(person);
     }
 
+    @PUT
+    @NoCache
+    @Path("/{id}/update_tag")
+    //@Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public RestEntity updatePersonTags(
+            @PathParam("id") Long id,
+            @QueryParam("tag_id") final List<String> list
+    ) throws PersonNotValidException, PersonNotFoundException, TagNotFoundException {
+        //log.fine("updatePersonTags(\n" +
+        //                 "            PersonRest rest = {0},\n" +
+        //                 "            @PathParam(\"id\") Long id = {1}\n" +
+        //                 "    )", rest, id);
+        //Person person = personService.update(id, rest.getFirstName(), rest.getLastName(), rest.getDescription());
+        Person person = personService.get(id);
+        //Set<Tag> personTags = person.getTags();
+        
+        Set<Tag> newTags = new HashSet<Tag>();
+        for (String stringTag : list) {
+            Long tagId = Long.parseLong(stringTag);
+            Tag itemTag = tagService.get(tagId);
+            newTags.add(itemTag);
+        }
+        person.setTags(newTags);
+        person = personService.updateTags(id, newTags);
+        return converter.convertToRest(person);
+    }
+    
     @DELETE
     @NoCache
     @Path("/{id}")

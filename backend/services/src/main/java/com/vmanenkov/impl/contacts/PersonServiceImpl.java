@@ -15,6 +15,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -66,6 +67,13 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.save(person);
     }
 
+    @Override
+    public Person updateTags(Long id, Set<Tag> tags) throws PersonNotFoundException {
+        Person person = get(id);
+        person.setTags(tags);
+        return personRepository.save(person);
+    }
+            
     @Override
     public void delete(Long id) throws PersonNotFoundException {
         Person person = get(id);
