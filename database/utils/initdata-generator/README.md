@@ -11,6 +11,6 @@ python3 setup.py develop
 Использование
 
 ```
-# Example addressbook-initdata-generator initdata.yml initdata.sql
-addressbook-initdata-generator [имя_yml_файла_с_данными] [имя_sql_файла_с_результатом]
+# Example initdatagen initdata.yml initdata.sql
+initdatagen [имя_yml_файла_с_данными] [имя_sql_файла_с_результатом]
 ```
