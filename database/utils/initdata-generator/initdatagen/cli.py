@@ -24,7 +24,7 @@ def main():
 
     print(yaml_data)
     for role in yaml_data['roles']:
-        sql_source += "public.role (id, name) VALUES ({0}, '{1}');\n".format(role['id'], role['name'])
+        sql_source += "insert into public.role (id, name) VALUES ({0}, '{1}');\n".format(role['id'], role['name'])
 
     item_id = 1
     for account in yaml_data['accounts']:

@@ -45,9 +45,9 @@ accounts:
 
 Результат `initdata.sql`:
 ```
-public.role (id, name) VALUES (1, 'Admin');
-public.role (id, name) VALUES (2, 'Operator');
-public.role (id, name) VALUES (3, 'User');
+insert into public.role (id, name) VALUES (1, 'Admin');
+insert into public.role (id, name) VALUES (2, 'Operator');
+insert into public.role (id, name) VALUES (3, 'User');
 insert into account(id, person_id, email, password) values(1, NULL, 'aaa@mail.ru', 'hash');
 insert into account_role(user_id, role_id) values (1,1);
 insert into account(id, person_id, email, password) values(2, NULL, 'bbb@mail.ru', 'hash');
