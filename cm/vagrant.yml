@@ -48,11 +48,11 @@
   - name: Restart Postgres service
     service: name=postgresql state=restarted
     become: yes
-  - name: Init database
+  - name: Build database schema
     shell: "psql -d {{dbname}} -a -f /vagrant/database/schema.sql"
-  - name: Import test data
-    shell: "psql -d {{dbname}} -a -f /vagrant/database/testdata.sql"
-  - name: Import test data (contacts)
+  - name: Add initial data to database
+    shell: "psql -d {{dbname}} -a -f /vagrant/database/initdata.sql"
+  - name: Import demonstration data to database
     shell: "psql -d {{dbname}} -a -f /vagrant/database/demodata.sql"
   - name: Start Postgresql on boot
     shell: "update-rc.d postgresql defaults"
