@@ -4,25 +4,23 @@ import traceback
 import yaml
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage example: " + sys.argv[0] + " initdata.yml initdata.sql")
+    if len(sys.argv) != 2:
+        print("Usage example: " + sys.argv[0] + " initdata.yml")
         exit(1)
 
     yaml_file = sys.argv[1]
-    sql_file = sys.argv[2]
 
     if not os.path.exists(yaml_file):
         print("Can't open file", yaml_file,"for reading")
         exit(2)
 
     yaml_fp = open(yaml_file, 'r')
-    sql_fp = open(sql_file, 'w')
 
     yaml_source = yaml_fp.read()
     sql_source = ""
     yaml_data = yaml.load(yaml_source)
 
-    print(yaml_data)
+    #print(yaml_data)
     for role in yaml_data['roles']:
         sql_source += "insert into public.role (id, name) VALUES ({0}, '{1}');\n".format(role['id'], role['name'])
 
@@ -33,10 +31,9 @@ def main():
             sql_source += "insert into account_role(user_id, role_id) values ({0},{1});\n".format(str(item_id), str(role_id))
         item_id += 1
 
-    sql_fp.write(sql_source)
+    print(sql_source)
 
     yaml_fp.close()
-    sql_fp.close()
 
 if __name__ == "__main__":
     main()

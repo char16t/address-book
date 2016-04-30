@@ -1,11 +1,7 @@
 # coding=utf-8
 
 import os
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 def local_file(name):
     return os.path.relpath(os.path.join(os.path.dirname(__file__), name))
