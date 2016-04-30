@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name helloworldApp.controller:MainCtrl
+ * @name addressbookApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the helloworldApp
+ * Controller of the addressbookApp
  */
-angular.module('helloworldApp')
+angular.module('addressbookApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
