@@ -1,0 +1,22 @@
+roles:
+  - name: Admin
+    id: 1
+  - name: Operator
+    id: 2
+  - name: User
+    id: 3
+
+accounts:
+  - email: aaa@mail.ru
+    pass: hash
+    roles: [1]
+  - email: bbb@mail.ru
+    pass: hash
+    roles: [2]
+  - email: ccc@mail.ru
+    pass: hash
+    roles: [3]
+  - email: ddd@mail.ru
+    pass: hash
+    roles: [1,3]
+
