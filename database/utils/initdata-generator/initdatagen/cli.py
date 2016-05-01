@@ -1,0 +1,43 @@
+import os
+import sys
+import traceback
+import yaml
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage example: " + sys.argv[0] + " initdata.yml")
+        exit(1)
+
+    yaml_file = sys.argv[1]
+
+    if not os.path.exists(yaml_file):
+        print("Can't open file", yaml_file,"for reading")
+        exit(2)
+
+    yaml_fp = open(yaml_file, 'r')
+
+    yaml_source = yaml_fp.read()
+    sql_source = ""
+    yaml_data = yaml.load(yaml_source)
+
+    #print(yaml_data)
+    for role in yaml_data['roles']:
+        sql_source += "insert into public.role (id, name) VALUES ({0}, '{1}');\n".format(role['id'], role['name'])
+
+    item_id = 1
+    for account in yaml_data['accounts']:
+        sql_source += "insert into account(id, person_id, email, password) values({0}, {1}, '{2}', '{3}');\n".format(item_id, 'NULL', account['email'], account['pass'])
+        for role_id in account['roles']:
+            sql_source += "insert into account_role(user_id, role_id) values ({0},{1});\n".format(str(item_id), str(role_id))
+        item_id += 1
+
+    item_id = 1
+    for tag in yaml_data['public_tags']:
+        sql_source += "insert into tag(id, name, public_tag, description) values ({0}, '{1}', TRUE, NULL);\n".format(item_id, tag)
+        item_id += 1
+
+    yaml_fp.close()
+    print(sql_source)
+
+if __name__ == "__main__":
+    main()
