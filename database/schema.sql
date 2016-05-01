@@ -29,6 +29,7 @@ DROP TABLE IF EXISTS public.tag ;
 CREATE TABLE IF NOT EXISTS public.tag (
   id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
+  public_tag BOOLEAN NOT NULL DEFAULT FALSE,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id))
 ;

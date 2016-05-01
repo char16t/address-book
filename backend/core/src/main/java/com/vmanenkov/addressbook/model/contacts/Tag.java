@@ -16,6 +16,9 @@ public class Tag implements DbEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "public_tag")
+    private Boolean publicTag;
+
     @Column(name = "description")
     private String description;
 
@@ -28,8 +31,9 @@ public class Tag implements DbEntity {
     public Tag() {
     }
 
-    public Tag(String name, String description) {
+    public Tag(String name, Boolean publicTag, String description) {
         this.name = name;
+        this.publicTag = publicTag;
         this.description = description;
     }
 
@@ -47,6 +51,14 @@ public class Tag implements DbEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean isPublicTag() {
+        return publicTag;
+    }
+
+    public void setPublicTag(Boolean publicTag) {
+        this.publicTag = publicTag;
     }
 
     public String getDescription() {

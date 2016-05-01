@@ -22,12 +22,12 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
     @Override
-    public Tag create(String name, String description) throws TagNotValidException {
+    public Tag create(String name, Boolean publicTag, String description) throws TagNotValidException {
         if (name == null || "".equals(name)) {
             throw new TagNotValidException(TagErrorType.TAG_NAME_IS_EMPTY);
         }
 
-        Tag tag = new Tag(name, description);
+        Tag tag = new Tag(name, publicTag, description);
         return tagRepository.save(tag);
     }
 
@@ -42,12 +42,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag update(Long id, String name, String description) throws TagNotFoundException, TagNotValidException {
+    public Tag update(Long id, String name, Boolean publicTag, String description) throws TagNotFoundException, TagNotValidException {
         Tag tag = get(id);
         if (name == null || ("".equals(name))) {
             throw new TagNotValidException(TagErrorType.TAG_NAME_IS_EMPTY);
         }
         tag.setName(name);
+        tag.setPublicTag(publicTag);
         tag.setDescription(description);
 
         return tagRepository.save(tag);
@@ -61,7 +62,8 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Collection<Tag> getAll() {
-        return tagRepository.findAll();
+        //return tagRepository.findAll(); //findPublicTags();
+        return new HashSet<>(tagRepository.findOptionalPublicTags());
     }
 
     @Override

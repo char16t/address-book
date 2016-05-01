@@ -46,7 +46,7 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public TagRest createTag(TagRest rest) throws TagNotValidException {
         log.fine("createTag(TagRest rest = {0})", rest);
-        Tag tag = tagService.create(rest.getName(), rest.getDescription());
+        Tag tag = tagService.create(rest.getName(), rest.isPublicTag(), rest.getDescription());
         TagRest tagRest = (TagRest) converter.convertToRest(tag);
         return tagRest;
     }
@@ -74,7 +74,7 @@ public class TagRestService {
                          "            TagRest rest = {0},\n" +
                          "            @PathParam(\"id\") Long id = {1}\n" +
                          "    )", rest, id);
-        Tag tag = tagService.update(id, rest.getName(), rest.getDescription());
+        Tag tag = tagService.update(id, rest.getName(), rest.isPublicTag(), rest.getDescription());
         return converter.convertToRest(tag);
     }
 
@@ -94,12 +94,19 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
         Collection<Tag> tags;
+        Collection<Tag> publicTags = tagService.getAll();
         if (accountId == null) {
-            tags = tagService.getAll();
+            //tags = tagService.getAll();
+            tags = publicTags;
         }
         else {
-            accountService.getById(accountId);
+            accountService.getById(accountId);  //зачем? ведь AccountNotFoundException и так бросается.
             tags = tagService.getByAccount(accountId);
+            for (Tag tag: publicTags) {
+                if (!tags.contains(tag)) {
+                    tags.add(tag);
+                }
+            }
         }
         return convertToRests(tags);
     }

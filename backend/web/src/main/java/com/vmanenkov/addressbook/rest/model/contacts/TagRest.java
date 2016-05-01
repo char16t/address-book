@@ -6,14 +6,16 @@ import com.vmanenkov.addressbook.rest.model.RestEntity;
 public class TagRest implements RestEntity {
     private Long id;
     private String name;
+    private Boolean publicTag;
     private String description;
 
     public TagRest() {
     }
 
-    public TagRest(Long id, String name, String description) {
+    public TagRest(Long id, String name, Boolean publicTag, String description) {
         this.id = id;
         this.name = name;
+        this.publicTag = publicTag;
         this.description = description;
     }
 
@@ -33,6 +35,14 @@ public class TagRest implements RestEntity {
         this.name = name;
     }
 
+    public Boolean isPublicTag() {
+        return publicTag;
+    }
+
+    public void setPublicTag(Boolean publicTag) {
+        this.publicTag = publicTag;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -46,6 +56,7 @@ public class TagRest implements RestEntity {
         return "TagRest{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", publicTag='" + publicTag + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

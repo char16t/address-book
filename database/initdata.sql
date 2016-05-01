@@ -25,7 +25,7 @@ insert into attribute_group(id, name, description) values (1, 'Личная ин
 insert into field_type(id, type_name) values (1, 'Текстовое поле');
 insert into attribute_type(id, name, field_type_id, regex, required, hidden, description) values (1, 'Свободное поле', 1, '*', 0, 0, 'Без ограничений на ввод');
 
-insert into tag(id, name, description) values (1, 'GroupA', 'Description for GroupA');
+insert into tag(id, name, public_tag, description) values (1, 'GroupA', FALSE, 'Description for GroupA');
 
 insert into person(id, first_name, last_name, description) values (1, 'F1', 'L1', 'F1 L1 description');
 insert into person_account(person_id, user_id) values (1, 1);

@@ -9,11 +9,11 @@ import java.util.Collection;
 
 @Local
 public interface TagService {
-    Tag create(String name, String description) throws TagNotValidException;
+    Tag create(String name, Boolean publicTag, String description) throws TagNotValidException;
 
     Tag get(Long id) throws TagNotFoundException;
 
-    Tag update(Long id, String name, String description) throws TagNotFoundException, TagNotValidException;
+    Tag update(Long id, String name, Boolean publicTag, String description) throws TagNotFoundException, TagNotValidException;
 
     void delete(Long id) throws TagNotFoundException;
 
@@ -21,5 +21,9 @@ public interface TagService {
 
     Collection<Tag> getByAccount(Long accountId);
 
+    //Collection<Tag> getPublicByAccount(Long accountId);
+    
+    //Collection<Tag> getPrivateByAccount(Long accountId);
+            
     Collection<Tag> getByPerson(Long personId);
 }
