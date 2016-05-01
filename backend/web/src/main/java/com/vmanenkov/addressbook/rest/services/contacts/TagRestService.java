@@ -92,7 +92,7 @@ public class TagRestService {
     @Path("/get_all")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
+    public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) {
         Collection<Tag> tags;
         Collection<Tag> publicTags = tagService.getAll();
         if (accountId == null) {
@@ -100,7 +100,6 @@ public class TagRestService {
             tags = publicTags;
         }
         else {
-            accountService.getById(accountId);  //зачем? ведь AccountNotFoundException и так бросается.
             tags = tagService.getByAccount(accountId);
             for (Tag tag: publicTags) {
                 if (!tags.contains(tag)) {
