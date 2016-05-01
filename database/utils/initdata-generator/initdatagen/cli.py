@@ -31,9 +31,13 @@ def main():
             sql_source += "insert into account_role(user_id, role_id) values ({0},{1});\n".format(str(item_id), str(role_id))
         item_id += 1
 
-    print(sql_source)
+    item_id = 1
+    for tag in yaml_data['public_tags']:
+        sql_source += "insert into tag(id, name, public_tag, description) values ({0}, '{1}', TRUE, NULL);\n".format(item_id, tag)
+        item_id += 1
 
     yaml_fp.close()
+    print(sql_source)
 
 if __name__ == "__main__":
     main()
