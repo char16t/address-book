@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name helloworldApp
+ * @name addressbookApp
  * @description
- * # helloworldApp
+ * # addressbookApp
  *
  * Main module of the application.
  */
 angular
-  .module('helloworldApp', [
+  .module('addressbookApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
