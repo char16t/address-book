@@ -1,16 +1,5 @@
-insert into account(id, person_id, email, password) values(1, 1, 'aaa@mail.ru', 'hash');
-insert into account(id, email, password) values(2, 'bbb@mail.ru', 'hash');
-insert into account(id, email, password) values(3, 'ccc@mail.ru', 'hash');
-insert into account(id, email, password) values(4, 'ddd@mail.ru', 'hash');
-
-insert into account_role(user_id, role_id) values (1, 1);
-insert into account_role(user_id, role_id) values (2, 2);
-insert into account_role(user_id, role_id) values (3, 3);
-insert into account_role(user_id, role_id) values (4, 1);
-insert into account_role(user_id, role_id) values (4, 3);
-
 insert into person(id, first_name, last_name, description) values(1,'Joseph','Wilcox','Furthermore, any associated supporting element is to be regarded as the
-traditional practice of grammarians.');
+    traditional practice of grammarians.');
 insert into person(id, first_name, last_name, description) values(2,'Thomas','Marine','Comparing these examples with their parasitic gap counterparts in (96)
 and (97), we see that an important property of these three types of EC
 does not readily tolerate the ultimate standard that determines the
@@ -3883,25 +3872,6 @@ insert into person_account(person_id, user_id) values(996, 4);
 insert into person_account(person_id, user_id) values(997, 4);
 insert into person_account(person_id, user_id) values(998, 4);
 insert into person_account(person_id, user_id) values(999, 4);
-
-insert into tag(id, name, public_tag, description) values(8,'Classmates', TRUE, 'Thus most of the methodological work in modern linguistics is to be
-regarded as the levels of acceptability from fairly high (e.g. (99a)) to
-virtual gibberish (e.g. (98d)).');
-insert into tag(id, name, public_tag, description) values(2,'University Firends', TRUE,'Let us continue to suppose that the natural general principle that will
-subsume this case may remedy and, at the same time, eliminate irrelevant
-intervening contexts in selectional rules.');
-insert into tag(id, name, public_tag, description) values(3,'Colleagues', TRUE,'Notice, incidentally, that the earlier discussion of deviance raises
-serious doubts about the strong generative capacity of the theory.');
-insert into tag(id, name, public_tag, description) values(4,'Family', TRUE,'Suppose, for instance, that a case of semigrammaticalness of a different
-sort is unspecified with respect to a parasitic gap construction.');
-insert into tag(id, name, public_tag, description) values(5,'NetCracker', FALSE, 'In the discussion of resumptive pronouns following (81), this
-selectionally introduced contextual feature delimits the ultimate
-standard that determines the accuracy of any proposed grammar.');
-insert into tag(id, name, public_tag, description) values(6,'Customers', FALSE, 'Thus the speaker-hearers linguistic intuition is not to be considered in
-determining problems of phonemic and morphological analysis.');
-insert into tag(id, name, public_tag, description) values(7,'Best firends', TRUE, 'On our assumptions, the descriptive power of the base component is not
-subject to an abstract underlying order.');
-
 insert into note(id, person_id, date, value) values(1, 339, '2016-02-22', 'By combining adjunctions and certain deformations, relational
 information can be defined in such a way as to impose an important
 distinction in language use.');

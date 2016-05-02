@@ -1,0 +1,102 @@
+roles:
+  - name: Admin
+    id: 1
+  - name: Operator
+    id: 2
+  - name: User
+    id: 3
+
+accounts:
+  - email: aaa@mail.ru
+    pass: hash
+    roles: [1]
+  - email: bbb@mail.ru
+    pass: hash
+    roles: [2]
+  - email: ccc@mail.ru
+    pass: hash
+    roles: [3]
+  - email: ddd@mail.ru
+    pass: hash
+    roles: [1,3]
+
+public_tags:
+  - Семья
+  - Друзья
+  - Друзья по вузу
+  - Лучшие друзья
+  - Коллеги
+
+
+field_types:
+  - text
+  - checkbox
+  - file
+  - image
+  - date
+  - time
+  - raw
+  - url
+  - list
+
+attribute_types:
+  - name: free_text
+    description: Free text field
+    type: text
+    regex: "*"
+    required: false
+    hidden: false
+
+  - name: email
+    description: Email field
+    type: text
+    regex: "^[-a-z0-9!#$%&*+/=?^_`{|}~]+(\\.[-a-z0-9!#$%&*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"
+    required: false
+    hidden: false
+
+  # http://stackoverflow.com/a/6960635/1943863
+  - name: phone
+    description: Mobile/Home Phone
+    type: text
+    regex: "/\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})/"
+    required: false
+    hidden: false
+
+attribute_groups:
+  - name: Контактная информация
+    description: ""
+    attributes:
+      - name: Email
+        description: Электронная почта
+        type: email
+      - name: Телефон
+        description: Мобильный или домашний телефон
+        type: phone
+
+  - name: Образование
+    description: ""
+    attributes: []
+  - name: Работа
+    description: ""
+    attributes: []
+  - name: Личная информация
+    description: ""
+    attributes: []
+  - name: Места
+    description: ""
+    attributes: []
+
+persons:
+  - first_name: F1
+    last_name: L1
+    description: "Demo data"
+    account: 1
+    tags: [1]
+    notes:
+      - date: "1971-09-13"
+        value: "User 1"
+    info:
+      - field: Email
+        value: "aaa@mail.ru"
+      - field: Телефон
+        value: "+7 (904) 000-00-00"

@@ -16,6 +16,11 @@
       - nodejs-legacy
       - npm
       - git
+      - python3-setuptools
+      - python3-pip
+    become: yes
+  - name: Install initdatagen
+    shell: "cd /vagrant/database/utils/initdata-generator && pip3 install -r requirements.txt && python3 setup.py develop"
     become: yes
 
 - hosts: all
@@ -54,6 +59,8 @@
     shell: "psql -d {{dbname}} -a -f /vagrant/database/initdata.sql"
   - name: Import demonstration data to database
     shell: "psql -d {{dbname}} -a -f /vagrant/database/demodata.sql"
+  - name: Import data to database from YAML
+    shell: "initdatagen /vagrant/database/initdata.yml > ~/initdata.sql && psql -d {{dbname}} -a -f ~/initdata.sql"
   - name: Start Postgresql on boot
     shell: "update-rc.d postgresql defaults"
     become: yes
