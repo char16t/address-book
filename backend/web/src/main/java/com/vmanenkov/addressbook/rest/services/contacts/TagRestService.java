@@ -37,6 +37,9 @@ public class TagRestService {
     private AccountService accountService;
 
     @Inject
+    private PersonService personService;
+
+    @Inject
     private EntityConverter converter;
 
     @POST
@@ -92,13 +95,14 @@ public class TagRestService {
     @Path("/get_all")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) {
+    public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
         Collection<Tag> tags;
         Collection<Tag> publicTags = tagService.getAllPublic();
         if (accountId == null) {
             tags = publicTags;
         }
         else {
+            accountService.getById(accountId);
             tags = tagService.getByAccount(accountId);
             for (Tag tag: publicTags) {
                 if (!tags.contains(tag)) {
@@ -109,7 +113,6 @@ public class TagRestService {
         return convertToRests(tags);
     }
 
-    //findOptionalPrivateTagsByAccountId
     @GET
     @NoCache
     @Path("/get_private")
@@ -122,11 +125,21 @@ public class TagRestService {
             tags = new HashSet<Tag>();
         }
         else {
+            accountService.getById(accountId);
             tags = tagService.getPrivateByAccount(accountId);
         }
         return convertToRests(tags);
     }
     
+    @GET
+    @NoCache
+    @Path("/get_public")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<TagRest> getAllPublic() {
+        Collection<Tag> tags = tagService.getAllPublic();
+        return convertToRests(tags);
+    }
+
     @GET
     @NoCache
     @Path("/get_all_by_person")
@@ -138,7 +151,7 @@ public class TagRestService {
             tags = tagService.getAllPublic();
         }
         else {
-            //personService.getById(personId);
+            personService.get(personId);
             tags = tagService.getByPerson(personId);
         }
         return convertToRests(tags);
