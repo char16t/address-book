@@ -17,13 +17,13 @@ public interface TagService {
 
     void delete(Long id) throws TagNotFoundException;
 
-    Collection<Tag> getAll();
+    //Collection<Tag> getAll();
 
     Collection<Tag> getByAccount(Long accountId);
 
-    //Collection<Tag> getPublicByAccount(Long accountId);
+    Collection<Tag> getAllPublic();
     
-    //Collection<Tag> getPrivateByAccount(Long accountId);
+    Collection<Tag> getPrivateByAccount(Long accountId);
             
     Collection<Tag> getByPerson(Long personId);
 }

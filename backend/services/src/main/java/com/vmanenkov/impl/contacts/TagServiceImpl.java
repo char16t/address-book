@@ -61,9 +61,14 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Collection<Tag> getAll() {
+    public Collection<Tag> getAllPublic() {
         //return tagRepository.findAll(); //findPublicTags();
         return new HashSet<>(tagRepository.findOptionalPublicTags());
+    }
+
+    @Override
+    public Collection<Tag> getPrivateByAccount(Long accountId) {
+        return new HashSet<>(tagRepository.findOptionalPrivateTagsByAccountId(accountId));        
     }
 
     @Override

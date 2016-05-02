@@ -94,9 +94,8 @@ public class TagRestService {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Collection<TagRest> getTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
         Collection<Tag> tags;
-        Collection<Tag> publicTags = tagService.getAll();
+        Collection<Tag> publicTags = tagService.getAllPublic();
         if (accountId == null) {
-            //tags = tagService.getAll();
             tags = publicTags;
         }
         else {
@@ -111,6 +110,24 @@ public class TagRestService {
         return convertToRests(tags);
     }
 
+    //findOptionalPrivateTagsByAccountId
+    @GET
+    @NoCache
+    @Path("/get_private")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Collection<TagRest> getPrivateTagsByAccount(@QueryParam("account_id") Long accountId) throws AccountNotFoundException {
+        Collection<Tag> tags;
+        if (accountId == null) {
+            //tags = tagService.getAllPublic();
+            tags = new HashSet<Tag>();
+        }
+        else {
+            tags = tagService.getPrivateByAccount(accountId);
+        }
+        return convertToRests(tags);
+    }
+    
     @GET
     @NoCache
     @Path("/get_all_by_person")
@@ -119,7 +136,7 @@ public class TagRestService {
     public Collection<TagRest> getTagsByPerson(@QueryParam("person_id") Long personId) throws PersonNotFoundException {
         Collection<Tag> tags;
         if (personId == null) {
-            tags = tagService.getAll();
+            tags = tagService.getAllPublic();
         }
         else {
             //personService.getById(personId);

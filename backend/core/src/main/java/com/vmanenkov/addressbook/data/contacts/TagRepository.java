@@ -30,6 +30,15 @@ public interface TagRepository extends EntityRepository<Tag, Long> {
     @Query(value = "" +
             "SELECT t " +
             "  FROM Tag         t " +
-            " WHERE public_tag = TRUE", singleResult = SingleResultType.OPTIONAL)
+            " WHERE publicTag = TRUE", singleResult = SingleResultType.OPTIONAL)
     List<Tag> findOptionalPublicTags();
+    
+    @Query(value = "" +
+            "SELECT t " +
+            "  FROM Tag         t " +
+            "  JOIN t.persons   tp " +
+            "  JOIN tp.accounts tpa " +
+            " WHERE tpa.id = ?1 " +
+            "   AND t.publicTag <> TRUE", singleResult = SingleResultType.OPTIONAL)
+    List<Tag> findOptionalPrivateTagsByAccountId(Long accountId);
 } 
