@@ -1,22 +1,5 @@
 insert into person(id, first_name, last_name, description) values(1,'Joseph','Wilcox','Furthermore, any associated supporting element is to be regarded as the
     traditional practice of grammarians.');
-insert into attribute_group(id, name, description) values (1, 'Личная информация', 'Описание для Личная информация');
-insert into field_type(id, type_name) values (1, 'Текстовое поле');
-insert into attribute_type(id, name, field_type_id, regex, required, hidden, description) values (1, 'Свободное поле', 1, '*', 0, 0, 'Без ограничений на ввод');
-
-insert into person(id, first_name, last_name, description) values (1, 'F1', 'L1', 'F1 L1 description');
-insert into person_account(person_id, user_id) values (1, 1);
-insert into person_tag(person_id, tag_id) values (1, 1);
-
-insert into note(id, date, value) values (1, '1971-07-13', 'User 1');
-insert into person_note(person_id, note_id) values (1, 1);
-
-insert into attribute(id, name, type_id, group_id, description) values (1, 'Email', 1, 1, 'Электронная почта');
-insert into attribute(id, name, type_id, group_id, description) values (2, 'Телефон', 1, 1, 'Личный телефон');
-
-insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (1, 1, 2, '+7(000)000-00-00', null);
-insert into attribute_value(id, person_id, attribute_id, text_value, blob_value) values (2, 1, 1, 'aaaa@mail.ru', null);
-
 insert into person(id, first_name, last_name, description) values(2,'Thomas','Marine','Comparing these examples with their parasitic gap counterparts in (96)
 and (97), we see that an important property of these three types of EC
 does not readily tolerate the ultimate standard that determines the
