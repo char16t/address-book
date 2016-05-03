@@ -55,6 +55,8 @@ public class ApplicationErrorCodes {
     public static final String TAG_NOT_FOUND = "260";
     public static final String TAG_NAME_IS_EMPTY = "261";
 
+    public static final String ATTRIBUTE_LIST_NOT_FOUND = "280";
+    public static final String ATTRIBUTE_LIST_NAME_IS_EMPTY = "281";
 
     public static final String PERSON_NOT_FOUND = "271";
     public static final String PERSON_NAME_IS_NOT_VALID = "220";

@@ -111,6 +111,21 @@ CREATE TABLE IF NOT EXISTS public.attribute_group (
   CONSTRAINT name_UNIQUE UNIQUE  (name)
 );
 
+
+-- -----------------------------------------------------
+-- Table `public`.`attribute_list`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS public.attribute_list ;
+
+CREATE TABLE IF NOT EXISTS public.attribute_list (
+  id INT NOT NULL,
+  name VARCHAR(45) NOT NULL,
+  description VARCHAR(1024) NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT attr_list_name_UNIQUE UNIQUE  (name)
+);
+
+
 -- -----------------------------------------------------
 -- Table `public`.`attribute`
 -- -----------------------------------------------------
@@ -121,6 +136,7 @@ CREATE TABLE IF NOT EXISTS public.attribute (
   name VARCHAR(45) NOT NULL,
   type_id INT NOT NULL,
   group_id INT NOT NULL,
+  attribute_list_id INT NULL,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id)
  ,
@@ -133,11 +149,19 @@ CREATE TABLE IF NOT EXISTS public.attribute (
     FOREIGN KEY (group_id)
     REFERENCES public.attribute_group (id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT FK_attribute_list_id
+    FOREIGN KEY (attribute_list_id)
+    REFERENCES public.attribute_list (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
 ;
 
 CREATE INDEX FK_attribute_type_id_idx ON public.attribute (type_id);
 CREATE INDEX FK_attribute_group_id_idx ON public.attribute (group_id);
+CREATE INDEX FK_attribute_list_id_idx ON public.attribute (attribute_list_id);
+COMMIT;
 
 
 -- -----------------------------------------------------
@@ -186,6 +210,7 @@ CREATE TABLE IF NOT EXISTS public.note (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
 
 -- -----------------------------------------------------
 -- Table `public`.`test`
