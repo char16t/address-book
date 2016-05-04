@@ -8,13 +8,23 @@ DROP SCHEMA IF EXISTS public CASCADE;
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS public;
 
+-- DROP SEQUENCE hibernate_sequence;
+CREATE SEQUENCE hibernate_sequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 10000
+  CACHE 10000;
+ALTER TABLE hibernate_sequence
+  OWNER TO postgres;
+
 -- -----------------------------------------------------
 -- Table `public`.`person`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS public.person ;
 
 CREATE TABLE IF NOT EXISTS public.person (
-  id INT NOT NULL,
+  id INT NOT NULL default nextval('hibernate_sequence'),
   first_name VARCHAR(45) NOT NULL,
   last_name VARCHAR(45) NULL,
   description VARCHAR(1024) NULL,
@@ -27,7 +37,7 @@ CREATE TABLE IF NOT EXISTS public.person (
 DROP TABLE IF EXISTS public.tag ;
 
 CREATE TABLE IF NOT EXISTS public.tag (
-  id INT NOT NULL,
+  id INT NOT NULL default nextval('hibernate_sequence'),
   name VARCHAR(45) NOT NULL,
   public_tag BOOLEAN NOT NULL DEFAULT FALSE,
   description VARCHAR(1024) NULL,
@@ -199,7 +209,7 @@ CREATE INDEX FK_attribute_value_attribute_id_idx ON public.attribute_value (attr
 DROP TABLE IF EXISTS public.note ;
 
 CREATE TABLE IF NOT EXISTS public.note (
-  id INT NOT NULL,
+  id INT NOT NULL default nextval('hibernate_sequence'),
   person_id INT NOT NULL,
   date DATE NOT NULL,
   value VARCHAR(1024) NULL,
@@ -218,7 +228,7 @@ CREATE TABLE IF NOT EXISTS public.note (
 DROP TABLE IF EXISTS public.test ;
 
 CREATE TABLE IF NOT EXISTS public.test (
-  id INT NOT NULL,
+  id INT NOT NULL ,
   description VARCHAR(1024) NULL,
   PRIMARY KEY (id))
 ;
@@ -230,7 +240,7 @@ CREATE TABLE IF NOT EXISTS public.test (
 DROP TABLE IF EXISTS public.account ;
 
 CREATE TABLE IF NOT EXISTS public.account (
-  id INT NOT NULL,
+  id INT NOT NULL default nextval('hibernate_sequence'),
   person_id INT NULL,
   email VARCHAR(45) NULL,
   password VARCHAR(45) NULL,
@@ -345,12 +355,3 @@ CREATE INDEX fk_person_has_user_user1_idx ON public.person_account (user_id);
 CREATE INDEX fk_person_has_user_person1_idx ON public.person_account (person_id);
 
 
--- DROP SEQUENCE hibernate_sequence;
-CREATE SEQUENCE hibernate_sequence
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 10000
-  CACHE 10000;
-ALTER TABLE hibernate_sequence
-  OWNER TO postgres;
