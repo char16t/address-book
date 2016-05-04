@@ -1,6 +1,7 @@
 package com.vmanenkov.managers.vk;
 
 import com.google.gson.Gson;
+import com.vmanenkov.managers.SocialNetwork;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -15,7 +16,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VK {
+public class VK extends SocialNetwork {
     String clientId;
     String redirectUri;
     String scope;

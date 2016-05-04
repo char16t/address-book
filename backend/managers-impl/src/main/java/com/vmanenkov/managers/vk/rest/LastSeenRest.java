@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class LastSeenRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class LastSeenRest implements SocialNetworkInfo {
     Long time;
     Long platform;
 

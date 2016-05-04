@@ -1,8 +1,10 @@
 package com.vmanenkov.managers.vk.rest;
 
+import com.vmanenkov.managers.SocialNetworkInfo;
+
 import java.util.List;
 
-public class UsersGetRest {
+public class UsersGetRest implements SocialNetworkInfo {
     List<UserRest> response;
 
     public List<UserRest> getResponse() {

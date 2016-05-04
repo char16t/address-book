@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class RelativeRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class RelativeRest implements SocialNetworkInfo {
     Long uid; // В документации написано id, но приходит uid :)
     String name;
     String type;

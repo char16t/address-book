@@ -1,8 +1,9 @@
 package com.vmanenkov.managers.vk.rest;
 
 import com.google.gson.annotations.SerializedName;
+import com.vmanenkov.managers.SocialNetworkInfo;
 
-public class SchoolRest {
+public class SchoolRest implements SocialNetworkInfo {
     Long id;
     Long country;
     Long city;

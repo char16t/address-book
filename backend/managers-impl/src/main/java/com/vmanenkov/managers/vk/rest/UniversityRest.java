@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class UniversityRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class UniversityRest implements SocialNetworkInfo {
     Long id;
     Long country;
     Long city;

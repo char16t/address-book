@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class PersonalRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class PersonalRest implements SocialNetworkInfo {
     Long political;
     String langs;
     String religion;

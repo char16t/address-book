@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class OccupationRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class OccupationRest implements SocialNetworkInfo {
     Long id;
     String name;
     String type;

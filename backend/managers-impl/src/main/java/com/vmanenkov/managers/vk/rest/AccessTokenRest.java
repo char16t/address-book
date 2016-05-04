@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class AccessTokenRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class AccessTokenRest implements SocialNetworkInfo {
     String access_token;
     String expires_in;
     String user_id;

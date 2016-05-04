@@ -1,6 +1,8 @@
 package com.vmanenkov.managers.vk.rest;
 
-public class CountersRest {
+import com.vmanenkov.managers.SocialNetworkInfo;
+
+public class CountersRest implements SocialNetworkInfo {
     Long albums;
     Long videos;
     Long audios;
