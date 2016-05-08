@@ -58,6 +58,10 @@ public class ApplicationErrorCodes {
     public static final String ATTRIBUTE_LIST_NOT_FOUND = "280";
     public static final String ATTRIBUTE_LIST_NAME_IS_EMPTY = "281";
 
+    public static final String ATTRIBUTE_LIST_VALUE_NOT_FOUND = "290";
+    public static final String ATTRIBUTE_LIST_VALUE_IS_EMPTY = "291";
+    public static final String ATTRIBUTE_LIST_VALUE_IS_NOT_UNIQIE = "292";
+
     public static final String PERSON_NOT_FOUND = "271";
     public static final String PERSON_NAME_IS_NOT_VALID = "220";
     public static final String TEST_ERROR = "990";

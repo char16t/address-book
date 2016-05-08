@@ -72,6 +72,18 @@ the grammar.');
 insert into person(id, first_name, last_name, description) values(27,'Melanie','Burr','On our assumptions, the descriptive power of the base component appears
 to correlate rather closely with the system of base rules exclusive of
 the lexicon.');
+insert into attribute_list(id, name, description) values(1,'пол','пол: мужской/женский');
+insert into attribute_list_value(id, attribute_list_id, value) values(1,1,'мужской');
+insert into attribute_list_value(id, attribute_list_id, value) values(2,1,'женский');
+
+insert into attribute_list(id, name, description) values(2,'языки','владение языками');
+insert into attribute_list_value(id, attribute_list_id, value) values(1,2,'русский');
+insert into attribute_list_value(id, attribute_list_id, value) values(2,2,'английский');
+insert into attribute_list_value(id, attribute_list_id, value) values(3,2,'немецкий');
+insert into attribute_list_value(id, attribute_list_id, value) values(4,2,'испанский');
+insert into attribute_list_value(id, attribute_list_id, value) values(5,2,'португальский');
+
+
 insert into person(id, first_name, last_name, description) values(28,'Paul','Mcdonald','Clearly, the natural general principle that will subsume this case
 appears to correlate rather closely with the levels of acceptability
 from fairly high (e.g. (99a)) to virtual gibberish (e.g. (98d)).');

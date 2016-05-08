@@ -30,6 +30,7 @@ public class EntityConverterImpl implements EntityConverter {
         classMap.put(Person.class, PersonRest.class);
         classMap.put(Tag.class, TagRest.class);
         classMap.put(AttributeList.class, AttributeListRest.class);
+        classMap.put(AttributeListValue.class, AttributeListValueRest.class);
 
         CLASSES = Collections.unmodifiableMap(classMap);
     }

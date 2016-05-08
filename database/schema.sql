@@ -125,6 +125,25 @@ CREATE TABLE IF NOT EXISTS public.attribute_list (
   CONSTRAINT attr_list_name_UNIQUE UNIQUE  (name)
 );
 
+-- -----------------------------------------------------
+-- Table `public`.`attribute_list_value`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS public.attribute_list_value ;
+
+CREATE TABLE IF NOT EXISTS public.attribute_list_value (
+  id INT NOT NULL,
+  attribute_list_id INT NOT NULL,
+  value VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT attr_list_value_UNIQUE UNIQUE  (attribute_list_id, value)
+ ,
+  CONSTRAINT FK_attribute_list_id
+    FOREIGN KEY (attribute_list_id)
+    REFERENCES public.attribute_list (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
 
 -- -----------------------------------------------------
 -- Table `public`.`attribute`

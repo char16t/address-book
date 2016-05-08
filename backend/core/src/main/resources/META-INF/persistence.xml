@@ -11,6 +11,7 @@
         <class>com.vmanenkov.addressbook.model.contacts.AttributeGroup</class>
         <class>com.vmanenkov.addressbook.model.contacts.AttributeType</class>
         <class>com.vmanenkov.addressbook.model.contacts.AttributeList</class>
+        <class>com.vmanenkov.addressbook.model.contacts.AttributeListValue</class>
         <class>com.vmanenkov.addressbook.model.contacts.AttributeValue</class>
         <class>com.vmanenkov.addressbook.model.contacts.FieldType</class>
         <class>com.vmanenkov.addressbook.model.contacts.Note</class>
