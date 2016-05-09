@@ -30,16 +30,21 @@ public class Attribute implements DbEntity {
     @JoinColumn(name="type_id")
     private AttributeType attributeType;
 
+    @ManyToOne
+    @JoinColumn(name="attribute_list_id")
+    private AttributeList attributeList;
+
     public Attribute() {
     }
 
     public Attribute(String name, String description, Set<AttributeValue> attributeValues,
-                     AttributeGroup attributeGroup, AttributeType attributeType) {
+                     AttributeGroup attributeGroup, AttributeType attributeType, AttributeList attributeList) {
         this.name = name;
         this.description = description;
         this.attributeValues = attributeValues;
         this.attributeGroup = attributeGroup;
         this.attributeType = attributeType;
+        this.attributeList = attributeList;
     }
 
     public Long getId() {
@@ -88,5 +93,13 @@ public class Attribute implements DbEntity {
 
     public void setAttributeValues(Set<AttributeValue> attributeValues) {
         this.attributeValues = attributeValues;
+    }
+
+    public AttributeList getAttributeList() {
+        return attributeList;
+    }
+
+    public void setAttributeList(AttributeList attributeList) {
+        this.attributeList = attributeList;
     }
 }

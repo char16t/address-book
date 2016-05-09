@@ -8,16 +8,18 @@ public class AttributeRest implements RestEntity {
     private String description;
     private AttributeGroupRest attributeGroup;
     private AttributeTypeRest attributeType;
+    private AttributeListRest attributeList;
 
     public AttributeRest() {
     }
 
-    public AttributeRest(Long id, String name, String description, AttributeGroupRest attributeGroup, AttributeTypeRest attributeType) {
+    public AttributeRest(Long id, String name, String description, AttributeGroupRest attributeGroup, AttributeTypeRest attributeType, AttributeListRest attributeList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.attributeGroup = attributeGroup;
         this.attributeType = attributeType;
+        this.attributeList = attributeList;
     }
 
     public Long getId() {
@@ -60,6 +62,14 @@ public class AttributeRest implements RestEntity {
         this.attributeType = attributeType;
     }
 
+    public AttributeListRest getAttributeList() {
+        return attributeList;
+    }
+
+    public void setAttributeList(AttributeListRest attributeList) {
+        this.attributeList = attributeList;
+    }
+
     @Override
     public String toString() {
         return "AttributeRest{" +
@@ -68,6 +78,7 @@ public class AttributeRest implements RestEntity {
                 ", description='" + description + '\'' +
                 ", attributeGroup=" + attributeGroup +
                 ", attributeType=" + attributeType +
+                ", attributeList=" + attributeList +
                 '}';
     }
 }
