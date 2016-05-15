@@ -63,7 +63,7 @@ public class PersonServiceImpl implements PersonService {
         }
         if (description != null) {
             person.setDescription(description);
-        }
+        }  
         return personRepository.save(person);
     }
 
@@ -73,7 +73,7 @@ public class PersonServiceImpl implements PersonService {
         person.setTags(tags);
         return personRepository.save(person);
     }
-            
+
     @Override
     public void delete(Long id) throws PersonNotFoundException {
         Person person = get(id);

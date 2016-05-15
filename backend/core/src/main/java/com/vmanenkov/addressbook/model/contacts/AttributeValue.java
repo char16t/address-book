@@ -26,14 +26,19 @@ public class AttributeValue implements DbEntity {
     @ManyToOne(optional = false)
     private Person person;
 
+    @JoinColumn(name = "list_value_id")
+    @ManyToOne(optional = true)
+    private AttributeListValue attributeListValue;
+    
     public AttributeValue() {
     }
 
-    public AttributeValue(String textValue, byte[] blobValue, Person person, Attribute attribute) {
+    public AttributeValue(String textValue, byte[] blobValue, Person person, Attribute attribute, AttributeListValue attributeListValue) {
         this.textValue = textValue;
         this.blobValue = blobValue;
         this.person = person;
         this.attribute = attribute;
+        this.attributeListValue = attributeListValue;
     }
 
     public Long getId() {
@@ -74,5 +79,13 @@ public class AttributeValue implements DbEntity {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public AttributeListValue getAttributeListValue() {
+        return attributeListValue;
+    }
+
+    public void setAttributeListValue(AttributeListValue attributeListValue) {
+        this.attributeListValue = attributeListValue;
     }
 }

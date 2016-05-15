@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS public.attribute_value (
   attribute_id INT NOT NULL,
   text_value VARCHAR(1024) NULL,
   blob_value BYTEA NULL,
+  list_value_id INT NULL,
   PRIMARY KEY (id)
  ,
   CONSTRAINT FK_attribute_value_person_id
@@ -215,11 +216,17 @@ CREATE TABLE IF NOT EXISTS public.attribute_value (
     FOREIGN KEY (attribute_id)
     REFERENCES public.attribute (id)
     ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT FK_attribute_value_list_value_id
+    FOREIGN KEY (list_value_id)
+    REFERENCES public.attribute_list_value (id)
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ;
 
 CREATE INDEX FK_attribute_value_person_id_idx ON public.attribute_value (person_id);
 CREATE INDEX FK_attribute_value_attribute_id_idx ON public.attribute_value (attribute_id);
+CREATE INDEX FK_attribute_value_list_value_id_idx ON public.attribute_value (list_value_id);
 
 
 -- -----------------------------------------------------

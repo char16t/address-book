@@ -7,15 +7,17 @@ public class AttributeValueRest implements RestEntity {
     private String textValue;
     private byte[] blobValue;
     private AttributeRest attribute;
+    private AttributeListValueRest attributeListValue;
 
     public AttributeValueRest() {
     }
 
-    public AttributeValueRest(Long id, String textValue, byte[] blobValue, AttributeRest attribute) {
+    public AttributeValueRest(Long id, String textValue, byte[] blobValue, AttributeRest attribute, AttributeListValueRest attributeListValue) {
         this.id = id;
         this.textValue = textValue;
         this.blobValue = blobValue;
         this.attribute = attribute;
+        this.attributeListValue = attributeListValue;
     }
 
     public Long getId() {
@@ -50,12 +52,21 @@ public class AttributeValueRest implements RestEntity {
         this.attribute = attribute;
     }
 
+    public AttributeListValueRest getListValue() {
+        return attributeListValue;
+    }
+
+    public void setListValue(AttributeListValueRest attributeListValue) {
+        this.attributeListValue = attributeListValue;
+    }
+
     @Override
     public String toString() {
         return "AttributeValueRest{" +
                 "id=" + id +
                 ", textValue='" + textValue + '\'' +
                 ", attribute=" + attribute +
+                ", attributeListValue=" + attributeListValue +
                 '}';
     }
 }

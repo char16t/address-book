@@ -46,7 +46,7 @@ public class PersonRestService {
 
     @Inject
     private AttributeValueService attributeValueService;
-
+    
     @Inject
     private EntityConverter converter;
 
@@ -115,7 +115,7 @@ public class PersonRestService {
         person = personService.updateTags(id, newTags);
         return converter.convertToRest(person);
     }
-    
+        
     @DELETE
     @NoCache
     @Path("/{id}")

@@ -2,6 +2,7 @@ package com.vmanenkov.impl.contacts;
 
 import com.vmanenkov.addressbook.data.contacts.AttributeValueRepository;
 import com.vmanenkov.addressbook.model.contacts.Attribute;
+import com.vmanenkov.addressbook.model.contacts.AttributeListValue;
 import com.vmanenkov.addressbook.model.contacts.AttributeValue;
 import com.vmanenkov.addressbook.model.contacts.Person;
 import com.vmanenkov.services.contacts.AttributeValueService;
@@ -23,11 +24,11 @@ public class AttributeValueServiceImpl implements AttributeValueService {
     private AttributeValueRepository attributeValueRepository;
 
     @Override
-    public AttributeValue create(String textValue, byte[] blobValue, Person person, Attribute attribute) throws AttributeValueNotValidException {
-        if (textValue == null && blobValue == null) {
+    public AttributeValue create(String textValue, byte[] blobValue, Person person, Attribute attribute, AttributeListValue attributeListValue) throws AttributeValueNotValidException {
+        if (textValue == null && blobValue == null && attributeListValue == null) {
             throw new AttributeValueNotValidException(AttributeValueErrorType.ATTRIBUTE_VALUE_IS_EMPTY);
         }
-        AttributeValue attributeValue = new AttributeValue(textValue, blobValue, person, attribute);
+        AttributeValue attributeValue = new AttributeValue(textValue, blobValue, person, attribute, attributeListValue);
         return attributeValueRepository.save(attributeValue);
     }
 
@@ -37,13 +38,14 @@ public class AttributeValueServiceImpl implements AttributeValueService {
     }
 
     @Override
-    public AttributeValue update(Long id, String textValue, byte[] blobValue) throws AttributeValueNotFoundException, AttributeValueNotValidException {
-        if (textValue == null && blobValue == null) {
+    public AttributeValue update(Long id, String textValue, byte[] blobValue, AttributeListValue attributeListValue) throws AttributeValueNotFoundException, AttributeValueNotValidException {
+        if (textValue == null && blobValue == null && attributeListValue == null) {
             throw new AttributeValueNotValidException(AttributeValueErrorType.ATTRIBUTE_VALUE_IS_EMPTY);
         }
         AttributeValue attributeValue = get(id);
         attributeValue.setTextValue(textValue);
         attributeValue.setBlobValue(blobValue);
+        attributeValue.setAttributeListValue(attributeListValue);
 
         return attributeValueRepository.save(attributeValue);
     }
