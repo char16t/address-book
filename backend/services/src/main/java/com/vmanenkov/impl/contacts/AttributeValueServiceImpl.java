@@ -34,7 +34,11 @@ public class AttributeValueServiceImpl implements AttributeValueService {
 
     @Override
     public AttributeValue get(Long id) throws AttributeValueNotFoundException {
-        return attributeValueRepository.findOptionalById(id);
+        AttributeValue attributeValue = attributeValueRepository.findOptionalById(id);
+        if (attributeValue == null) {
+            throw new AttributeValueNotFoundException();
+        }
+        return attributeValue;
     }
 
     @Override
