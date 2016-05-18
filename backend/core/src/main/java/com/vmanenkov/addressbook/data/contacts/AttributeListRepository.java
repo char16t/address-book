@@ -7,5 +7,5 @@ import org.apache.deltaspike.data.api.Repository;
 @Repository
 public interface AttributeListRepository extends EntityRepository<AttributeList, Long>{
     AttributeList findOptionalById(Long id);
-    
+    AttributeList findOptionalByName(String name);   
 }

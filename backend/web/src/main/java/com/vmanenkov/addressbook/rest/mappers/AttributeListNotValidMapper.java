@@ -27,6 +27,10 @@ public class AttributeListNotValidMapper implements ExceptionMapper<AttributeLis
                 errorCode = ApplicationErrorCodes.ATTRIBUTE_LIST_NAME_IS_EMPTY;
                 description = "AttributeList name should not be empty";
                 break;
+            case ATTRIBUTE_LIST_NAME_IS_NOT_UNIQIE:
+                errorCode = ApplicationErrorCodes.ATTRIBUTE_LIST_NAME_IS_NOT_UNIQIE;
+                description = "AttributeList name should be unique";
+                break;
             default:
                 break;
         }

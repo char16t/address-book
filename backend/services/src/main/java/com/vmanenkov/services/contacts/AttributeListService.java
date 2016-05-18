@@ -13,6 +13,8 @@ public interface AttributeListService {
 
     AttributeList getById(Long id) throws AttributeListNotFoundException;
 
+    AttributeList getByName(String name);
+
     AttributeList update(Long id, String name, String description) throws AttributeListNotFoundException, AttributeListNotValidException;
 
     void delete(Long id) throws AttributeListNotFoundException;

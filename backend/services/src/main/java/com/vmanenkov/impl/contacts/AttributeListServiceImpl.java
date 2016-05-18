@@ -25,7 +25,9 @@ public class AttributeListServiceImpl implements AttributeListService{
         if (name == null || "".equals(name)) {
             throw new AttributeListNotValidException(AttributeListErrorType.ATTRIBUTE_LIST_NAME_IS_EMPTY);
         }
-
+        if (getByName(name) != null) {
+            throw new AttributeListNotValidException(AttributeListErrorType.ATTRIBUTE_LIST_NAME_IS_NOT_UNIQIE);
+        }
         AttributeList attributeList = new AttributeList(name, description);
         return attributeListRepository.save(attributeList);
     }
@@ -40,6 +42,11 @@ public class AttributeListServiceImpl implements AttributeListService{
     }
 
     @Override
+    public AttributeList getByName(String name) {
+        return attributeListRepository.findOptionalByName(name);
+    }
+    
+    @Override
     public AttributeList update(Long id, String name, String description) throws AttributeListNotFoundException, AttributeListNotValidException {
         AttributeList attributeList = getById(id);
         
@@ -47,6 +54,10 @@ public class AttributeListServiceImpl implements AttributeListService{
             throw new AttributeListNotValidException(AttributeListErrorType.ATTRIBUTE_LIST_NAME_IS_EMPTY);
         }
 
+        if (getByName(name) != null) {
+            throw new AttributeListNotValidException(AttributeListErrorType.ATTRIBUTE_LIST_NAME_IS_NOT_UNIQIE);
+        }
+        
         if (name != null) {
             attributeList.setName(name);
         }

@@ -57,6 +57,7 @@ public class ApplicationErrorCodes {
 
     public static final String ATTRIBUTE_LIST_NOT_FOUND = "280";
     public static final String ATTRIBUTE_LIST_NAME_IS_EMPTY = "281";
+    public static final String ATTRIBUTE_LIST_NAME_IS_NOT_UNIQIE = "282";
 
     public static final String ATTRIBUTE_LIST_VALUE_NOT_FOUND = "290";
     public static final String ATTRIBUTE_LIST_VALUE_IS_EMPTY = "291";
