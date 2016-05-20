@@ -16,6 +16,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -60,7 +62,21 @@ public class AccountServiceImpl implements AccountService {
             throw new AccountNotValidException(AccountErrorType.PASSWORD_IS_EMPTY);
         }
 
-        // todo: add validate
+        if (password.length()<6) {
+            throw new AccountNotValidException(AccountErrorType.PASSWORD_IS_TOO_SMALL);
+        } else if (password.length()>20) {
+            throw new AccountNotValidException(AccountErrorType.PASSWORD_IS_TOO_LONG);
+        } else {
+            String regex = "[-A-Za-z0-9%*)(?@#$~_]+";
+            if (!password.matches(regex)) {
+                throw new AccountNotValidException(AccountErrorType.PASSWORD_INVALID_CHARACTER_ERROR);
+            } else {
+                regex = "^(?=[-A-Za-z0-9%*)(&@#$~_]*?[A-Z])(?=[-A-Za-z0-9%*)(&@#$~_]*?[a-z])(?=[-A-Za-z0-9%*)(&@#$~_]*?[0-9])(?=[-A-Za-z0-9%*)(&@#$~_]*?[-%*)(&@#$~_])([-A-Za-z0-9%*)(&@#$~_]{6,20})$";
+                if (!password.matches(regex)) {
+                    throw new AccountNotValidException(AccountErrorType.PASSWORD_IS_TOO_SIMPLE);
+                }
+            }
+        }
     }
 
     private void validateEmail(String email) throws AccountNotValidException, EmailNotValidException {
@@ -68,8 +84,7 @@ public class AccountServiceImpl implements AccountService {
             throw new EmailNotValidException(EmailErrorType.EMAIL_IS_EMPTY);
         }
 
-        String regex = "^[-a-z0-9!#$%&*+/=?^_`{|}~]+(.[-a-z0-9!#$%&*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$";
-        //String regex = "^[a-z0-9]+@[a-z0-9]+.com$";
+        String regex = "^[-a-z0-9!#$%&*+/=?^_`{|}~]+(\\.[-a-z0-9!#$%&*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$";
         if (!email.toLowerCase().matches(regex)) {
             throw new EmailNotValidException(EmailErrorType.EMAIL_IS_NOT_VALID);
         }
