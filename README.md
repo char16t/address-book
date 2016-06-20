@@ -26,15 +26,6 @@
  4. Скопировать собранный EAR-файл в папку Wildfly для горячего деплоя (`sudo cp ear/target/addressbook-ear-1.0.ear /opt/wildfly/standalone/deployments`)
  4. Открыть в браузере [http://localhost:8080](http://localhost:8080) и проверить изменения
 
-<!---
-## Сборка и деплой фронтэнда
-
- 1. Зайти внутрь виртуальной машины `vagrant ssh`
- 2. Перейти в `/vagrant/frontend`
- 3. Выполнить `grunt build --force`
- 4. Открыть в браузере [http://localhost:8080](http://localhost:8080) и проверить изменения
--->
-
 ## Структура проекта
 
 | Директория | Описание |
