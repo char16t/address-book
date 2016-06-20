@@ -1,6 +1,0 @@
-/node_modules
-/dist
-!/dist/.gitkeep
-/.tmp
-/.sass-cache
-/bower_components
