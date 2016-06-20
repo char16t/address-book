@@ -91,7 +91,3 @@
 
 Чтобы посмотреть все таблицы в базе данных, нужно ввести `\d`, чтобы посмотреть поля таблицы `\d <имятаблицы>`, чтобы выйти -- нужно ввести `\q`.
 
-## Другие страницы
- * https://bitbucket.org/char16t/address-book/wiki/OldHome
- * https://bitbucket.org/char16t/address-book/wiki/RESTful
- * https://bitbucket.org/char16t/address-book/wiki/Use%20cases
